@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- LINK BOOTSTRAP -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    <!-- LINK CSS -->
+    <link rel="stylesheet" href="../static/css/login.css">
+    <!-- LINK FONT AWESOME -->
+    <script src="https://kit.fontawesome.com/2b5286e1aa.js" crossorigin="anonymous"></script>
+    <!-- LINK GOOGLE FONTS -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa&display=swap" rel="stylesheet">
+    <!-- LINK JS -->
+    <script type="text/javascript" src="../static/js/script.js"></script>
+    <title>Iniciar sesión - CAHM</title>
+</head>
+
+<body>
+    <nav>
+        <input type="checkbox" id="check">
+        <label for="check" class="checkbtn">
+            <i class="fas fa-bars"></i>
+        </label>
+        <a class="enlace">
+            <img src="../static/img/Logo login - pequeño.png" alt="Logo login - pequeño" class="logo-peq">
+        </a>
+        <a class="enlace">
+            <img src="../static/img/Logo login - grande.png" alt="Logo login" class="logo">
+        </a>
+        <ul>
+            <li style="margin-right: 20px;"><a href="./bienvenida.html">Volver atrás<i style="margin-left: 15px;" class="fa-solid fa-arrow-left-long"></i></a></li>
+        </ul>
+    </nav>
+    <div class="region-login">
+        <div class="widget">
+            <div class="form">
+                <form class="form-login" action="../proc/login.php" method="post">
+                    <p style="margin-bottom: 10px;">Correo electrónico</p>
+                    <input class="casilla" type="text" id="email_gestor" name="email_gestor" placeholder="Introduce tu email...">
+                    <p style="margin-top: 15px;margin-bottom: 10px;">Contraseña</p>
+                    <input class="casilla" type="password" id="contra_gestor" name="contra_gestor" placeholder="Introduce la contraseña...">
+                    <input class="boton-ini" style="width: 80px; margin-top: 20px;" onclick="return validarFormulario()" type="submit">
+                </form>
+            </div>
+            <div class="separator"></div>
+            <div class="logo">
+                <img src="../static/img/Logo login - pequeño.png" alt="">
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

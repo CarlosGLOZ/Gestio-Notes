@@ -1,0 +1,270 @@
+* {
+    font-family: 'Comfortaa', cursive;
+    padding: 0;
+    margin: 0;
+    text-decoration: none;
+    list-style: none;
+    box-sizing: border-box;
+}
+
+.boton-ini {
+    -webkit-transition-duration: 0.4s;
+    /* Safari */
+    transition-duration: 0.4s;
+    background-color: #d0c8c8;
+    color: black;
+    border-radius: 28px;
+    cursor: pointer;
+}
+
+.boton-ini:hover {
+    background-color: #177791;
+    /* Green */
+    color: white;
+}
+
+nav {
+    position: sticky;
+    top: 0px;
+    z-index: 10;
+    background: #177791;
+    height: 80px;
+    width: 100%;
+}
+
+nav .enlace {
+    position: absolute;
+    padding: 0px 50px;
+}
+
+@media (max-width: 702px) {
+    nav .enlace {
+        padding: 0px 20px;
+    }
+}
+
+nav .enlace .logo {
+    height: 80px;
+    width: 100px;
+}
+
+@media (min-width: 702px) {
+    nav .enlace .logo {
+        display: block;
+    }
+}
+
+@media (max-width: 702px) {
+    nav .enlace .logo {
+        display: none;
+    }
+}
+
+nav .enlace .logo-peq {
+    height: 80px;
+    width: 100px;
+}
+
+@media (min-width: 702px) {
+    nav .enlace .logo-peq {
+        display: none;
+    }
+}
+
+@media (max-width: 702px) {
+    nav .enlace .logo-peq {
+        display: block;
+    }
+}
+
+nav ul {
+    float: right;
+    padding-left: 0;
+    margin-bottom: 0;
+}
+
+@media (max-width: 702px) {
+    nav ul {
+        position: fixed;
+        width: 100%;
+        height: calc(100vh - 80px);
+        background: #1f1f1feb;
+        top: 80px;
+        right: -100%;
+        text-align: center;
+        transition: all 0.5s;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+}
+
+nav ul li {
+    display: inline-block;
+    line-height: 80px;
+    margin: 0px 5px;
+}
+
+@media (max-width: 702px) {
+    nav ul li {
+        font-size: 17px;
+    }
+}
+
+nav ul li a {
+    color: #1f1f1f;
+    font-size: 15px;
+    padding: 7px 13px;
+    text-decoration: none;
+    font-weight: 600;
+    position: relative;
+}
+
+nav ul li a:hover {
+    color: #1f1f1f;
+}
+
+nav ul li a::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: #1f1f1f;
+    transform-origin: bottom right;
+    transition: transform 0.2s ease-out;
+    transform: scaleX(0);
+}
+
+nav ul li a:hover::after {
+    transform: scaleX(1);
+    transform-origin: bottom left;
+}
+
+@media (max-width: 702px) {
+    nav ul li a {
+        width: 40px;
+        font-size: 18px;
+        padding: 10px 0px;
+    }
+}
+
+nav .checkbtn {
+    font-size: 30px;
+    color: #1f1f1f;
+    float: right;
+    line-height: 80px;
+    margin-right: 40px;
+    cursor: pointer;
+    display: none;
+}
+
+@media (max-width: 702px) {
+    nav .checkbtn {
+        display: block;
+    }
+}
+
+nav #check {
+    display: none;
+}
+
+@media (max-width: 702px) {
+    nav #check:checked~ul {
+        right: 0;
+    }
+}
+
+.region-login {
+    width: 100%;
+    height: calc(100vh - 80px);
+    background-image: url('../img/fondo.gif');
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.widget {
+    position: relative;
+    width: 80%;
+    height: 70%;
+    padding: 50px;
+    background-color: #177791;
+    border-radius: 20px;
+    display: flex;
+}
+
+.form {
+    width: 55%;
+    height: 100%;
+}
+
+.separator {
+    width: 0.5%;
+    height: 100%;
+    background-color: black;
+    border-radius: 50px;
+    margin: 0px 50px;
+}
+
+.logo {
+    width: 45%;
+    height: 100%;
+}
+
+.logo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color: #c8c8c8;
+    border-radius: 20px;
+    padding: 20px;
+    height: 100%;
+}
+
+p {
+    margin-bottom: 0;
+}
+
+input {
+    width: 60%;
+}
+
+.casilla {
+    padding: 10px 8px;
+    border-radius: 20px;
+    background-color: #1777916a;
+}
+
+@media (max-width: 702px) {
+    .widget {
+        flex-direction: column-reverse;
+    }
+    .separator {
+        display: none;
+    }
+    .form {
+        width: 100%;
+    }
+    .logo {
+        margin-top: -50px;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+    }
+    .logo img {
+        width: 50%;
+    }
+    input {
+        width: 100%;
+    }
+}
