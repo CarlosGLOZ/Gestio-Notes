@@ -4,11 +4,20 @@
 function validar_email($email, $password, $conexion)
 {
     $email = $conexion -> real_escape_string($email);
-    $password = $conexion -> real_escape_string($password);
-
+    // $password = $conexion -> real_escape_string($password);
+    
     $stmt = "SELECT ".PASSWORD_VARNAME." FROM ".TABLA_USUARIOS." WHERE ".EMAIL_VARNAME." = '$email';";
+    
+    echo $stmt;
+    $results = mysqli_query($conexion, $stmt);
+    var_dump($results);
+    // var_dump($conexion);
+    // die();
 
-    $account_password = mysqli_fetch_assoc(mysqli_query($conexion, $stmt))[PASSWORD_VARNAME];
+    $account_password = mysqli_fetch_assoc($results)[PASSWORD_VARNAME];
+
+    echo $password."<br>";
+    echo $account_password;
 
     if ($password == $account_password) {
         return true;
@@ -37,4 +46,34 @@ function loguear($email, $conexion)
     // foreach ($_SESSION as $key => $value) {
     //     echo "[".$key."] -> [".$value."]<br>";
     // }
+}
+
+
+function getModulos($conexion)
+{
+    $stmt = "SELECT * FROM tbl_modulo";
+
+    // $modulos = mysqli_fetch_assoc(mysqli_query($conexion, $stmt));
+    $modulos = mysqli_query($conexion, $stmt);
+
+    return $modulos;
+}
+
+function getEmailAlumnosDeModulo($modulo, $conexion)
+{
+    $lista_alumnos = [];
+
+    $stmt = "SELECT email_alumno FROM tbl_alumno INNER JOIN tbl_alumno_modulo ON tbl_alumno.id_alumno = tbl_alumno_modulo.id_Alumno WHERE tbl_alumno_modulo.id_Modulo = $modulo;";
+
+    $alumnos = mysqli_query($conexion, $stmt);
+
+    foreach ($alumnos as $key => $array) {
+        # code...
+        foreach ($array as $key => $value) {
+            // echo "[".$key."] -> [".$value."]<br>";
+            array_push($lista_alumnos, $value);
+        }
+    }
+
+    return $lista_alumnos;
 }

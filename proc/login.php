@@ -21,9 +21,15 @@ foreach ($_POST as $key => $value) {
     } else {
         $$key = trim(strip_tags($value));
     }
+    // echo "[".$key."] -> [".$GLOBALS[$key]."]<br>";
+    // echo $GLOBALS[$key]."<br>";
 }
 
 // $GLOBALS[EMAIL_VARNAME] devuelve el valor de la variable cuyo nombre el el valor de EMAIL_VARNAME
+// echo $GLOBALS[EMAIL_VARNAME]."<br>";
+// echo $GLOBALS[PASSWORD_VARNAME]."<br>";
+// var_dump($conexion);
+
 if (!validar_email($GLOBALS[EMAIL_VARNAME], $GLOBALS[PASSWORD_VARNAME], $conexion)) {
     echo "<script>window.location.href = '../view/login.html?val=false&val_fail_cause=email';</script>";
 }
