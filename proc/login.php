@@ -38,4 +38,4 @@ if (!validar_email($GLOBALS[EMAIL_VARNAME], $GLOBALS[PASSWORD_VARNAME], $conexio
 
 loguear($GLOBALS[EMAIL_VARNAME], $conexion);
 
-echo "<script>window.location.href = '../view/entrar.php';</script>";
+echo "<script>window.location.href = '../view/principal.php';</script>";

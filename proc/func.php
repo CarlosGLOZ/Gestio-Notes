@@ -4,20 +4,21 @@
 function validar_email($email, $password, $conexion)
 {
     $email = $conexion -> real_escape_string($email);
+    $email = trim(strip_tags($email))
     // $password = $conexion -> real_escape_string($password);
     
     $stmt = "SELECT ".PASSWORD_VARNAME." FROM ".TABLA_USUARIOS." WHERE ".EMAIL_VARNAME." = '$email';";
     
-    echo $stmt;
+    // echo $stmt;
     $results = mysqli_query($conexion, $stmt);
-    var_dump($results);
+    // var_dump($results);
     // var_dump($conexion);
     // die();
 
     $account_password = mysqli_fetch_assoc($results)[PASSWORD_VARNAME];
 
-    echo $password."<br>";
-    echo $account_password;
+    // echo $password."<br>";
+    // echo $account_password;
 
     if ($password == $account_password) {
         return true;
@@ -28,6 +29,7 @@ function validar_email($email, $password, $conexion)
 function loguear($email, $conexion)
 {
     $email = $conexion -> real_escape_string($email);
+    $email = trim(strip_tags($email))
 
     $stmt = "SELECT * FROM ".TABLA_USUARIOS." WHERE ".EMAIL_VARNAME." = '$email';";
 

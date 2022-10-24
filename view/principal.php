@@ -34,10 +34,10 @@
         <label for="check" class="checkbtn">
             <i class="fas fa-bars"></i>
         </label>
-        <a class="enlace" href="./entrar.php">
+        <a class="enlace" href="./principal.php">
             <img src="../static/img/logo/svg/2.2.svg" alt="Logo" class="logo-peq">
         </a>
-        <a class="enlace" href="./entrar.php">
+        <a class="enlace" href="./principal.php">
             <img src="../static/img/logo/svg/1.1.svg" alt="Logo" class="logo">
         </a>
         <p class="bienvenida"> | ㅤBienvenido @marc <!--Aqui va variable para el nombre del user--></p>
