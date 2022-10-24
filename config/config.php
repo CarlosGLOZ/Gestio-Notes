@@ -3,10 +3,10 @@
 const SERVIDOR = 'localhost';
 const USUARIO = 'root';
 const PASSWORD = '';
-const BD = 'bd_login';
+const BD = 'bd_gestion_notas';
 
 // nombres de la BDD para poder cambiarlos facilmente en caso necesario
-const TABLA_USUARIOS = 'tbl_gestor_de_notes';
+const TABLA_USUARIOS = 'tbl_gestor';
 const ID_VARNAME = 'id_gestor';
 const NOMBRE_VARNAME = 'nom_gestor';
 const APELLIDOS_VARNAME = 'cognoms_gestor';
