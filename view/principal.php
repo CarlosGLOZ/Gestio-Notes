@@ -109,14 +109,30 @@
             
                 <h2><i class="fa-solid fa-envelopes-bulk"></i> Enviar e-mail</h2>
 
+                 <!--ZONA SELECTOR-->               
+                <select name="grupo">
+                    <option value="none">Seleccionar Clase</option>
+                    <?php
+                        require_once '../config/conexion.php';
+                        require_once '../proc/func.php';
+
+                        $modulos = getModulos($conexion);
+
+                        foreach ($modulos as $modulo) {
+                            // echo "[{$modulo['numero_modulo']}] -> [{$modulo['nombre_modulo']}]<br>";
+                            echo "<option value='".$modulo['id_modulo']."'>".$modulo['numero_modulo']."-".$modulo['nombre_modulo']."</option>";
+                        }
+                    ?>
+                </select>
+
                 <!--ZONA E-MAIL-->
-                <input  placeholder="e-mail" type="email" id="email" name="email" required>
+                <input  placeholder="e-mail" type="email" id="email" name="correo" required>
 
                 <!--ZONA ASUNTO-->
                 <input placeholder="Asunto" type="text" id="asunto" name="asunto" required>
 
                 <!--ZONA MENSAJE-->                
-                <textarea  placeholder="Escribe tu mensaje" name="mensaje" id="mensaje" cols="30" rows="10"></textarea>
+                <textarea  placeholder="Escribe tu mensaje" name="cuerpo" id="mensaje" cols="30" rows="10"></textarea>
 
                 <!--BOTON ENVIAR-->
                 <button type="submit" class="btn btn-success btn-lg btn-outline-info" value="Enviar correo" onclick="return validarCorreo()"  id="btn2"> Enviar e-mail
