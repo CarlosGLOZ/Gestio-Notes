@@ -27,20 +27,21 @@
         if (!isset($_SESSION[EMAIL_VARNAME])) {
             echo "<script>window.location.href = '../view/login.html';</script>";
         } 
-    ?>
+
+        ?>
 
     <nav>
         <input type="checkbox" id="check">
         <label for="check" class="checkbtn">
             <i class="fas fa-bars"></i>
         </label>
-        <a class="enlace" href="./entrar.php">
+        <a class="enlace" href="./principal.php">
             <img src="../static/img/logo/svg/2.2.svg" alt="Logo" class="logo-peq">
         </a>
-        <a class="enlace" href="./entrar.php">
+        <a class="enlace" href="./principal.php">
             <img src="../static/img/logo/svg/1.1.svg" alt="Logo" class="logo">
         </a>
-        <p class="bienvenida"> | ㅤBienvenido @marc <!--Aqui va variable para el nombre del user--></p>
+        <p class="bienvenida"> | ㅤBienvenido @marc <?php echo $nombre; ?><!--Aqui va variable para el nombre del user--></p>
         <ul>
             <li><a href="../proc/cerrar_sesion.php">Cerrar sesión</a></li>
         </ul>
@@ -55,7 +56,8 @@
     <div class="boton-modal">
         <label for="btn-modal"><i class="fa-solid fa-plus"></i></label>
         <label for="btn2-modal"><i class="fa-solid fa-envelope-open "></i></label>
-        <label for=""><i class="fa-solid fa-magnifying-glass"></i></label>
+        <label for=""><i class="fa-solid fa-magnifying-glass"></i></label> <!--buscador-->
+        <button onclick="darkMode()" class="dark"><label for=""><i class="fa-sharp fa-solid fa-circle-half-stroke"></i></label></button> <!--modo oscuro-->
     </div>
     <!----------------------------------------------------------FIN BOTONES---------------------------------------------------------->
 

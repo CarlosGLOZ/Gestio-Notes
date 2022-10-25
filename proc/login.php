@@ -35,7 +35,8 @@ if (!validar_email($GLOBALS[EMAIL_VARNAME], $GLOBALS[PASSWORD_VARNAME], $conexio
 }
 
 // a partir de aquí el email ya está validado y el usuario se puede loguear
+$nombre = $_POST['email_gestor'];
 
 loguear($GLOBALS[EMAIL_VARNAME], $conexion);
 
-echo "<script>window.location.href = '../view/entrar.php';</script>";
+echo "<script>window.location.href = '../view/principal.php';</script>";
