@@ -48,3 +48,32 @@ function validarSesion() {
         echo "<script>window.location.href = '../view/login.html?error=errorSesion';</script>";
     }
 }
+
+function getModulos($conexion)
+{
+    $stmt = "SELECT * FROM tbl_modulo";
+
+    // $modulos = mysqli_fetch_assoc(mysqli_query($conexion, $stmt));
+    $modulos = mysqli_query($conexion, $stmt);
+
+    return $modulos;
+}
+
+function getEmailAlumnosDeModulo($modulo, $conexion)
+{
+    $lista_alumnos = [];
+
+    $stmt = "SELECT email_alumno FROM tbl_alumno INNER JOIN tbl_alumno_modulo ON tbl_alumno.id_alumno = tbl_alumno_modulo.id_Alumno WHERE tbl_alumno_modulo.id_Modulo = $modulo;";
+
+    $alumnos = mysqli_query($conexion, $stmt);
+
+    foreach ($alumnos as $key => $array) {
+        # code...
+        foreach ($array as $key => $value) {
+            // echo "[".$key."] -> [".$value."]<br>";
+            array_push($lista_alumnos, $value);
+        }
+    }
+
+    return $lista_alumnos;
+}

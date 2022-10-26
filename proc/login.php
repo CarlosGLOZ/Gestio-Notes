@@ -23,6 +23,8 @@ foreach ($_POST as $key => $value) {
     } else {
         $$key = trim(strip_tags($value));
     }
+    // echo "[".$key."] -> [".$GLOBALS[$key]."]<br>";
+    // echo $GLOBALS[$key]."<br>";
 }
 
 // $GLOBALS[EMAIL_VARNAME] devuelve el valor de la variable cuyo nombre el el valor de EMAIL_VARNAME
