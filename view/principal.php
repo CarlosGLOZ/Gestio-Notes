@@ -19,14 +19,11 @@
 </head>
 
 <body>
-    <?php
-        //esto hay que activarlo para poder funcionar con la BD y loa validación
-        require_once '../config/config.php';
 
-        session_start();
-        if (!isset($_SESSION[EMAIL_VARNAME])) {
-            echo "<script>window.location.href = '../view/login.html';</script>";
-        } 
+    <?php
+        if (!isset($entrada_valida)) {
+            echo "<script>window.location.href='../controller/index_controller.php'</script>";
+        }
     ?>
 
     <nav>
@@ -40,7 +37,7 @@
         <a class="enlace" href="./principal.php">
             <img src="../static/img/logo/svg/1.1.svg" alt="Logo" class="logo">
         </a>
-        <p class="bienvenida"> | Bienvenido <?php echo $_SESSION[NOMBRE_VARNAME]; ?> <!--Aqui va variable para el nombre del user--></p>
+        <p class="bienvenida"> | Bienvenido <?php echo $_SESSION[GESTOR['nombre']]; ?> <!--Aqui va variable para el nombre del user--></p>
         <ul>
             <li><a href="../proc/cerrar_sesion.php">Cerrar sesión</a></li>
         </ul>
@@ -59,13 +56,52 @@
     </div>
     <!----------------------------------------------------------FIN BOTONES---------------------------------------------------------->
 
+    <!----------------------------------------------------------BOTONES FILTROS---------------------------------------------------------->
+    <div class="boton-modal">
+        <form action="" method="get">
+            <input type="text" name="filtro-nombre" placeholder="nombre">
+            <input type="text" name="filtro-apellidos" placeholder="apellidos">
+            <input type="text" name="filtro-email" placeholder="email">
+            <input type="text" name="filtro-dni" placeholder="dni">
+            <input type="submit" value="buscar">
+        </form>
+    </div>
+    <!----------------------------------------------------------FIN FILTROS---------------------------------------------------------->
+
+    <!----------------------------------------------------------FIN TABLA DE DATOS ---------------------------------------------------------->
+    <?php
+    // MOSTRAR DATOS EN FORMA DE TABLA:
+    echo "<a href='../view/crear.php'><button style='margin-bottom: 10px;' type='button' class='btn btn-success'>Crear</button></a>";
+    echo '<table style="border: solid 2px #c4c4c4;" class="table table-striped">';
+        echo '<tr>';
+            echo '<th>ID</th>';
+            echo '<th>NOMBRE</th>';
+            echo '<th>APELLIDOS</th>';
+            echo '<th>EMAIL</th>';
+            echo '<th>DNI</th>';
+            echo '<th>MODIFICAR</th>';
+            echo '<th>ELIMINAR</th>';
+        echo '</tr>';
+        foreach ($listado_alumnos as $alumno) {
+            echo '<tr>';
+                echo "<td>{$alumno['id_alumno']}</td>";
+                echo "<td>{$alumno['nombre_alumno']}</td>";
+                echo "<td>{$alumno['primer_apellido_alumno']} {$alumno['segundo_apellido_alumno']}</td>";
+                echo "<td>{$alumno['email_alumno']}</td>";
+                echo "<td>{$alumno['dni_alumno']}</td>";
+                echo "<td><a href='../controller/form_mod_controller.php?id_alumno={$alumno['id_alumno']}'><button type='button' class='btn btn-primary'>Modificar</button></a></td>";
+                echo "<td><a href='../controller/eliminar_controller.php?id_alumno={$alumno['id_alumno']}'><button type='button' class='btn btn-danger'>Eliminar</button></a></td>";           
+            echo "</tr>";
+        }
+    echo '</table>';
+    ?>
+    <!----------------------------------------------------------FIN TABLA DE DATOS ---------------------------------------------------------->
     
     <!----------------------------------------------------------1 VENTANA MODAL---------------------------------------------------------->
     <input type="checkbox" id="btn-modal">
     <div class="container-modal">
             <div class="formulario">
                 <form action="" method="Post">
-
 
                     <h2><i class="fa-solid fa-user-tag"></i> Nombre completo</h2> 
                     <!--NOMBRE COMPLETO-->

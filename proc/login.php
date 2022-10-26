@@ -12,11 +12,13 @@ require_once 'func.php';
 //    echo "<script>window.location.href = '../view/login.html?val=false&val_fail_cause=unset_fields';</script>";
 // }
 
+// Comprobar que haya conexión con la base de datos
+
 // recuperar datos evitando inyecctions HTML y JS y eliminando espacios en blanco del principio y el final
 foreach ($_POST as $key => $value) {
 
     // encriptar contraseña
-    if ($key == PASSWORD_VARNAME) {
+    if ($key == GESTOR['contra']) {
         $$key = sha1(trim(strip_tags($value)));
     } else {
         $$key = trim(strip_tags($value));
@@ -26,16 +28,11 @@ foreach ($_POST as $key => $value) {
 }
 
 // $GLOBALS[EMAIL_VARNAME] devuelve el valor de la variable cuyo nombre el el valor de EMAIL_VARNAME
-// echo $GLOBALS[EMAIL_VARNAME]."<br>";
-// echo $GLOBALS[PASSWORD_VARNAME]."<br>";
-// var_dump($conexion);
-
-if (!validar_email($GLOBALS[EMAIL_VARNAME], $GLOBALS[PASSWORD_VARNAME], $conexion)) {
+if (!validar_email($GLOBALS[GESTOR['email']], $GLOBALS[GESTOR['contra']], $conexion)) {
     echo "<script>window.location.href = '../view/login.html?val=false&val_fail_cause=email';</script>";
 }
 
 // a partir de aquí el email ya está validado y el usuario se puede loguear
+loguear($GLOBALS[GESTOR['email']], $conexion);
 
-loguear($GLOBALS[EMAIL_VARNAME], $conexion);
-
-echo "<script>window.location.href = '../view/principal.php';</script>";
+echo "<script>window.location.href = '../controller/index_controller.php';</script>";

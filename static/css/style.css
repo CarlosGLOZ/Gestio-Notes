@@ -10,10 +10,9 @@
 
 body {
     background-color: #443E53;
-
 }
 
-button{
+button {
     background-color: #7D7199;
     padding: 10px;
     border: none;
@@ -21,10 +20,9 @@ button{
     color: #F6F7FC;
 }
 
-button:hover{
+button:hover {
     background-color: #443E53;
-    color:#719972;
-
+    color: #719972;
 }
 
 img {
@@ -38,7 +36,6 @@ img {
     display: flex;
     justify-content: center;
     align-items: center;
-
 }
 
 .fondo-login {
@@ -66,10 +63,19 @@ img {
     margin-bottom: 20px;
 }
 
+
 /*----------------------------------------------------------------*/
+
+
 /*----------------------------------------------------------------*/
+
+
 /*-------------------------RESPONSIVE-----------------------------*/
+
+
 /*----------------------------------------------------------------*/
+
+
 /*----------------------------------------------------------------*/
 
 @media (max-width: 900px) {
@@ -86,7 +92,6 @@ img {
     }
 }
 
-
 @media (max-width: 550px) {
     .region-login img {
         /* margin-top: 0px; */
@@ -99,7 +104,6 @@ img {
     .region-login h5 {
         font-size: 16px;
     }
-
     .separador {
         background-color: #443E53;
         width: 100px;
@@ -120,7 +124,6 @@ img {
         padding: 30px;
         border-radius: 10px;
     }
-
     .region-login img {
         /* margin-top: 0px; */
         width: 150px;
@@ -132,11 +135,9 @@ img {
     .region-login h5 {
         font-size: 13px;
     }
-
-    a{
+    a {
         font-size: 15px;
     }
-
     .separador {
         background-color: #443E53;
         width: 100px;
@@ -145,5 +146,3 @@ img {
         margin-bottom: 20px;
     }
 }
-
-

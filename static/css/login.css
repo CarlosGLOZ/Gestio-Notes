@@ -8,10 +8,10 @@
     box-sizing: border-box;
 }
 
-body{
+body {
     background-color: #443E53;
-
 }
+
 .close {
     width: 5%;
     height: 5%;
@@ -25,6 +25,7 @@ body{
 .close:hover {
     fill: #443E53;
 }
+
 .boton-ini {
     -webkit-transition-duration: 0.4s;
     /* Safari */
@@ -33,16 +34,14 @@ body{
     color: black;
     border-radius: 28px;
     cursor: pointer;
-    width: 80px; 
+    width: 80px;
     margin-top: 20px;
-
 }
 
 .boton-ini:hover {
     background-color: #443E53;
-    color:#719972;
+    color: #719972;
 }
-
 
 .region-login {
     width: 100%;
@@ -81,7 +80,8 @@ body{
     height: 100%;
     display: flex;
     justify-content: center;
-    align-items: center;;
+    align-items: center;
+    ;
 }
 
 .logo img {
@@ -90,7 +90,6 @@ body{
     object-fit: cover;
 }
 
-
 .casilla {
     padding: 10px 8px;
     border-radius: 20px;
@@ -98,7 +97,7 @@ body{
     padding: 15px;
 }
 
-.casilla:hover{
+.casilla:hover {
     border: none;
     color: #443E53;
     outline: 0 none;
@@ -126,15 +125,23 @@ input {
     border: none;
 }
 
+
 /*----------------------------------------------------------------*/
+
+
 /*----------------------------------------------------------------*/
+
+
 /*-------------------------RESPONSIVE-----------------------------*/
+
+
 /*----------------------------------------------------------------*/
+
+
 /*----------------------------------------------------------------*/
 
 @media (max-width: 1000px) {
-
-    .widget{
+    .widget {
         height: 60%;
     }
     .form {
@@ -146,25 +153,20 @@ input {
         display: flex;
         justify-content: center;
     }
-
     .logo img {
         width: 50%;
         height: auto;
         object-fit: cover;
     }
-    
-  
     input {
         width: 100%;
     }
 }
 
 @media (max-width: 840px) {
-
-    .widget{
+    .widget {
         height: 50%;
     }
-
     .form {
         width: 100%;
     }
@@ -174,7 +176,6 @@ input {
         display: flex;
         justify-content: center;
     }
-
     .logo img {
         width: 50%;
         height: auto;
@@ -185,18 +186,14 @@ input {
         height: 7%;
         display: flex;
     }
-  
     input {
         width: 100%;
-        font-size:80%;
+        font-size: 80%;
     }
 }
 
-
-
 @media (max-width: 700px) {
-
-    .widget{
+    .widget {
         height: 40%;
     }
     .form {
@@ -208,20 +205,17 @@ input {
         display: flex;
         justify-content: center;
     }
-
     .logo img {
         width: 60%;
         height: auto;
         object-fit: cover;
     }
-    
-    p{
+    p {
         font-size: 80%;
     }
-  
     input {
         width: 100%;
-        font-size:70%;
+        font-size: 70%;
     }
     .close {
         width: 8%;
@@ -232,24 +226,20 @@ input {
 }
 
 @media (max-width: 500px) {
-
-    .widget{
+    .widget {
         height: 70%;
         flex-direction: column;
-
     }
-    .separator{
+    .separator {
         width: 100%;
         height: 2px;
-        margin:0px;
+        margin: 0px;
     }
     .form {
         width: 100%;
     }
-
-    .form-login{
+    .form-login {
         padding: 0px;
-
     }
     .logo {
         margin-top: -0px;
@@ -259,20 +249,17 @@ input {
         justify-content: center;
         margin: 0 0 10px 0;
     }
-
     .logo img {
         width: 50%;
         height: auto;
         object-fit: cover;
     }
-    
-    p{
+    p {
         font-size: 80%;
     }
-  
     input {
         width: 100%;
-        font-size:70%;
+        font-size: 70%;
     }
     .close {
         width: 7%;
@@ -284,11 +271,9 @@ input {
 }
 
 @media (max-width: 400px) {
-
-    .widget{
+    .widget {
         height: 70%;
         flex-direction: column;
-
     }
     .form {
         width: 100%;
@@ -300,19 +285,16 @@ input {
         display: flex;
         justify-content: center;
     }
-
     .logo img {
         width: 70%;
         height: auto;
         object-fit: cover;
     }
-    
-    p{
+    p {
         font-size: 80%;
     }
-  
     input {
         width: 100%;
-        font-size:70%;
+        font-size: 70%;
     }
 }
