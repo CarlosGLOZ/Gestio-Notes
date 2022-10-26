@@ -69,7 +69,4 @@ function sendMail($asunto, $cuerpo, $correo/*, $adjunto=null*/) {
 }
 
 sendMail($asunto, $cuerpo, $correo);
-
-// die();
-
-echo "<script>window.location.href = '../view/principal.php'</script>";
+echo "<script>window.location.href='../view/principal.php'</script>";
