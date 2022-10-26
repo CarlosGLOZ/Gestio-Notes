@@ -19,10 +19,22 @@ class Alumno{
         $this->dni_alumno = $dni_alumno;
     }
 
-    public static function getAlumnos() {
+    public static function getAlumnos($filtro_nombre='', $filtro_apellidos='', $filtro_email='', $filtro_dni='') {
         require_once '../config/conexion.php';
 
-        $sentencia = "SELECT * FROM ".ALUMNO['tabla'].";";
+        // sentencia inclusiva de los filtros
+        $sentencia = 
+        "SELECT * FROM ".ALUMNO['tabla']." 
+        WHERE ".ALUMNO['nombre']." LIKE '%".$filtro_nombre."%' 
+        AND (".ALUMNO['primer_apellido']." LIKE '%".$filtro_apellidos."%'
+        OR ".ALUMNO['segundo_apellido']." LIKE '%".$filtro_apellidos."%')
+        AND ".ALUMNO['email']." LIKE '%".$filtro_email."%'
+        AND ".ALUMNO['dni']." LIKE '%".$filtro_dni."%'
+        ;";
+
+        // echo $sentencia;
+        // die();
+        
         $listado_alumnos = mysqli_query($conexion, $sentencia);
 
         // Devolvemos el listado de alumnos, para imprimirlo en el index_controller.

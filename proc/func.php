@@ -78,3 +78,81 @@ function getEmailAlumnosDeModulo($modulo, $conexion)
 
     return $lista_alumnos;
 }
+
+function getURL()
+{
+    if(isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on')
+         $url = "https://";
+    else
+         $url = "http://";
+    // Append the host(domain name, ip) to the URL.
+    $url.= $_SERVER['HTTP_HOST'];
+
+    // Append the requested resource location to the URL
+    $url.= $_SERVER['REQUEST_URI'];
+
+    return $url;
+}
+
+function isGetSet()
+{
+    $url = getURL();
+
+    $url_separada = explode('?',$url);
+
+    if (!isset($url_separada[1])) {
+        return false;
+    }
+
+    if ($url_separada[1] == '') {
+        return false;
+    }
+
+    return true;
+}
+
+// Comprueba si hay variables GET vacías
+function hayGetsVacios(Type $var = null)
+{
+    $url = getURL();
+    $url_partida = explode('?', $url);
+
+    // separo la URL en dos por el '?', el primer valor será la url base y el segundo serán los valores GET
+    // cojo los valores GET y los separo por el '&', esto me devuelve un array de todas las variables GET
+    $variables_get = explode('&', $url_partida[1]);
+    
+    
+    foreach ($variables_get as $value) {
+        // separo cada variable por el '=', esto me devuelve el nombre de la variable y su valor
+        // si el valor no está vacío, añadirlo a una string 
+        if (explode('=', $value)[1] == '') {
+            return true;
+        }
+    }
+
+    return false;
+}
+
+function eliminarVariablesGetVacias($exclude=['filtro-buscar'])
+{
+    $url = getURL();
+    $url_partida = explode('?', $url);
+
+    // separo la URL en dos por el '?', el primer valor será la url base y el segundo serán los valores GET
+    // cojo los valores GET y los separo por el '&', esto me devuelve un array de todas las variables GET
+    $variables_get = explode('&', $url_partida[1]);
+
+    $nuevo_array_variables_get = [];
+
+    foreach ($variables_get as $value) {
+        // separo cada variable por el '=', esto me devuelve el nombre de la variable y su valor
+        // si el valor no está vacío, añadirlo a una string 
+        if (explode('=', $value)[1] != '' && !in_array(explode('=', $value)[0], $exclude)) {
+            array_push($nuevo_array_variables_get, $value);
+        }
+    }
+
+    $nueva_url = $url_partida[0].'?'.implode('&', $nuevo_array_variables_get);
+
+    return $nueva_url;
+}

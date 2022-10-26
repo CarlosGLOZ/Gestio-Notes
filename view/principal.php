@@ -57,13 +57,13 @@
     <!----------------------------------------------------------FIN BOTONES---------------------------------------------------------->
 
     <!----------------------------------------------------------BOTONES FILTROS---------------------------------------------------------->
-    <div class="boton-modal">
+    <div>
         <form action="" method="get">
-            <input type="text" name="filtro-nombre" placeholder="nombre">
-            <input type="text" name="filtro-apellidos" placeholder="apellidos">
-            <input type="text" name="filtro-email" placeholder="email">
-            <input type="text" name="filtro-dni" placeholder="dni">
-            <input type="submit" value="buscar">
+            <input type="text" name="filtro-nombre" placeholder="nombre" value=<?php echo $filtro_nombre?>>
+            <input type="text" name="filtro-apellidos" placeholder="apellidos" value=<?php echo $filtro_apellidos?>>
+            <input type="text" name="filtro-email" placeholder="email" value=<?php echo $filtro_email?>>
+            <input type="text" name="filtro-dni" placeholder="dni" value=<?php echo $filtro_dni?>>
+            <input type="submit" name="filtro-buscar">
         </form>
     </div>
     <!----------------------------------------------------------FIN FILTROS---------------------------------------------------------->
