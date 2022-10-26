@@ -40,7 +40,7 @@
         <a class="enlace" href="./principal.php">
             <img src="../static/img/logo/svg/1.1.svg" alt="Logo" class="logo">
         </a>
-        <p class="bienvenida"> | ㅤBienvenido @marc <!--Aqui va variable para el nombre del user--></p>
+        <p class="bienvenida"> | Bienvenido <?php echo $_SESSION[NOMBRE_VARNAME]; ?> <!--Aqui va variable para el nombre del user--></p>
         <ul>
             <li><a href="../proc/cerrar_sesion.php">Cerrar sesión</a></li>
         </ul>
@@ -105,7 +105,7 @@
     <input type="checkbox" id="btn2-modal">
     <div class="container2-modal">
         <div class="formulario">
-            <form method="Post" action="">
+            <form method="Post" action="../proc/enviar_correo.php">
             
                 <h2><i class="fa-solid fa-envelopes-bulk"></i> Enviar e-mail</h2>
 

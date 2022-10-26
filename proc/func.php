@@ -4,7 +4,7 @@
 function validar_email($email, $password, $conexion)
 {
     $email = $conexion -> real_escape_string($email);
-    $email = trim(strip_tags($email))
+    $email = trim(strip_tags($email));
     // $password = $conexion -> real_escape_string($password);
     
     $stmt = "SELECT ".PASSWORD_VARNAME." FROM ".TABLA_USUARIOS." WHERE ".EMAIL_VARNAME." = '$email';";
@@ -29,7 +29,7 @@ function validar_email($email, $password, $conexion)
 function loguear($email, $conexion)
 {
     $email = $conexion -> real_escape_string($email);
-    $email = trim(strip_tags($email))
+    $email = trim(strip_tags($email));
 
     $stmt = "SELECT * FROM ".TABLA_USUARIOS." WHERE ".EMAIL_VARNAME." = '$email';";
 
