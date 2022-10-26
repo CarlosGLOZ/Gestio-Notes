@@ -333,7 +333,7 @@ input, textarea {
 
 /*:::::::::::::::::Fin Ventana Modal:::::::::::::::::*/
 
-/*:::::::::::::::::Ventana Modal:::::::::::::::::*/
+/*:::::::::::::::::Ventana Modal 2:::::::::::::::::*/
 #btn2-modal{
     display: none;
 }
@@ -352,6 +352,55 @@ input, textarea {
     justify-content: center;
     align-items: center;
     z-index: 100;
+
+}
+/*:::::::::::::::::Fin Ventana Modal:::::::::::::::::*/
+
+/*:::::::::::::::::Ventana Modal 3:::::::::::::::::*/
+#btn3-modal{
+    display: none;
+}
+
+
+#btn3-modal:checked ~ .container3-modal{
+    display: flex;
+}
+
+.container3-modal{
+    width: 100%;
+    display: none;
+    margin: 0 0 0 0px
+}
+.buscar{
+    width: 100%;
+    margin: 0px;
+    padding: 0 0 0 18px;
+}
+.container3-modal input {
+    width: 10%;
+    background-color: #443E53;
+    color: #F6F7FC;
+    border: none;
+    border-radius: 3px;
+}
+
+.container3-modal input::placeholder { 
+    color: #7D7199; 
+}
+
+.btnbuscar {
+    width: 5%;
+    height: 36px;
+    background-color: #443E53;
+    color: #F6F7FC;
+    padding: 5px;
+    border: none;
+    border-radius: 5px;
+}
+.btnbuscar:hover {
+    background-color: #2B2A2D;
+    color: #443E53;
+    transition: all 300ms ease;
 
 }
 /*:::::::::::::::::Fin Ventana Modal:::::::::::::::::*/
@@ -411,7 +460,19 @@ select {
     background-color: #F6F7FC;
     color: #443E53;
 }
+.dark-mode .btnbuscar{
+    background-color: #F6F7FC;
+    color: #443E53;
+}
+.dark-mode .buscar input{
+    background-color: #F6F7FC;
+    color: #443E53;
+}
 /*----------------------------------------------------------------*/
+.dark-mode .btnbuscar:hover{
+    background-color: #443E53;
+    color: #F6F7FC;
+}
 .dark-mode .boton-modal label:hover{
     background-color: #443E53;
     color: #F6F7FC;
@@ -541,6 +602,12 @@ select {
         width: 3%;
         right: 41px;
     }
+    .btnbuscar{
+        width: 9%;
+    }
+    .container3-modal input {
+        width: 15%;
+    }
 }
 
 /*----------------------------------------------------------------*/
@@ -554,6 +621,9 @@ select {
     }
     .formulario {
         width: 350px;
+    }
+    .container3-modal input {
+        width: 18%;
     }
 }
 /*----------------------------------------------------------------*/

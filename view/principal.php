@@ -162,37 +162,17 @@
     
     
     <!----------------------------------------------------------3 VENTANA MODAL---------------------------------------------------------->
-<!--     <input type="checkbox" id="btn2-modal">
-    <div class="buscar">
+    <input type="checkbox" id="btn3-modal">
+    <div class="container3-modal">
         <div class="buscar">
-            <form method="Post" action="">
-            
-                <h2><i class="fa-solid fa-envelopes-bulk"></i> Enviar e-mail</h2>
-
-                <select name="grupo">
-                    <option value="none">Seleccionar Clase</option>
-                </select>
-
-                <input  placeholder="e-mail" type="email" id="email" name="correo" required>
-
-                <input placeholder="Asunto" type="text" id="asunto" name="asunto" required>
-
-                <textarea  placeholder="Escribe tu mensaje" name="cuerpo" id="mensaje" cols="30" rows="10"></textarea>
-
-                <button type="submit" class="btn btn-success btn-lg btn-outline-info" value="Enviar correo"  onclick="loading(); validarcorreo()" id="btn2"> Enviar e-mail
-                    <div class="cerrado">
-                            <i class="fa-solid fa-envelope "></i>
-                        </div>   
-                        
-                        <div class="abierto">
-                            <i class="fa-solid fa-envelope-open "></i>
-                        </div>  
-                    </button>
-                
-            </form>
+            <form action="" method="GET">
+                <input type="text" name="filtro-nombre" placeholder="Nombre">
+                <input type="text" name="filtro-apellidos" placeholder="Apellidos">
+                <input type="text" name="filtro-email" placeholder="E-mail">
+                <input type="text" name="filtro-dni" placeholder="Dni">
+                <button type="submit" name="filtro-buscar" value="Buscar" class="btnbuscar"><label for=""><i class="fa-solid fa-magnifying-glass"></i></label></button> 
+            </form> 
         </div>
-                
-            <label for="btn2-modal" class="close2"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M256 512c141.4 0 256-114.6 256-256S397.4 0 256 0S0 114.6 0 256S114.6 512 256 512zM175 175c9.4-9.4 24.6-9.4 33.9 0l47 47 47-47c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9l-47 47 47 47c9.4 9.4 9.4 24.6 0 33.9s-24.6 9.4-33.9 0l-47-47-47 47c-9.4 9.4-24.6 9.4-33.9 0s-9.4-24.6 0-33.9l47-47-47-47c-9.4-9.4-9.4-24.6 0-33.9z"/></svg></label> -->
     <!-------------------------------------------------------FIN VENTANA MODAL---------------------------------------------------------->
 
 
@@ -203,6 +183,4 @@
 
 </html>
 
-<!-- 
-CREAR ESTILOS CRUD
-CREAR BUSCADOR -->
+<!-- CREAR ESTILOS CRUD -->
