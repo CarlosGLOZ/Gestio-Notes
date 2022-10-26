@@ -1,14 +1,42 @@
 <?php
 
-const SERVIDOR = 'localhost';
-const USUARIO = 'root';
-const PASSWORD = '';
-const BD = 'bd_login';
+// Constantes base de datos
+const BD = [
+    'servidor' => '172.24.17.191',
+    'usuario' => 'testeo',
+    'password' => '1234',
+    'bd' => 'bd_gestion_notas',
+];
 
-// nombres de la BDD para poder cambiarlos facilmente en caso necesario
-const TABLA_USUARIOS = 'tbl_gestor_de_notes';
-const ID_VARNAME = 'id_gestor';
-const NOMBRE_VARNAME = 'nom_gestor';
-const APELLIDOS_VARNAME = 'cognoms_gestor';
-const EMAIL_VARNAME = 'email_gestor';
-const PASSWORD_VARNAME = 'contra_gestor';
+// Constantes tbl_gestor_de_notes
+const GESTOR = [
+    'tabla' => 'tbl_gestor',
+    'id' => 'id_gestor',
+    'nombre' => 'nombre_gestor',
+    'primer_apellido' => 'primer_apellido_gestor',
+    'segundo_apellido' => 'segundo_apellido_gestor',
+    'email' => 'email_gestor',
+    'contra' => 'contra_gestor',
+];
+
+// Constantes tbl_alumno
+const ALUMNO = [
+    'tabla' => 'tbl_alumno',
+    'id' => 'id_alumno',
+    'nombre' => 'nombre_alumno',
+    'primer_apellido' => 'primer_apellido_alumno',
+    'segundo_apellido' => 'segundo_apellido_alumno',
+    'email' => 'email_alumno',
+    'dni' => 'dni_alumno',
+];
+
+// Constantes tbl_módulo
+const MODULO = [
+    'tabla' => 'tbl_modulo',
+    'id' => 'id_modulo',
+    'numero' => 'numero_modulo',
+    'nombre' => 'nombre_modulo',
+];
+
+// Obtener dato del array asociativo.
+// GESTOR['tabla'];

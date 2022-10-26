@@ -6,9 +6,9 @@ function validar_email($email, $password, $conexion)
     $email = $conexion -> real_escape_string($email);
     $password = $conexion -> real_escape_string($password);
 
-    $stmt = "SELECT ".PASSWORD_VARNAME." FROM ".TABLA_USUARIOS." WHERE ".EMAIL_VARNAME." = '$email';";
+    $stmt = "SELECT ".GESTOR['contra']." FROM ".GESTOR['tabla']." WHERE ".GESTOR['email']." = '$email';";
 
-    $account_password = mysqli_fetch_assoc(mysqli_query($conexion, $stmt))[PASSWORD_VARNAME];
+    $account_password = mysqli_fetch_assoc(mysqli_query($conexion, $stmt))[GESTOR['contra']];
 
     if ($password == $account_password) {
         return true;
@@ -20,7 +20,7 @@ function loguear($email, $conexion)
 {
     $email = $conexion -> real_escape_string($email);
 
-    $stmt = "SELECT * FROM ".TABLA_USUARIOS." WHERE ".EMAIL_VARNAME." = '$email';";
+    $stmt = "SELECT * FROM ".GESTOR['tabla']." WHERE ".GESTOR['email']." = '$email';";
 
     $registro_usuario = mysqli_fetch_assoc(mysqli_query($conexion, $stmt));
 
@@ -30,11 +30,21 @@ function loguear($email, $conexion)
     //     // echo "[".$key."] -> [".$value."]<br>";
     // }
 
-    $_SESSION[NOMBRE_VARNAME] = $registro_usuario[NOMBRE_VARNAME];
-    $_SESSION[APELLIDOS_VARNAME] = $registro_usuario[APELLIDOS_VARNAME];
-    $_SESSION[EMAIL_VARNAME] = $registro_usuario[EMAIL_VARNAME];
+    $_SESSION[GESTOR['nombre']] = $registro_usuario[GESTOR['nombre']];
+    $_SESSION[GESTOR['email']] = $registro_usuario[GESTOR['email']];
+    $_SESSION[GESTOR['contra']] = $registro_usuario[GESTOR['contra']];
 
     // foreach ($_SESSION as $key => $value) {
     //     echo "[".$key."] -> [".$value."]<br>";
     // }
+}
+
+
+function validarSesion() {
+    require_once '../config/config.php';
+
+    session_start();
+    if (!isset($_SESSION[GESTOR['email']])) {
+        echo "<script>window.location.href = '../view/login.html?error=errorSesion';</script>";
+    }
 }

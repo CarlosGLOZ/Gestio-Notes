@@ -17,19 +17,10 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Comfortaa&display=swap" rel="stylesheet">
     <!-- LINK FAVICON -->
-    <title>Bienvenida - CAHM</title>
+    <title>CRUD - CAHM</title>
 </head>
 
 <body>
-    <?php
-        require_once '../config/config.php';
-
-        session_start();
-        if (!isset($_SESSION[EMAIL_VARNAME])) {
-            echo "<script>window.location.href = '../view/login.html';</script>";
-        }
-    ?>
-
     <nav>
         <input type="checkbox" id="check">
         <label for="check" class="checkbtn">
@@ -45,18 +36,32 @@
             <li><a href="../proc/cerrar_sesion.php">Cerrar sesión</a></li>
         </ul>
     </nav>
-    <!-- <div class="region-login">
-        <div class="fondo-login">
-            <img src="../static/img/Logo login - grande.png" alt="">
-            <h1>Página de Bienvenida</h1>
-            <p>Login | Carlos Alex Héctor y Marc</p>
-        </div>
-    </div> -->
-    <div class="mydiv">
-        <h1>Bienvenido</h1>
-    </div>
-
-
+    <?php
+    // MOSTRAR DATOS EN FORMA DE TABLA:
+    echo "<a href='../view/crear.php'><button style='margin-bottom: 10px;' type='button' class='btn btn-success'>Crear</button></a>";
+    echo '<table style="border: solid 2px #c4c4c4;" class="table table-striped">';
+        echo '<tr>';
+            echo '<th>ID</th>';
+            echo '<th>NOMBRE</th>';
+            echo '<th>APELLIDOS</th>';
+            echo '<th>EMAIL</th>';
+            echo '<th>DNI</th>';
+            echo '<th>MODIFICAR</th>';
+            echo '<th>ELIMINAR</th>';
+        echo '</tr>';
+        foreach ($listado_alumnos as $alumno) {
+            echo '<tr>';
+                echo "<td>{$alumno['id_alumno']}</td>";
+                echo "<td>{$alumno['nombre_alumno']}</td>";
+                echo "<td>{$alumno['primer_apellido_alumno']} {$alumno['segundo_apellido_alumno']}</td>";
+                echo "<td>{$alumno['email_alumno']}</td>";
+                echo "<td>{$alumno['dni_alumno']}</td>";
+                echo "<td><a href='../controller/form_mod_controller.php?id_alumno={$alumno['id_alumno']}'><button type='button' class='btn btn-primary'>Modificar</button></a></td>";
+                echo "<td><a href='../controller/eliminar_controller.php?id_alumno={$alumno['id_alumno']}'><button type='button' class='btn btn-danger'>Eliminar</button></a></td>";           
+            echo "</tr>";
+        }
+    echo '</table>';
+    ?>
 </body>
 
 </html>

@@ -21,6 +21,7 @@ function validarFormulario() {
         alert("La contraseña ha de ser mínimo de 8 caractéres");
         validacion = false;
     }
+
     if (!validacion) {
         return false;
     }
