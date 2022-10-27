@@ -117,6 +117,17 @@ nav #check {
     font-size: 45px;
 }
 /*----------------------------------------------------------------*/
+/*------------------------------CRUD------------------------------*/
+/*----------------------------------------------------------------*/
+.crud {
+    max-width: 100%;
+    margin: 0 18px 0 18px;
+    padding: 15px;
+    border: #443E53 2px solid;
+    border-top-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+}
+/*----------------------------------------------------------------*/
 /*--------------------------CARGANDO------------------------------*/
 /*----------------------------------------------------------------*/
 #loading {
@@ -467,6 +478,12 @@ select {
 .dark-mode .buscar input{
     background-color: #F6F7FC;
     color: #443E53;
+}
+.dark-mode .container-modal {
+    background-color: rgba(43, 42, 45, 0.8);
+}
+.dark-mode .container2-modal {
+    background-color: rgba(43, 42, 45, 0.8);
 }
 /*----------------------------------------------------------------*/
 .dark-mode .btnbuscar:hover{

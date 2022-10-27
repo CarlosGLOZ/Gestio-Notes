@@ -24,10 +24,10 @@
         require_once '../config/config.php';
 
         session_start();
-        if (!isset($_SESSION[EMAIL_VARNAME])) {
-            echo "<script>window.location.href = '../view/login.html';</script>";
-        } 
-
+            if (!isset($_SESSION[EMAIL_VARNAME])) {
+                echo "<script>window.location.href = '../view/login.html';</script>";
+                
+            } 
         ?>
 
     <nav>
@@ -137,7 +137,7 @@
                 <textarea  placeholder="Escribe tu mensaje" name="cuerpo" id="mensaje" cols="30" rows="10"></textarea>
 
                 <!--BOTON ENVIAR-->
-                <button type="submit" class="btn btn-success btn-lg btn-outline-info" value="Enviar correo"  onclick="validarcorreo()" id="btn2"> Enviar e-mail
+                <button type="submit" class="btn btn-success btn-lg btn-outline-info" value="Enviar correo"  onclick="validarcorreoyloading()" id="btn2"> Enviar e-mail
                     <div class="cerrado">
                             <i class="fa-solid fa-envelope "></i>
                         </div>   
@@ -173,11 +173,16 @@
                 <button type="submit" name="filtro-buscar" value="Buscar" class="btnbuscar"><label for=""><i class="fa-solid fa-magnifying-glass"></i></label></button> 
             </form> 
         </div>
+    </div>
     <!-------------------------------------------------------FIN VENTANA MODAL---------------------------------------------------------->
 
 
     <!-------------------------------------------------------CRUD---------------------------------------------------------->
-
+    <div class="crud">
+        <h1>Crud</h1>
+        <p>Este es el Crud y aqui apareceran todos los datos</p>
+        <p>Es un proyecto realizado por CAHM</p>
+    </div>
 
 </body>
 
