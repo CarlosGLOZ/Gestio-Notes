@@ -114,16 +114,7 @@ class Alumno{
      */
     public static function createAlumno($conexion, $nombre_alumno, $primer_apellido_alumno, $segundo_apellido_alumno, $email_alumno, $dni_alumno) {
 
-        // $alumno = new Alumno (null,$nombre_alumno, $primer_apellido_alumno, $segundo_apellido_alumno, $email_alumno, $dni_alumno);
-
-        // $sentencia = "INSERT INTO ".ALUMNO['tabla']." (".ALUMNO['id'].", ".ALUMNO['nombre'].", ".ALUMNO['primer_apellido'].", ".ALUMNO['segundo_apellido'].", ".ALUMNO['email'].", ".ALUMNO['dni'].") VALUES (null, $nombre_alumno, $primer_apellido_alumno, $segundo_apellido_alumno, $email_alumno, $dni_alumno);";
-        // $insert_user = mysqli_query($conexion, $sentencia);
-
         $alumno = new Alumno (null,$nombre_alumno, $primer_apellido_alumno, $segundo_apellido_alumno, $email_alumno, $dni_alumno);
-
-        foreach ($alumno as $key => $value) {
-            echo "[$key] -> [$value]<br>";
-        }
 
         // TRANSACCIÓN PARA CREAD ALUMNO Y SUS NOTAS
         mysqli_autocommit($conexion, false);
