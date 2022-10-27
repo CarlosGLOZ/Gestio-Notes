@@ -32,20 +32,20 @@ function validarFormulario() {
 function darkMode() {
     var element = document.body;
     element.classList.toggle("dark-mode");
-  }
+}
 
 //MODAL PANTALLA DE CARGA
-function loading(){
+function loading() {
     var form = document.getElementById("form");
     var loading = document.getElementById("loading");
-    
+
     if (form.style.display != "none") {
         form.style.display = "none";
         loading.style.display = "block";
     } else {
         form.style.display = "block";
     }
-}   
+}
 //MODAL ENVIAR MAIL
 function validarcorreo() {
 

@@ -56,47 +56,6 @@
         <button onclick="darkMode()" class="dark"><label for=""><i class="fa-sharp fa-solid fa-circle-half-stroke"></i></label></button> <!--modo oscuro-->
     </div>
     <!----------------------------------------------------------FIN BOTONES---------------------------------------------------------->
-
-    <!----------------------------------------------------------BOTONES FILTROS---------------------------------------------------------->
-    <div>
-        <form action="" method="get">
-            <input type="text" name="filtro-nombre" placeholder="nombre" value=<?php echo $filtro_nombre?>>
-            <input type="text" name="filtro-apellidos" placeholder="apellidos" value=<?php echo $filtro_apellidos?>>
-            <input type="text" name="filtro-email" placeholder="email" value=<?php echo $filtro_email?>>
-            <input type="text" name="filtro-dni" placeholder="dni" value=<?php echo $filtro_dni?>>
-            <input type="submit" name="filtro-buscar">
-        </form>
-    </div>
-    <!----------------------------------------------------------FIN FILTROS---------------------------------------------------------->
-
-    <!----------------------------------------------------------FIN TABLA DE DATOS ---------------------------------------------------------->
-    <?php
-    // MOSTRAR DATOS EN FORMA DE TABLA:
-    echo "<a href='../view/crear.php'><button style='margin-bottom: 10px;' type='button' class='btn btn-success'>Crear</button></a>";
-    echo '<table style="border: solid 2px #c4c4c4;" class="table table-striped">';
-        echo '<tr>';
-            echo '<th>ID</th>';
-            echo '<th>NOMBRE</th>';
-            echo '<th>APELLIDOS</th>';
-            echo '<th>EMAIL</th>';
-            echo '<th>DNI</th>';
-            echo '<th>MODIFICAR</th>';
-            echo '<th>ELIMINAR</th>';
-        echo '</tr>';
-        foreach ($listado_alumnos as $alumno) {
-            echo '<tr>';
-                echo "<td>{$alumno['id_alumno']}</td>";
-                echo "<td>{$alumno['nombre_alumno']}</td>";
-                echo "<td>{$alumno['primer_apellido_alumno']} {$alumno['segundo_apellido_alumno']}</td>";
-                echo "<td>{$alumno['email_alumno']}</td>";
-                echo "<td>{$alumno['dni_alumno']}</td>";
-                echo "<td><a href='../controller/form_mod_controller.php?id_alumno={$alumno['id_alumno']}'><button type='button' class='btn btn-primary'>Modificar</button></a></td>";
-                echo "<td><a href='../controller/eliminar_controller.php?id_alumno={$alumno['id_alumno']}'><button type='button' class='btn btn-danger'>Eliminar</button></a></td>";           
-            echo "</tr>";
-        }
-    echo '</table>';
-    ?>
-    <!----------------------------------------------------------FIN TABLA DE DATOS ---------------------------------------------------------->
     
     <!----------------------------------------------------------1 VENTANA MODAL---------------------------------------------------------->
     <input type="checkbox" id="btn-modal">
@@ -208,10 +167,37 @@
                 <button type="submit" name="filtro-buscar" value="Buscar" class="btnbuscar"><label for=""><i class="fa-solid fa-magnifying-glass"></i></label></button> 
             </form> 
         </div>
+    </div>
     <!-------------------------------------------------------FIN VENTANA MODAL---------------------------------------------------------->
 
 
-    <!-------------------------------------------------------CRUD---------------------------------------------------------->
+    <!----------------------------------------------------------FIN TABLA DE DATOS ---------------------------------------------------------->
+    <?php
+    // MOSTRAR DATOS EN FORMA DE TABLA:
+    echo '<table style="border: solid 2px #c4c4c4;" class="table table-striped">';
+        echo '<tr>';
+            echo '<th>ID</th>';
+            echo '<th>NOMBRE</th>';
+            echo '<th>APELLIDOS</th>';
+            echo '<th>EMAIL</th>';
+            echo '<th>DNI</th>';
+            echo '<th>MODIFICAR</th>';
+            echo '<th>ELIMINAR</th>';
+        echo '</tr>';
+        foreach ($listado_alumnos as $alumno) {
+            echo '<tr>';
+                echo "<td>{$alumno['id_alumno']}</td>";
+                echo "<td>{$alumno['nombre_alumno']}</td>";
+                echo "<td>{$alumno['primer_apellido_alumno']} {$alumno['segundo_apellido_alumno']}</td>";
+                echo "<td>{$alumno['email_alumno']}</td>";
+                echo "<td>{$alumno['dni_alumno']}</td>";
+                echo "<td><a href='../controller/form_mod_controller.php?id_alumno={$alumno['id_alumno']}'><button type='button' class='btn btn-primary'>Modificar</button></a></td>";
+                echo "<td><a href='../controller/eliminar_controller.php?id_alumno={$alumno['id_alumno']}'><button type='button' class='btn btn-danger'>Eliminar</button></a></td>";           
+            echo "</tr>";
+        }
+    echo '</table>';
+    ?>
+    <!----------------------------------------------------------FIN TABLA DE DATOS ---------------------------------------------------------->
 
 
 </body>
