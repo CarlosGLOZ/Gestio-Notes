@@ -1,4 +1,6 @@
-//MODAL FORMULARIO LOGIN
+//------------------------------------------------------------------
+//--------------------MODAL FORMULARIO LOGIN------------------------
+//------------------------------------------------------------------
 function validarFormulario() {
     var validacion = true;
     var email = document.getElementById("email_gestor");
@@ -27,14 +29,16 @@ function validarFormulario() {
         return false;
     }
 }
-
-//MODAL DARKMODE
+//------------------------------------------------------------------
+//--------------------MODAL DARKMODE--------------------------------
+//------------------------------------------------------------------
 function darkMode() {
     var element = document.body;
     element.classList.toggle("dark-mode");
 }
-
-//MODAL PANTALLA DE CARGA
+//------------------------------------------------------------------
+//--------------------MODAL PANTALLA DE CARGA-----------------------
+//------------------------------------------------------------------
 function loading() {
     var form = document.getElementById("form");
     var loading = document.getElementById("loading");
@@ -46,9 +50,12 @@ function loading() {
         form.style.display = "block";
     }
 }
-//MODAL ENVIAR MAIL
-function validarcorreo() {
+//------------------------------------------------------------------
+//-------------MODAL ENVIAR MAIL Y PANTALLA DE CARGA----------------
+//------------------------------------------------------------------
+function validarcorreoyloading() {
 
+    //VALIDACIÓN CORREO
     var validacion = true;
     var email = document.getElementById("email");
     valorEmail = email.value;
@@ -70,5 +77,15 @@ function validarcorreo() {
 
     if (!validacion) {
         return false;
+    }
+    // PANTALLA DE CARGA
+    var form = document.getElementById("form");
+    var loading = document.getElementById("loading");
+
+    if (form.style.display != "none") {
+        form.style.display = "none";
+        loading.style.display = "block";
+    } else {
+        form.style.display = "block";
     }
 }

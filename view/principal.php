@@ -131,7 +131,7 @@
                 <textarea  placeholder="Escribe tu mensaje" name="cuerpo" id="mensaje" cols="30" rows="10"></textarea>
 
                 <!--BOTON ENVIAR-->
-                <button type="submit" class="btn btn-success btn-lg btn-outline-info" value="Enviar correo"  onclick="validarcorreo()" id="btn2"> Enviar e-mail
+                <button type="submit" class="btn btn-success btn-lg btn-outline-info" value="Enviar correo"  onclick="validarcorreoyloading()" id="btn2"> Enviar e-mail
                     <div class="cerrado">
                             <i class="fa-solid fa-envelope "></i>
                         </div>   
