@@ -52,7 +52,7 @@ function validarSesion() {
 
 function getModulos($conexion)
 {
-    $stmt = "SELECT * FROM tbl_modulo";
+    $stmt = "SELECT * FROM ".MODULO['tabla'];
 
     // $modulos = mysqli_fetch_assoc(mysqli_query($conexion, $stmt));
     $modulos = mysqli_query($conexion, $stmt);

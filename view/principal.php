@@ -109,9 +109,6 @@
                 <select name="grupo">
                     <option value="none">Seleccionar Clase</option>
                     <?php
-                        require_once '../config/conexion.php';
-                        require_once '../proc/func.php';
-
                         $modulos = getModulos($conexion);
 
                         foreach ($modulos as $modulo) {
