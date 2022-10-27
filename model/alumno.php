@@ -19,8 +19,7 @@ class Alumno{
         $this->dni_alumno = $dni_alumno;
     }
 
-    public static function getAlumnos($filtro_nombre='', $filtro_apellidos='', $filtro_email='', $filtro_dni='') {
-        require_once '../config/conexion.php';
+    public static function getAlumnos($conexion, $filtro_nombre='', $filtro_apellidos='', $filtro_email='', $filtro_dni='') {
 
         // sentencia inclusiva de los filtros
         $sentencia = 
@@ -41,7 +40,6 @@ class Alumno{
         return $listado_alumnos;
 
         // Cerrar statement
-        mysqli_stmt_close($stmt);
     }
 
     public static function getAlumnosEmail() {

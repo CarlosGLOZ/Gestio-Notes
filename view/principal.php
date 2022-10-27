@@ -108,14 +108,12 @@
                  <!--ZONA SELECTOR-->               
                 <select name="grupo">
                     <option value="none">Seleccionar Clase</option>
-                    <?php
-                        require_once '../config/conexion.php';
-                        require_once '../proc/func.php';
 
+                    <?php
                         $modulos = getModulos($conexion);
 
                         foreach ($modulos as $modulo) {
-                            // echo "[{$modulo['numero_modulo']}] -> [{$modulo['nombre_modulo']}]<br>";
+                                // echo "[{$modulo['numero_modulo']}] -> [{$modulo['nombre_modulo']}]<br>";
                             echo "<option value='".$modulo['id_modulo']."'>".$modulo['numero_modulo']."-".$modulo['nombre_modulo']."</option>";
                         }
                     ?>
@@ -171,34 +169,35 @@
     <!-------------------------------------------------------FIN VENTANA MODAL---------------------------------------------------------->
 
 
+    <!----------------------------------------------------------INICIO TABLA DE DATOS ---------------------------------------------------------->
+       <div class="crud">
+        <?php
+        // MOSTRAR DATOS EN FORMA DE TABLA:
+        echo '<table class="tablacrud table table-striped ">';
+            echo '<tr class="bloqueado">';
+                echo '<th id="primero">ID</th>';
+                echo '<th id="titulo">NOMBRE</th>';
+                echo '<th id="titulo">APELLIDOS</th>';
+                echo '<th id="titulo">EMAIL</th>';
+                echo '<th id="titulo">DNI</th>';
+                echo '<th id="titulo">MODIFICAR</th>';
+                echo '<th id="ultimo">ELIMINAR</th>';
+            echo '</tr>';
+            foreach ($listado_alumnos as $alumno) {
+                echo '<tr>';
+                    echo "<td>{$alumno['id_alumno']}</td>";
+                    echo "<td>{$alumno['nombre_alumno']}</td>";
+                    echo "<td>{$alumno['primer_apellido_alumno']} {$alumno['segundo_apellido_alumno']}</td>";
+                    echo "<td>{$alumno['email_alumno']}</td>";
+                    echo "<td>{$alumno['dni_alumno']}</td>";
+                    echo "<td><a href='../controller/form_mod_controller.php?id_alumno={$alumno['id_alumno']}'><button type='button' class='btncrudmodificar btn btn-primary'>Modificar</button></a></td>";
+                    echo "<td><a href='../controller/eliminar_controller.php?id_alumno={$alumno['id_alumno']}'><button type='button' class='btncrudenviar btn btn-danger'>Eliminar</button></a></td>";           
+                echo "</tr>";
+            }
+        echo '</table>';
+        ?>
+    </div>
     <!----------------------------------------------------------FIN TABLA DE DATOS ---------------------------------------------------------->
-    <?php
-    // MOSTRAR DATOS EN FORMA DE TABLA:
-    echo '<table style="border: solid 2px #c4c4c4;" class="table table-striped">';
-        echo '<tr>';
-            echo '<th>ID</th>';
-            echo '<th>NOMBRE</th>';
-            echo '<th>APELLIDOS</th>';
-            echo '<th>EMAIL</th>';
-            echo '<th>DNI</th>';
-            echo '<th>MODIFICAR</th>';
-            echo '<th>ELIMINAR</th>';
-        echo '</tr>';
-        foreach ($listado_alumnos as $alumno) {
-            echo '<tr>';
-                echo "<td>{$alumno['id_alumno']}</td>";
-                echo "<td>{$alumno['nombre_alumno']}</td>";
-                echo "<td>{$alumno['primer_apellido_alumno']} {$alumno['segundo_apellido_alumno']}</td>";
-                echo "<td>{$alumno['email_alumno']}</td>";
-                echo "<td>{$alumno['dni_alumno']}</td>";
-                echo "<td><a href='../controller/form_mod_controller.php?id_alumno={$alumno['id_alumno']}'><button type='button' class='btn btn-primary'>Modificar</button></a></td>";
-                echo "<td><a href='../controller/eliminar_controller.php?id_alumno={$alumno['id_alumno']}'><button type='button' class='btn btn-danger'>Eliminar</button></a></td>";           
-            echo "</tr>";
-        }
-    echo '</table>';
-    ?>
-    <!----------------------------------------------------------FIN TABLA DE DATOS ---------------------------------------------------------->
-
 
 </body>
 

@@ -112,7 +112,7 @@ function isGetSet()
 }
 
 // Comprueba si hay variables GET vacías
-function hayGetsVacios(Type $var = null)
+function hayGetsVacios()
 {
     $url = getURL();
     $url_partida = explode('?', $url);
