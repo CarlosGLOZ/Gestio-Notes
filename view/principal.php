@@ -61,22 +61,22 @@
     <input type="checkbox" id="btn-modal">
     <div class="container-modal">
             <div class="formulario">
-                <form action="" method="Post">
+                <form action="crear_controller.php" method="Post">
 
                     <h2><i class="fa-solid fa-user-tag"></i> Nombre completo</h2> 
                     <!--NOMBRE COMPLETO-->
-                    <input type="text" name="nom_alu"  placeholder="Nombre" required>    
-                    <input type="text" name="primer_cognom_alu" placeholder="Primer apellido" required>    
-                    <input type="text" name="segon_cognom_alu"  placeholder="Segundo apellido" required>
+                    <input type="text" name="<?php echo ALUMNO['nombre'];?>"  placeholder="Nombre" required>    
+                    <input type="text" name="<?php echo ALUMNO['primer_apellido'];?>" placeholder="Primer apellido" required>    
+                    <input type="text" name="<?php echo ALUMNO['segundo_apellido'];?>"  placeholder="Segundo apellido" required>
 
 
                     <h2><i class="fa-solid fa-id-card"></i> Dni</h2>
                     <!--DNI-->
-                    <input type="text" name="dni_alu" placeholder="dni" required>
+                    <input type="text" name="<?php echo ALUMNO['dni'];?>" placeholder="dni" required>
 
                     <h2><i class="fa-solid fa-square-envelope"></i> e-mail</h2>
                     <!--EMAIL-->
-                    <input type="email" name="email_alu" placeholder="e-mail" required>
+                    <input type="email" name="<?php echo ALUMNO['email'];?>" placeholder="e-mail" required>
 
                     <!--BOTON ENVIAR-->
                     <button type="submit" class="btn btn-success btn-lg btn-outline-info" value="Enviar correo"  id="btn">
