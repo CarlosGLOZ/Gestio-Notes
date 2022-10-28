@@ -99,6 +99,7 @@ class Alumno{
 
         // Cerrar statement
     }
+    
     public static function getAlumnosEmail() {
 
         $sentencia = "SELECT ".ALUMNO['email']." FROM ".ALUMNO['tabla'].";";
