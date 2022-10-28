@@ -9,12 +9,17 @@ require_once '../config/conexion.php';
 require_once '../proc/func.php';
 validarSesion();
 
-$id_alumno = $_POST['id'];
-$nombre_alumno = $conexion -> real_escape_string(trim(strip_tags($_POST['nombre'])));
-$primer_apellido_alumno = $conexion -> real_escape_string(trim(strip_tags($_POST['primer_apellido'])));
-$segundo_apellido_alumno = $conexion -> real_escape_string(trim(strip_tags($_POST['segundo_apellido'])));
-$email_alumno = $conexion -> real_escape_string(trim(strip_tags($_POST['email'])));
-$dni_alumno = $conexion -> real_escape_string(trim(strip_tags($_POST['dni'])));
+// Si no entramos aqui desde el boton nos echa para atrás
+if(!isset($_POST['modificar'])){
+    echo "<script>window.location.href='../controller/index_controller.php?error=entradaInvalida'</script>";
+    exit();
+}
+
+// Asegurar los campos que vamos a introducir en la base de datos:
+foreach ($_POST as $key => $value) {
+    $$key = mysqli_real_escape_string($conexion, trim(strip_tags($value)));
+    // echo $key."<br>";
+}
 
 // VALIDACIONES:
 // Comprobar que no queden campos vacios
@@ -23,7 +28,7 @@ if(Alumno::registroCamposVacios($nombre_alumno,$primer_apellido_alumno, $segundo
     exit();
 }
 // Comprobamos que el usuario no este ya creado
-if(Alumno::checkUser($conexion, $email_alumno) !== FALSE){
+if(Alumno::checkUser($conexion, $email_alumno) != true){
     echo "<script>window.location.href='../controller/index_controller.php?error=checkUser'</script>";
     exit();
 }
@@ -37,6 +42,3 @@ if(Alumno::errorEmail($email_alumno) !== FALSE){
 Alumno::updateAlumno($id_alumno, $nombre_alumno, $primer_apellido_alumno, $segundo_apellido_alumno, $email_alumno, $dni_alumno, $conexion);
 
 echo "<script>location.href='../controller/index_controller.php'</script>";
-?>
-
-

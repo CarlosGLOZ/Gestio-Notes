@@ -231,9 +231,9 @@ class Alumno{
     public static function updateAlumno($id_alumno, $nombre_alumno, $primer_apellido_alumno, $segundo_apellido_alumno, $email_alumno, $dni_alumno, $conexion) {
 
         $sql = "UPDATE ".ALUMNO['tabla']." SET ".ALUMNO['nombre']." = '$nombre_alumno', ".ALUMNO['primer_apellido']." = '$primer_apellido_alumno', ".ALUMNO['segundo_apellido']." = '$segundo_apellido_alumno', ".ALUMNO['email']." = '$email_alumno', ".ALUMNO['dni']." = '$dni_alumno' WHERE id_alumno = $id_alumno";
-        echo $sql;
+
         // Ejecutamos consulta para actualizar el usuario
-        mysqli_query($conexion, $sql);
+        return mysqli_query($conexion, $sql);
     }
 
 }
