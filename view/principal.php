@@ -79,7 +79,7 @@
                     <input type="email" name="<?php echo ALUMNO['email'];?>" placeholder="e-mail" required>
 
                     <!--BOTON ENVIAR-->
-                    <button type="submit" name="registro" class="btn btn-success btn-lg btn-outline-info" value="Enviar correo" id="btn">
+                    <button type="submit" name="registro" class="btn btn-success btn-lg btn-outline-info" value="Crear-alumno" id="btn">
                         <div class="cerrado"> 
                             <i class="fa-solid fa-user-plus"></i>
                         </div> 

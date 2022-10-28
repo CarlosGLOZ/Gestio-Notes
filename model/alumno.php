@@ -105,7 +105,6 @@ class Alumno{
         $sql = "SELECT * FROM ".ALUMNO['tabla']." WHERE ".ALUMNO['email']." = '$email_alumno';";
         
         $id_usuarioExiste = mysqli_fetch_assoc(mysqli_query($conexion, $sql));
-        var_dump($id_usuario);
         $usuarioExiste = mysqli_query($conexion, $sql);
         // var_dump($usuarioExiste -> num_rows);
 
@@ -160,7 +159,7 @@ class Alumno{
             $alumno_id = mysqli_insert_id($conexion);
         
             foreach (getModulos($conexion) as $modulo) {
-                $sql2 = "INSERT INTO tbl_alumno_modulo(id_alumno_modulo, nota_uf1, nota_uf2, nota_uf3, nota_final, id_Alumno, id_Modulo) VALUES(null, null, null, null, null, $alumno_id, {$modulo['id_modulo']});";
+                $sql2 = "INSERT INTO ".ALUMNO_MODULO['tabla']."(".ALUMNO_MODULO['id'].", ".ALUMNO_MODULO['nota_uf1'].", ".ALUMNO_MODULO['nota_uf2'].", ".ALUMNO_MODULO['nota_uf3'].", ".ALUMNO_MODULO['nota_final'].", ".ALUMNO_MODULO['id_alumno'].", ".ALUMNO_MODULO['id_modulo'].") VALUES(null, null, null, null, null, $alumno_id, {$modulo['id_modulo']});";
                 mysqli_query($conexion, $sql2);
             }
         
@@ -177,15 +176,53 @@ class Alumno{
 
         $sql = "SELECT * FROM ".ALUMNO['tabla']." WHERE ".ALUMNO['id']. " = '$id_alumno';";
         return mysqli_fetch_assoc(mysqli_query($conexion, $sql));
+
+        // TRANSACCIÓN PARA BORRAR ALUMNO Y SUS NOTAS
+        mysqli_autocommit($conexion, false);
+        try {
+            mysqli_begin_transaction($conexion);
+        
+            foreach (getModulos($conexion) as $modulo) {
+                $sql2 = "INSERT INTO tbl_alumno_modulo(id_alumno_modulo, nota_uf1, nota_uf2, nota_uf3, nota_final, id_Alumno, id_Modulo) VALUES(null, null, null, null, null, $alumno_id, {$modulo['id_modulo']});";
+                mysqli_query($conexion, $sql2);
+            }
+        
+            $sql1 = "INSERT INTO ".ALUMNO['tabla']." (".ALUMNO['id'].", ".ALUMNO['nombre'].", ".ALUMNO['primer_apellido'].", ".ALUMNO['segundo_apellido'].", ".ALUMNO['email'].", ".ALUMNO['dni'].") VALUES (null, '{$alumno->getNombre()}', '{$alumno->getPrimerApellido()}', '{$alumno->getSegundoApellido()}', '{$alumno->getEmail()}', '{$alumno->getDni()}');";
+            mysqli_query($conexion, $sql1);
+        
+            mysqli_commit($conexion);
+        } catch (\Thorwable $e) {
+            mysqli_rollback($conexion);
+        }
     }
 
     /**
      * 
      */
     public static function deleteAlumno($id_alumno, $conexion) {
-        $sql = "DELETE FROM ".ALUMNO['tabla']." WHERE ".ALUMNO['id']." = $id_alumno;";
-        // Ejecutamos la consulta del delete
-        mysqli_query($conexion, $sql);
+
+        // TRANSACCIÓN PARA CREAD ALUMNO Y SUS NOTAS
+        mysqli_autocommit($conexion, false);
+        try {
+            mysqli_begin_transaction($conexion);
+            
+            foreach (getModulos($conexion) as $modulo) {
+                $sql2 = "DELETE FROM ".ALUMNO_MODULO['tabla']." WHERE ".ALUMNO_MODULO['id_alumno']." = $id_alumno;";
+                mysqli_query($conexion, $sql2);
+            }
+        
+            $sql1 = "DELETE FROM ".ALUMNO['tabla']." WHERE ".ALUMNO['id']." = $id_alumno;";
+            mysqli_query($conexion, $sql1);
+        
+            $alumno_id = mysqli_insert_id($conexion);
+        
+            return mysqli_commit($conexion);
+        } catch (\Thorwable $e) {
+            mysqli_rollback($conexion);
+
+            return false;
+        }
+
     }
 
     /**
