@@ -1,5 +1,4 @@
 @import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@300&display=swap');
-
 * {
     font-family: 'Barlow Condensed', sans-serif;
     padding: 0;
@@ -16,7 +15,6 @@ nav {
     background: #443E53;
     width: 100%;
     height: 80px;
-
 }
 
 nav .enlace {
@@ -24,9 +22,9 @@ nav .enlace {
     padding: 5px 50px;
 }
 
-nav .bienvenida{
+nav .bienvenida {
     position: absolute;
-    padding:2% 130px;
+    padding: 2% 130px;
     color: #F6F7FC;
 }
 
@@ -46,6 +44,7 @@ nav ul {
     margin-bottom: 0;
     padding: 0 2%;
 }
+
 nav ul li a {
     color: #F6F7FC;
     font-size: 20px;
@@ -79,12 +78,10 @@ nav ul li {
     margin: 0px 5px;
 }
 
-
 nav ul li a:hover::after {
     transform: scaleX(1);
     transform-origin: bottom left;
 }
-
 
 nav .checkbtn {
     font-size: 30px;
@@ -99,7 +96,6 @@ nav .checkbtn {
 nav #check {
     display: none;
 }
-
 
 * {
     padding: 0;
@@ -116,19 +112,104 @@ nav #check {
     align-items: center;
     font-size: 45px;
 }
+
+
 /*----------------------------------------------------------------*/
+
+
+/*------------------------------CRUD------------------------------*/
+
+
+/*----------------------------------------------------------------*/
+
+.crud {
+    max-width: 100%;
+    margin: 0 18px 0 18px;
+    padding: 15px;
+    border: #443E53 2px solid;
+    border-top-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+}
+
+
+/*----------------------------------------------------------------*/
+
+
+/*--------------------------CARGANDO------------------------------*/
+
+
+/*----------------------------------------------------------------*/
+
+#loading {
+    display: none;
+}
+
+.spinner {
+    width: 40px;
+    height: 40px;
+    position: relative;
+    margin: 350px auto;
+}
+
+.double-bounce1,
+.double-bounce2 {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background-color: #F6F7FC;
+    opacity: 0.6;
+    position: absolute;
+    top: 0;
+    left: 0;
+    -webkit-animation: bounce 2.0s infinite ease-in-out;
+    animation: bounce 2.0s infinite ease-in-out;
+}
+
+.double-bounce2 {
+    -webkit-animation-delay: -1.0s;
+    animation-delay: -1.0s;
+}
+
+@-webkit-keyframes bounce {
+    0%,
+    100% {
+        -webkit-transform: scale(0.0)
+    }
+    50% {
+        -webkit-transform: scale(1.0)
+    }
+}
+
+@keyframes bounce {
+    0%,
+    100% {
+        transform: scale(0.0);
+        -webkit-transform: scale(0.0);
+    }
+    50% {
+        transform: scale(1.0);
+        -webkit-transform: scale(1.0);
+    }
+}
+
+
+/*----------------------------------------------------------------*/
+
+
 /*------------------------FORMULARIO------------------------------*/
+
+
 /*----------------------------------------------------------------*/
+
 .formulario {
     width: 400px;
     height: auto;
-    background-color: #443E53;    
+    background-color: #443E53;
     padding: 20px 20px;
     box-sizing: border-box;
-    margin-top: 20px;
+    margin-top: 69px;
     border-radius: 10px;
 }
-
 
 h2 {
     color: #fff;
@@ -138,7 +219,8 @@ h2 {
     margin-bottom: 20px;
 }
 
-input, textarea {
+input,
+textarea {
     width: 100%;
     margin-bottom: 15px;
     padding: 5px;
@@ -148,11 +230,12 @@ input, textarea {
 
 
 /*BTN1 MODAL1----------------------------------------------------------------*/
+
 #btn {
     color: rgb(50, 44, 44);
     width: 100%;
     height: 40px;
-    background-color:#F6F7FC ;
+    background-color: #F6F7FC;
     border-radius: 10px;
     padding: 0 0 2px;
     border-color: #719972;
@@ -173,12 +256,15 @@ input, textarea {
 #btn:hover {
     background-color: #719972;
 }
+
+
 /*BTN2 MODAL2----------------------------------------------------------------*/
+
 #btn2 {
     color: rgb(50, 44, 44);
     width: 100%;
     height: 65px;
-    background-color:#F6F7FC ;
+    background-color: #F6F7FC;
     border-radius: 10px;
     padding: 0 0 2px;
     border-color: #719972;
@@ -207,19 +293,27 @@ input, textarea {
     position: relative;
     fill: #F6F7FC;
     right: 48px;
-    top: -229px;
+    top: -222px;
     transition: all 200ms ease;
 }
 
 .close2:hover {
     fill: #7D7199;
 }
-/*----------------------------------------------------------------*/
-/*-----------------------------MODAL------------------------------*/
+
+
 /*----------------------------------------------------------------*/
 
+
+/*-----------------------------MODAL------------------------------*/
+
+
+/*----------------------------------------------------------------*/
+
+
 /*:::::::::::::::::Boton-Modal:::::::::::::::::*/
-.boton-modal{
+
+.boton-modal {
     height: 100%;
     padding: 40px;
     background-color: #fff;
@@ -228,9 +322,11 @@ input, textarea {
     padding: 8px;
     margin: 5px;
     border: none;
-    display: flex;;
+    display: flex;
+    ;
 }
-.boton-modal label{
+
+.boton-modal label {
     width: 5%;
     padding: 10px 15px;
     background-color: #443E53;
@@ -242,32 +338,37 @@ input, textarea {
     justify-content: space-evenly;
     margin: 5px;
 }
-.boton-modal label:hover{
-    background-color: #7D7199;
-    color: #719972;
+
+.boton-modal label:hover {
+    background-color: #2B2A2D;
+    color: #7D7199;
 }
+
+
 /*:::::::::::::::::Fin Boton-Modal:::::::::::::::::*/
 
+
 /*:::::::::::::::::Ventana1 Modal:::::::::::::::::*/
-#btn-modal{
+
+#btn-modal {
     display: none;
 }
 
-#btn-modal:checked ~ .container-modal{
+#btn-modal:checked~.container-modal {
     display: flex;
 }
 
-.container-modal{
+.container-modal {
     width: 100%;
     height: 100vh;
     position: fixed;
-    top: 0; left: 0;
+    top: 0;
+    left: 0;
     background-color: rgba(68, 62, 83, 0.8);
     display: none;
     justify-content: center;
     align-items: center;
     z-index: 100;
-
 }
 
 .close {
@@ -277,7 +378,7 @@ input, textarea {
     position: relative;
     fill: #F6F7FC;
     right: 46px;
-    top: -200px;
+    top: -178px;
     transition: all 200ms ease;
 }
 
@@ -285,35 +386,100 @@ input, textarea {
     fill: #7D7199;
 }
 
+
 /*:::::::::::::::::Fin Ventana Modal:::::::::::::::::*/
 
-/*:::::::::::::::::Ventana Modal:::::::::::::::::*/
-#btn2-modal{
+
+/*:::::::::::::::::Ventana Modal 2:::::::::::::::::*/
+
+#btn2-modal {
     display: none;
 }
 
-#btn2-modal:checked ~ .container2-modal{
+#btn2-modal:checked~.container2-modal {
     display: flex;
 }
 
-.container2-modal{
+.container2-modal {
     width: 100%;
     height: 100vh;
     position: fixed;
-    top: 0; left: 0;
+    top: 0;
+    left: 0;
     background-color: rgba(68, 62, 83, 0.8);
     display: none;
     justify-content: center;
     align-items: center;
     z-index: 100;
-
 }
+
+
 /*:::::::::::::::::Fin Ventana Modal:::::::::::::::::*/
 
+
+/*:::::::::::::::::Ventana Modal 3:::::::::::::::::*/
+
+#btn3-modal {
+    display: none;
+}
+
+#btn3-modal:checked~.container3-modal {
+    display: flex;
+}
+
+.container3-modal {
+    width: 100%;
+    display: none;
+    margin: 0 0 0 0px
+}
+
+.buscar {
+    width: 100%;
+    margin: 0px;
+    padding: 0 0 0 18px;
+}
+
+.container3-modal input {
+    width: 10%;
+    background-color: #443E53;
+    color: #F6F7FC;
+    border: none;
+    border-radius: 3px;
+}
+
+.container3-modal input::placeholder {
+    color: #7D7199;
+}
+
+.btnbuscar {
+    width: 5%;
+    height: 36px;
+    background-color: #443E53;
+    color: #F6F7FC;
+    padding: 5px;
+    border: none;
+    border-radius: 5px;
+}
+
+.btnbuscar:hover {
+    background-color: #2B2A2D;
+    color: #443E53;
+    transition: all 300ms ease;
+}
+
+
+/*:::::::::::::::::Fin Ventana Modal:::::::::::::::::*/
+
+
 /*----------------------------------------------------------------*/
+
+
 /*----------------------------------------------------------------*/
+
+
 /*----------------------------------------------------------------*/
-.boton{
+
+.boton {
     width: 50px;
     height: 50px;
     background-color: #443E53;
@@ -324,7 +490,7 @@ input, textarea {
     border: none;
 }
 
-.boton:hover{
+.boton:hover {
     background-color: #7D7199;
     color: #719972;
     border-radius: 5px;
@@ -333,11 +499,153 @@ input, textarea {
     border: none;
 }
 
+select {
+    width: 50%;
+    background-color: #F6F7FC;
+    margin: 0 0 10px 0;
+    color: #443E53;
+    border-radius: 3px;
+}
+
+
 /*----------------------------------------------------------------*/
+
+
 /*----------------------------------------------------------------*/
+
+
+/*-------------------------DARK MODE------------------------------*/
+
+
+/*----------------------------------------------------------------*/
+
+
+/*----------------------------------------------------------------*/
+
+.dark-mode {
+    background-color: #2B2A2D;
+    color: #F6F7FC;
+}
+
+
+/*----------------------------------------------------------------*/
+
+.dark-mode .boton-modal {
+    background-color: #2B2A2D;
+}
+
+.dark-mode .boton-modal label {
+    background-color: #F6F7FC;
+    color: #443E53;
+}
+
+.dark-mode .dark {
+    background-color: #F6F7FC;
+    color: #443E53;
+}
+
+.dark-mode .dark label {
+    background-color: #F6F7FC;
+    color: #443E53;
+}
+
+.dark-mode .btnbuscar {
+    background-color: #F6F7FC;
+    color: #443E53;
+}
+
+.dark-mode .buscar input {
+    background-color: #F6F7FC;
+    color: #443E53;
+}
+
+.dark-mode .container-modal {
+    background-color: rgba(43, 42, 45, 0.8);
+}
+
+.dark-mode .container2-modal {
+    background-color: rgba(43, 42, 45, 0.8);
+}
+
+
+/*----------------------------------------------------------------*/
+
+.dark-mode .btnbuscar:hover {
+    background-color: #443E53;
+    color: #F6F7FC;
+}
+
+.dark-mode .boton-modal label:hover {
+    background-color: #443E53;
+    color: #F6F7FC;
+}
+
+.dark-mode .dark:hover {
+    background-color: #443E53;
+    color: #F6F7FC;
+}
+
+.dark-mode .dark label:hover {
+    background-color: #443E53;
+    color: #F6F7FC;
+}
+
+
+/*----------------------------------------------------------------*/
+
+.dark {
+    width: 50px;
+    height: auto;
+    background-color: #443E53;
+    color: #fff;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 300ms ease;
+    display: flex;
+    justify-content: space-evenly;
+    border: none;
+    margin: 5px;
+}
+
+.dark label {
+    width: 100%;
+    height: 100%;
+    padding: 10px;
+    background-color: #443E53;
+    color: #fff;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 300ms ease;
+    display: flex;
+    justify-content: space-evenly;
+    margin: 0px;
+}
+
+.dark label:hover {
+    background-color: #2B2A2D;
+    color: #7D7199;
+}
+
+.dark:hover {
+    background-color: #2B2A2D;
+    color: #7D7199;
+}
+
+
+/*----------------------------------------------------------------*/
+
+
+/*----------------------------------------------------------------*/
+
+
 /*-------------------------RESPONSIVE-----------------------------*/
+
+
 /*----------------------------------------------------------------*/
+
+
 /*----------------------------------------------------------------*/
+
 @media (min-width: 700px) {
     nav .enlace .logo {
         display: block;
@@ -348,25 +656,20 @@ input, textarea {
 }
 
 @media (max-width: 700px) {
-
-    nav .bienvenida{
+    nav .bienvenida {
         position: absolute;
-        padding:4% 130px;
+        padding: 4% 130px;
         color: #F6F7FC;
     }
-    
     nav .enlace {
         padding: 1% 40px;
     }
-
     nav .enlace .logo {
         display: none;
     }
-
     nav .enlace .logo-peq {
         display: block;
     }
-
     nav ul {
         position: fixed;
         width: 100%;
@@ -380,78 +683,90 @@ input, textarea {
         flex-direction: column;
         justify-content: center;
     }
-
     nav ul li {
         font-size: 17px;
     }
-
     nav ul li a {
         width: 40px;
         font-size: 18px;
         padding: 10px 0px;
     }
-
     nav .checkbtn {
         display: block;
     }
-
     nav #check:checked~ul {
         right: 0;
     }
 }
+
+
 /*----------------------------------------------------------------*/
+
+
 /*----------------------------------------------------------------*/
 
 @media (max-width: 700px) {
     nav .enlace {
         padding: 2% 40px;
     }
-    .close{
+    .close {
         width: 3%;
         right: 41px;
     }
-
-    .close2{
+    .close2 {
         width: 3%;
         right: 41px;
+    }
+    .btnbuscar {
+        width: 9%;
+    }
+    .container3-modal input {
+        width: 15%;
     }
 }
 
-/*----------------------------------------------------------------*/
-/*----------------------------------------------------------------*/
-@media (max-width: 450px) {
 
-    nav .bienvenida{
+/*----------------------------------------------------------------*/
+
+
+/*----------------------------------------------------------------*/
+
+@media (max-width: 450px) {
+    nav .bienvenida {
         position: absolute;
-        padding:6% 130px;
+        padding: 6% 130px;
         color: #F6F7FC;
     }
     .formulario {
         width: 350px;
     }
+    .container3-modal input {
+        width: 18%;
+    }
 }
-/*----------------------------------------------------------------*/
-/*----------------------------------------------------------------*/
-@media (max-width: 400px) {
 
-    nav .bienvenida{
+
+/*----------------------------------------------------------------*/
+
+
+/*----------------------------------------------------------------*/
+
+@media (max-width: 400px) {
+    nav .bienvenida {
         position: absolute;
-        padding:7% 100px;
+        padding: 7% 100px;
         color: #F6F7FC;
         font-size: 15px;
     }
     nav .enlace {
         padding: 2% 10px;
     }
-
     nav .enlace .logo {
         display: none;
     }
-
     nav .enlace .logo-peq {
         display: block;
     }
-
     nav ul {
         position: fixed;
         width: 100%;
@@ -465,35 +780,29 @@ input, textarea {
         flex-direction: column;
         justify-content: center;
     }
-
     nav ul li {
         font-size: 17px;
     }
-
     nav ul li a {
         width: 40px;
         font-size: 18px;
         padding: 10px 0px;
     }
-
     nav .checkbtn {
         display: block;
     }
-
     nav #check:checked~ul {
         right: 0;
     }
-
-    .close{
+    .close {
         width: 4%;
         right: 36px;
     }
-    .close2{
+    .close2 {
         width: 4%;
         right: 36px;
     }
     .formulario {
         width: 300px;
     }
-
 }

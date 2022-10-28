@@ -69,3 +69,4 @@ function sendMail($asunto, $cuerpo, $correo/*, $adjunto=null*/) {
 }
 
 sendMail($asunto, $cuerpo, $correo);
+echo "<script>window.location.href='../view/principal.php'</script>";

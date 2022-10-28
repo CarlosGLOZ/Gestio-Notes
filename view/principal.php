@@ -19,14 +19,11 @@
 </head>
 
 <body>
-    <?php
-        //esto hay que activarlo para poder funcionar con la BD y loa validación
-        require_once '../config/config.php';
 
-        session_start();
-        if (!isset($_SESSION[EMAIL_VARNAME])) {
-            echo "<script>window.location.href = '../view/login.html';</script>";
-        } 
+    <?php
+        if (!isset($entrada_valida)) {
+            echo "<script>window.location.href='../controller/index_controller.php'</script>";
+        }
     ?>
 
     <nav>
@@ -34,13 +31,13 @@
         <label for="check" class="checkbtn">
             <i class="fas fa-bars"></i>
         </label>
-        <a class="enlace" href="./entrar.php">
+        <a class="enlace" href="./principal.php">
             <img src="../static/img/logo/svg/2.2.svg" alt="Logo" class="logo-peq">
         </a>
-        <a class="enlace" href="./entrar.php">
+        <a class="enlace" href="./principal.php">
             <img src="../static/img/logo/svg/1.1.svg" alt="Logo" class="logo">
         </a>
-        <p class="bienvenida"> | ㅤBienvenido @marc <!--Aqui va variable para el nombre del user--></p>
+        <p class="bienvenida"> | Bienvenido <?php echo $_SESSION[GESTOR['nombre']]; ?> <!--Aqui va variable para el nombre del user--></p>
         <ul>
             <li><a href="../proc/cerrar_sesion.php">Cerrar sesión</a></li>
         </ul>
@@ -55,32 +52,31 @@
     <div class="boton-modal">
         <label for="btn-modal"><i class="fa-solid fa-plus"></i></label>
         <label for="btn2-modal"><i class="fa-solid fa-envelope-open "></i></label>
-        <label for=""><i class="fa-solid fa-magnifying-glass"></i></label>
+        <label for="btn3-modal"><i class="fa-solid fa-magnifying-glass"></i></label> <!--buscador-->
+        <button onclick="darkMode()" class="dark"><label for=""><i class="fa-sharp fa-solid fa-circle-half-stroke"></i></label></button> <!--modo oscuro-->
     </div>
     <!----------------------------------------------------------FIN BOTONES---------------------------------------------------------->
-
     
     <!----------------------------------------------------------1 VENTANA MODAL---------------------------------------------------------->
     <input type="checkbox" id="btn-modal">
     <div class="container-modal">
             <div class="formulario">
-                <form action="" method="Post">
-
+                <form action="crear_controller.php" method="Post">
 
                     <h2><i class="fa-solid fa-user-tag"></i> Nombre completo</h2> 
                     <!--NOMBRE COMPLETO-->
-                    <input type="text" name="nom_alu"  placeholder="Nombre" required>    
-                    <input type="text" name="primer_cognom_alu" placeholder="Primer apellido" required>    
-                    <input type="text" name="segon_cognom_alu"  placeholder="Segundo apellido" required>
+                    <input type="text" name="<?php echo ALUMNO['nombre'];?>"  placeholder="Nombre" required>    
+                    <input type="text" name="<?php echo ALUMNO['primer_apellido'];?>" placeholder="Primer apellido" required>    
+                    <input type="text" name="<?php echo ALUMNO['segundo_apellido'];?>"  placeholder="Segundo apellido" required>
 
 
                     <h2><i class="fa-solid fa-id-card"></i> Dni</h2>
                     <!--DNI-->
-                    <input type="text" name="dni_alu" placeholder="dni" required>
+                    <input type="text" name="<?php echo ALUMNO['dni'];?>" placeholder="dni" required>
 
                     <h2><i class="fa-solid fa-square-envelope"></i> e-mail</h2>
                     <!--EMAIL-->
-                    <input type="email" name="email_alu" placeholder="e-mail" required>
+                    <input type="email" name="<?php echo ALUMNO['email'];?>" placeholder="e-mail" required>
 
                     <!--BOTON ENVIAR-->
                     <button type="submit" class="btn btn-success btn-lg btn-outline-info" value="Enviar correo"  id="btn">
@@ -104,8 +100,8 @@
     <!----------------------------------------------------------2 VENTANA MODAL---------------------------------------------------------->
     <input type="checkbox" id="btn2-modal">
     <div class="container2-modal">
-        <div class="formulario">
-            <form method="Post" action="">
+        <div class="formulario" id="form">
+            <form method="Post" action="../proc/enviar_correo.php">
             
                 <h2><i class="fa-solid fa-envelopes-bulk"></i> Enviar e-mail</h2>
 
@@ -113,9 +109,6 @@
                 <select name="grupo">
                     <option value="none">Seleccionar Clase</option>
                     <?php
-                        require_once '../config/conexion.php';
-                        require_once '../proc/func.php';
-
                         $modulos = getModulos($conexion);
 
                         foreach ($modulos as $modulo) {
@@ -135,22 +128,77 @@
                 <textarea  placeholder="Escribe tu mensaje" name="cuerpo" id="mensaje" cols="30" rows="10"></textarea>
 
                 <!--BOTON ENVIAR-->
-                <button type="submit" class="btn btn-success btn-lg btn-outline-info" value="Enviar correo" onclick="return validarCorreo()"  id="btn2"> Enviar e-mail
+                <button type="submit" class="btn btn-success btn-lg btn-outline-info" value="Enviar correo"  onclick="validarcorreoyloading()" id="btn2"> Enviar e-mail
                     <div class="cerrado">
-                        <i class="fa-solid fa-envelope "></i>
-                    </div>   
-                    
-                    <div class="abierto">
-                        <i class="fa-solid fa-envelope-open "></i>
-                    </div>  
-                </button>
+                            <i class="fa-solid fa-envelope "></i>
+                        </div>   
+                        
+                        <div class="abierto">
+                            <i class="fa-solid fa-envelope-open "></i>
+                        </div>  
+                    </button>
                 
             </form>
         </div>
             
             <label for="btn2-modal" class="close2"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M256 512c141.4 0 256-114.6 256-256S397.4 0 256 0S0 114.6 0 256S114.6 512 256 512zM175 175c9.4-9.4 24.6-9.4 33.9 0l47 47 47-47c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9l-47 47 47 47c9.4 9.4 9.4 24.6 0 33.9s-24.6 9.4-33.9 0l-47-47-47 47c-9.4 9.4-24.6 9.4-33.9 0s-9.4-24.6 0-33.9l47-47-47-47c-9.4-9.4-9.4-24.6 0-33.9z"/></svg></label>
+    <!-------------------------------------------------------CARGA E-MAIL---------------------------------------------------------->
+        <div class="spinner" id="loading">
+            <div class="double-bounce1"></div>
+            <div class="double-bounce2"></div>
+        </div>
+
     </div>
     <!-------------------------------------------------------FIN VENTANA MODAL---------------------------------------------------------->
+    
+    
+    <!----------------------------------------------------------3 VENTANA MODAL---------------------------------------------------------->
+    <input type="checkbox" id="btn3-modal">
+    <div class="container3-modal">
+        <div class="buscar">
+            <form action="" method="GET">
+                <input type="text" name="filtro-nombre" placeholder="Nombre">
+                <input type="text" name="filtro-apellidos" placeholder="Apellidos">
+                <input type="text" name="filtro-email" placeholder="E-mail">
+                <input type="text" name="filtro-dni" placeholder="Dni">
+                <button type="submit" name="filtro-buscar" value="Buscar" class="btnbuscar"><label for=""><i class="fa-solid fa-magnifying-glass"></i></label></button> 
+            </form> 
+        </div>
+    </div>
+    <!-------------------------------------------------------FIN VENTANA MODAL---------------------------------------------------------->
+
+
+    <!----------------------------------------------------------FIN TABLA DE DATOS ---------------------------------------------------------->
+    <?php
+    // MOSTRAR DATOS EN FORMA DE TABLA:
+    echo '<table style="border: solid 2px #c4c4c4;" class="table table-striped">';
+        echo '<tr>';
+            echo '<th>ID</th>';
+            echo '<th>NOMBRE</th>';
+            echo '<th>APELLIDOS</th>';
+            echo '<th>EMAIL</th>';
+            echo '<th>DNI</th>';
+            echo '<th>MODIFICAR</th>';
+            echo '<th>ELIMINAR</th>';
+        echo '</tr>';
+        foreach ($listado_alumnos as $alumno) {
+            echo '<tr>';
+                echo "<td>{$alumno['id_alumno']}</td>";
+                echo "<td>{$alumno['nombre_alumno']}</td>";
+                echo "<td>{$alumno['primer_apellido_alumno']} {$alumno['segundo_apellido_alumno']}</td>";
+                echo "<td>{$alumno['email_alumno']}</td>";
+                echo "<td>{$alumno['dni_alumno']}</td>";
+                echo "<td><a href='../controller/form_mod_controller.php?id_alumno={$alumno['id_alumno']}'><button type='button' class='btn btn-primary'>Modificar</button></a></td>";
+                echo "<td><a href='../controller/eliminar_controller.php?id_alumno={$alumno['id_alumno']}'><button type='button' class='btn btn-danger'>Eliminar</button></a></td>";           
+            echo "</tr>";
+        }
+    echo '</table>';
+    ?>
+    <!----------------------------------------------------------FIN TABLA DE DATOS ---------------------------------------------------------->
+
+
 </body>
 
 </html>
+
+<!-- CREAR ESTILOS CRUD -->
