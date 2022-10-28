@@ -1,6 +1,7 @@
 <?php
 // Recogemos el fichero del modelo
-require_once '../config/conexion.php';del/alumno.php";
+require_once '../config/conexion.php';
+require_once "../model/alumno.php";
 require_once '../proc/func.php';
 
 
@@ -18,7 +19,7 @@ if (isGetSet()) {
     if (hayGetsVacios()) {
         // Generamos una URL sin las variables GET vacías para hacerlo más limpio
         $nueva_url = eliminarVariablesGetVacias();
-        echo $nueva_url;
+        // echo $nueva_url;
         echo "<script>window.location.href = '$nueva_url';</script>";
     }
 
