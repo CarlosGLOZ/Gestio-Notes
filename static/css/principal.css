@@ -6,6 +6,53 @@
     text-decoration: none;
     list-style: none;
     box-sizing: border-box;
+    
+}
+.contenedor {
+    width: 100%;
+    background-color: #443E53;
+    border-radius: 10px;
+    margin: 20px;
+    display: flex;
+    align-items: center;
+    color: #F6F7FC;
+    overflow: auto;
+}
+.contenedor img{
+    width: 100px;
+}
+.column-perfil h1 {
+font-size: 20px;
+}
+.column-perfil p {
+    font-size: 15px;
+}
+.column-perfil {
+    width: 30%;
+    padding: 20px;
+}
+
+.column-notas{
+    background-color: #443E53;
+    width: 100%;
+}
+.notas {
+    background-color: #443E53;
+}
+::-webkit-scrollbar {
+    width: var(--scroll-size, 5px);
+    height: var(--scroll-size, 5px);
+
+}
+::-webkit-scrollbar-track {
+    background-color: var(--scroll-track, transparent);
+    border-radius: var(--scroll-track-radius, var(--scroll-radius));
+
+}
+::-webkit-scrollbar-thumb {
+    background-color: var(--scroll-thumb-color, #443E53);
+    background-image: var(--scroll-thumb, none);
+    border-radius: var(--scroll-thumb-radius, var(--scroll-radius));
 }
 
 nav {
@@ -113,7 +160,6 @@ nav #check {
     font-size: 45px;
 }
 
-
 /*----------------------------------------------------------------*/
 
 
@@ -124,11 +170,49 @@ nav #check {
 
 .crud {
     max-width: 100%;
-    margin: 0 18px 0 18px;
+    height: 450px;
+    margin: 0 18px 18px 18px;
     padding: 15px;
     border: #443E53 2px solid;
     border-top-left-radius: 20px;
     border-bottom-right-radius: 20px;
+    overflow: auto;
+}
+
+.table tbody {
+    vertical-align: middle;
+}
+
+.tablacrud #titulo {
+    background-color:#2B2A2D;
+    color: #F6F7FC;
+}
+.tablacrud  #primero {
+    background-color:#2B2A2D;
+    border-radius: 5px 0px 0px 5px;
+    color: #F6F7FC;
+}
+.tablacrud  #ultimo {
+    background-color:#2B2A2D;
+    color: #F6F7FC;
+    border-radius: 0px 5px 5px 0px;
+}
+.btncrudmodificar{
+    background-color: #7D7199;
+    border: none;
+}
+.btncrudenviar{
+    background-color: #2B2A2D;
+    border: none;
+}
+/*----------------------------------------------------------------*/
+.btncrudmodificar:hover{
+    background-color: #443E53;
+    border: none;
+}
+.btncrudenviar:hover{
+    background-color: #9a3737;
+    border: none;
 }
 
 
@@ -323,7 +407,7 @@ textarea {
     margin: 5px;
     border: none;
     display: flex;
-    ;
+    position: relative;
 }
 
 .boton-modal label {
@@ -591,6 +675,42 @@ select {
 }
 
 
+.dark-mode .tablacrud #titulo {
+    background-color:#443E53;
+    color: #F6F7FC;
+}
+.dark-mode .tablacrud  #primero {
+    background-color:#443E53;
+    border-radius: 5px 0px 0px 5px;
+    color: #F6F7FC;
+}
+.dark-mode .tablacrud  #ultimo {
+    background-color:#443E53;
+    color: #F6F7FC;
+    border-radius: 0px 5px 5px 0px;
+}
+
+.dark-mode .btncrudenviar{
+    background-color: #F6F7FC;
+    border: none;
+    color: #2B2A2D;
+}
+.dark-mode table{
+    border-color: #7D7199;
+    color: #F6F7FC;
+    --bs-table-striped-bg: rgba(125, 113, 153, 0.05);
+    --bs-table-striped-color: #F6F7FC;
+}
+/*----------------------------------------------------------------*/
+.dark-mode .btncrudmodificar:hover{
+    background-color: #443E53;
+    border: none;
+}
+.dark-mode .btncrudenviar:hover{
+    background-color: #9a3737;
+    border: none;
+}
+
 /*----------------------------------------------------------------*/
 
 .dark {
@@ -722,6 +842,72 @@ select {
     }
     .container3-modal input {
         width: 15%;
+    }
+    .crud {
+        max-width: 100%;
+        margin: 0 18px 18px 18px;
+        padding: 15px;
+        border: #443E53 2px solid;
+        border-top-left-radius: 20px;
+        border-bottom-right-radius: 20px;
+        font-size: 80%;
+    }
+    .btncrudmodificar{
+        width: 100%;
+        height: 100%;
+        font-size: 100%;
+    }
+    .btncrudenviar{
+        width: 100%;
+        height: 100%;
+        font-size: 100%;
+    }
+}
+/*----------------------------------------------------------------*/
+/*----------------------------------------------------------------*/
+@media (max-width: 600px) {
+    .crud {
+        max-width: 100%;
+        margin: 0 18px 18px 18px;
+        padding: 15px;
+        border: #443E53 2px solid;
+        border-top-left-radius: 20px;
+        border-bottom-right-radius: 20px;
+        font-size: 60%;
+    }
+    .btncrudmodificar{
+        width: 100%;
+        height: 100%;
+        font-size: 100%;
+    }
+    .btncrudenviar{
+        width: 100%;
+        height: 100%;
+        font-size: 100%;
+    }
+}
+/*----------------------------------------------------------------*/
+/*----------------------------------------------------------------*/
+@media (max-width: 500px) {
+    .crud {
+        max-width: 100%;
+        margin: 0 18px 18px 18px;
+        padding: 15px;
+        border: #443E53 2px solid;
+        border-top-left-radius: 20px;
+        border-bottom-right-radius: 20px;
+        font-size: 75%;
+        overflow: auto;
+    }
+    .btncrudmodificar{
+        width: 100%;
+        height: 100%;
+        font-size: 100%;
+    }
+    .btncrudenviar{
+        width: 100%;
+        height: 100%;
+        font-size: 100%;
     }
 }
 

@@ -98,8 +98,6 @@ class Alumno{
         return $listado_alumnos;
 
         // Cerrar statement
-        // mysqli_stmt_close($stmt);
-    }
 
     public static function getAlumnosEmail() {
 

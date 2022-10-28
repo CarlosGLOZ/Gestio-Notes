@@ -1,8 +1,6 @@
 <?php
-
 // Recogemos el fichero del modelo
-require_once "../config/conexion.php";
-require_once "../model/alumno.php";
+require_once '../config/conexion.php';del/alumno.php";
 require_once '../proc/func.php';
 
 
@@ -42,5 +40,7 @@ $listado_alumnos = Alumno::getAlumnos($conexion, $filtro_nombre, $filtro_apellid
 
 // Controllar que no nos entren a los views y vengan directos a los controllers, donde ya se les valida la sesión, en el caso de no tenerla
 $entrada_valida = true;
+
+
 
 require_once '../view/principal.php';
