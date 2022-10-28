@@ -51,7 +51,7 @@ function validarSesion() {
 
 function getModulos($conexion)
 {
-    $stmt = "SELECT * FROM tbl_modulo";
+    $stmt = "SELECT * FROM ".MODULO['tabla'].";";
 
     // $modulos = mysqli_fetch_assoc(mysqli_query($conexion, $stmt));
     $modulos = mysqli_query($conexion, $stmt);
@@ -63,7 +63,7 @@ function getEmailAlumnosDeModulo($modulo, $conexion)
 {
     $lista_alumnos = [];
 
-    $stmt = "SELECT email_alumno FROM tbl_alumno INNER JOIN tbl_alumno_modulo ON tbl_alumno.id_alumno = tbl_alumno_modulo.id_Alumno WHERE tbl_alumno_modulo.id_Modulo = $modulo;";
+    $stmt = "SELECT ".ALUMNO['email']." FROM ".ALUMNO['tabla']." INNER JOIN ".ALUMNO_MODULO['tabla']." ON ".ALUMNO['tabla'].".".ALUMNO['id']." = ".ALUMNO_MODULO['tabla'].".".ALUMNO_MODULO['id_alumno']." WHERE ".ALUMNO_MODULO['tabla'].".".ALUMNO_MODULO['id_modulo']." = $modulo;";
 
     $alumnos = mysqli_query($conexion, $stmt);
 

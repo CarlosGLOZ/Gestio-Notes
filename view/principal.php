@@ -37,7 +37,7 @@
         <a class="enlace" href="./principal.php">
             <img src="../static/img/logo/svg/1.1.svg" alt="Logo" class="logo">
         </a>
-        <p class="bienvenida"> | ㅤBienvenido @marc <!--Aqui va variable para el nombre del user--></p>
+        <p class="bienvenida"> | ㅤBienvenido <?php echo "<b>".$_SESSION[GESTOR['nombre']]."</b>" ?></p>
         <ul>
             <li><a href="../proc/cerrar_sesion.php">Cerrar sesión</a></li>
         </ul>
@@ -59,7 +59,6 @@
     <!----------------------------------------------------------FIN TABLA DE DATOS ---------------------------------------------------------->
     <?php
     // MOSTRAR DATOS EN FORMA DE TABLA:
-    echo "<a href='../view/crear.php'><button style='margin-bottom: 10px;' type='button' class='btn btn-success'>Crear</button></a>";
     echo '<table style="border: solid 2px #c4c4c4;" class="table table-striped">';
         echo '<tr>';
             echo '<th>ID</th>';
@@ -89,25 +88,24 @@
     <input type="checkbox" id="btn-modal">
     <div class="container-modal">
             <div class="formulario">
-                <form action="" method="Post">
+                <form action="../controller/crear_controller.php" method="Post">
 
                     <h2><i class="fa-solid fa-user-tag"></i> Nombre completo</h2> 
                     <!--NOMBRE COMPLETO-->
-                    <input type="text" name="nom_alu"  placeholder="Nombre" required>    
-                    <input type="text" name="primer_cognom_alu" placeholder="Primer apellido" required>    
-                    <input type="text" name="segon_cognom_alu"  placeholder="Segundo apellido" required>
-
+                    <input type="text" name="nombre"  placeholder="Nombre">    
+                    <input type="text" name="primer_apellido" placeholder="Primer apellido">    
+                    <input type="text" name="segundo_apellido"  placeholder="Segundo apellido">
 
                     <h2><i class="fa-solid fa-id-card"></i> Dni</h2>
                     <!--DNI-->
-                    <input type="text" name="dni_alu" placeholder="dni" required>
+                    <input type="text" name="dni" placeholder="dni">
 
                     <h2><i class="fa-solid fa-square-envelope"></i> e-mail</h2>
                     <!--EMAIL-->
-                    <input type="email" name="email_alu" placeholder="e-mail" required>
+                    <input type="email" name="email" placeholder="e-mail">
 
                     <!--BOTON ENVIAR-->
-                    <button type="submit" class="btn btn-success btn-lg btn-outline-info" value="Enviar correo"  id="btn">
+                    <button type="submit" name="registro" class="btn btn-success btn-lg btn-outline-info" value="Enviar correo" id="btn">
                         <div class="cerrado"> 
                             <i class="fa-solid fa-user-plus"></i>
                         </div> 
@@ -117,6 +115,24 @@
                         </div>  
                     </button>
 
+                    <?php
+                    // ERRORES FORMULARIO DE CREAR:
+                    if(isset($_GET['error'])){
+                        if($_GET['error']=='camposVacios'){
+                            echo "Te has olvidado de introducir algún campo!";
+                        }
+                    }
+                    if(isset($_GET['error'])){
+                        if($_GET['error']=='checkUser'){
+                            echo "El usuario ya existe en la base de datos!";
+                        }
+                    }
+                    if(isset($_GET['error'])){
+                        if($_GET['error']=='errorEmail'){
+                            echo "El formato del correo no es válido, utiliza otro correo.";
+                        }
+                    }
+                    ?>
                 </form>
             </div>
             
