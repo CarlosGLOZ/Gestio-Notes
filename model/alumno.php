@@ -98,7 +98,7 @@ class Alumno{
         return $listado_alumnos;
 
         // Cerrar statement
-
+    }
     public static function getAlumnosEmail() {
 
         $sentencia = "SELECT ".ALUMNO['email']." FROM ".ALUMNO['tabla'].";";
