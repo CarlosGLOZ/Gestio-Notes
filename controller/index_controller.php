@@ -1,7 +1,6 @@
 <?php
 // Recogemos el fichero del modelo
-require_once '../config/conexion.php';
-require_once "../model/alumno.php";
+require_once '../config/conexion.php';del/alumno.php";
 require_once '../proc/func.php';
 
 

@@ -2,12 +2,70 @@
 
 class Alumno{
     // ATRIBUTOS
-    public $id_alumno;
-    public $nombre_alumno;
-    public $primer_apellido_alumno;
-    public $segundo_apellido_alumno;
-    public $email_alumno;
-    public $dni_alumno;
+    private $id_alumno;
+    private $nombre_alumno;
+    private $primer_apellido_alumno;
+    private $segundo_apellido_alumno;
+    private $email_alumno;
+    private $dni_alumno;
+
+    // Getters y setters
+    public function getId()
+    {
+        return $this->id_alumno;
+    }
+    public function getNombre()
+    {
+        return $this->nombre_alumno;
+    }
+    public function getPrimerApellido()
+    {
+        return $this->primer_apellido_alumno;
+    }
+    public function getSegundoApellido()
+    {
+        return $this->segundo_apellido_alumno;
+    }
+    public function getEmail()
+    {
+        return $this->email_alumno;
+    }
+    public function getDni()
+    {
+        return $this->dni_alumno;
+    }
+
+    
+    public function setId($value)
+    {
+        $this->id_alumno = $value;
+        return $this->id_alumno == $value;
+    }
+    public function setNombre($value)
+    {
+        $this->nombre_alumno = $value;
+        return $this->nombre_alumno == $value;
+    }
+    public function setPrimerApellido($value)
+    {
+        $this->primer_apellido_alumno = $value;
+        return $this->primer_apellido_alumno == $value;
+    }
+    public function setSegundoApellido($value)
+    {
+        $this->segundo_apellido_alumno = $value;
+        return $this->segundo_apellido_alumno == $value;
+    }
+    public function setEmail($value)
+    {
+        $this->email_alumno = $value;
+        return $this->email_alumno == $value;
+    }
+    public function setDni($value)
+    {
+        $this->dni_alumno = $value;
+        return $this->dni_alumno == $value;
+    }
 
     public function __construct($id_alumno, $nombre_alumno, $primer_apellido_alumno, $segundo_apellido_alumno, $email_alumno, $dni_alumno){
         // ASIGNAMOS VALORES A LOS ATRIBUTOS
@@ -40,11 +98,8 @@ class Alumno{
         return $listado_alumnos;
 
         // Cerrar statement
-    }
 
     public static function getAlumnosEmail() {
-        require_once '../config/config.php';
-        require_once '../config/conexion.php';
 
         $sentencia = "SELECT ".ALUMNO['email']." FROM ".ALUMNO['tabla'].";";
         $listado_alumnos = mysqli_query($conexion, $sentencia);
@@ -55,13 +110,29 @@ class Alumno{
     /**
      * 
      */
-    public static function createAlumno($nombre_alumno, $primer_apellido_alumno, $segundo_apellido_alumno, $email_alumno, $dni_alumno) {
-        require_once '../config/conexion.php';
+    public static function createAlumno($conexion, $nombre_alumno, $primer_apellido_alumno, $segundo_apellido_alumno, $email_alumno, $dni_alumno) {
 
         $alumno = new Alumno (null,$nombre_alumno, $primer_apellido_alumno, $segundo_apellido_alumno, $email_alumno, $dni_alumno);
 
-        $sentencia = "INSERT INTO ".ALUMNO['tabla']." (".ALUMNO['id'].", ".ALUMNO['nombre'].", ".ALUMNO['primer_apellido'].", ".ALUMNO['segundo_apellido'].", ".ALUMNO['email'].", ".ALUMNO['dni'].") VALUES (null, $nombre_alumno, $primer_apellido_alumno, $segundo_apellido_alumno, $email_alumno, $dni_alumno);";
-        $insert_user = mysqli_query($conexion, $sentencia);
+        // TRANSACCIÓN PARA CREAD ALUMNO Y SUS NOTAS
+        mysqli_autocommit($conexion, false);
+        try {
+            mysqli_begin_transaction($conexion);
+        
+            $sql1 = "INSERT INTO ".ALUMNO['tabla']." (".ALUMNO['id'].", ".ALUMNO['nombre'].", ".ALUMNO['primer_apellido'].", ".ALUMNO['segundo_apellido'].", ".ALUMNO['email'].", ".ALUMNO['dni'].") VALUES (null, '{$alumno->getNombre()}', '{$alumno->getPrimerApellido()}', '{$alumno->getSegundoApellido()}', '{$alumno->getEmail()}', '{$alumno->getDni()}');";
+            mysqli_query($conexion, $sql1);
+        
+            $alumno_id = mysqli_insert_id($conexion);
+        
+            foreach (getModulos($conexion) as $modulo) {
+                $sql2 = "INSERT INTO tbl_alumno_modulo(id_alumno_modulo, nota_uf1, nota_uf2, nota_uf3, nota_final, id_Alumno, id_Modulo) VALUES(null, null, null, null, null, $alumno_id, {$modulo['id_modulo']});";
+                mysqli_query($conexion, $sql2);
+            }
+        
+            mysqli_commit($conexion);
+        } catch (\Thorwable $e) {
+            mysqli_rollback($conexion);
+        }
     }
 
     /**
