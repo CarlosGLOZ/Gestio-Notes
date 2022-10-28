@@ -38,5 +38,23 @@ const MODULO = [
     'nombre' => 'nombre_modulo',
 ];
 
-// Obtener dato del array asociativo.
-// GESTOR['tabla'];
+
+// TABLAS INTERMEDIAS //
+const ALUMNO_MODULO = [
+    'tabla' => 'tbl_alumno_modulo',
+    'id' => 'id_alumno_modulo',
+    'nota_uf1' => 'nota_uf1',
+    'nota_uf2' => 'nota_uf2',
+    'nota_uf3' => 'nota_uf3',
+    'nota_final' => 'nota_final',
+    // FK
+    'id_alumno' => 'id_Alumno',
+    'id_modulo' => 'id_Modulo',
+];
+
+const GESTOR_MODULO = [
+    'tabla' => 'tbl_gestor_modulo',
+    'id' => 'id_gestor_modulo',
+    'id_gestor' => 'id_Gestor',
+    'id_modulo' => 'id_Modulo',
+];

@@ -37,7 +37,7 @@
         <a class="enlace" href="./principal.php">
             <img src="../static/img/logo/svg/1.1.svg" alt="Logo" class="logo">
         </a>
-        <p class="bienvenida"> | Bienvenido <?php echo $_SESSION[GESTOR['nombre']]; ?> <!--Aqui va variable para el nombre del user--></p>
+        <p class="bienvenida"> | ㅤBienvenido <?php echo "<b>".$_SESSION[GESTOR['nombre']]."</b>" ?></p>
         <ul>
             <li><a href="../proc/cerrar_sesion.php">Cerrar sesión</a></li>
         </ul>
@@ -79,7 +79,7 @@
                     <input type="email" name="<?php echo ALUMNO['email'];?>" placeholder="e-mail" required>
 
                     <!--BOTON ENVIAR-->
-                    <button type="submit" class="btn btn-success btn-lg btn-outline-info" value="Enviar correo"  id="btn">
+                    <button type="submit" name="registro" class="btn btn-success btn-lg btn-outline-info" value="Enviar correo" id="btn">
                         <div class="cerrado"> 
                             <i class="fa-solid fa-user-plus"></i>
                         </div> 
@@ -89,6 +89,24 @@
                         </div>  
                     </button>
 
+                    <?php
+                    // ERRORES FORMULARIO DE CREAR:
+                    if(isset($_GET['error'])){
+                        if($_GET['error']=='camposVacios'){
+                            echo "Te has olvidado de introducir algún campo!";
+                        }
+                    }
+                    if(isset($_GET['error'])){
+                        if($_GET['error']=='checkUser'){
+                            echo "El usuario ya existe en la base de datos!";
+                        }
+                    }
+                    if(isset($_GET['error'])){
+                        if($_GET['error']=='errorEmail'){
+                            echo "El formato del correo no es válido, utiliza otro correo.";
+                        }
+                    }
+                    ?>
                 </form>
             </div>
             
