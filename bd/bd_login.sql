@@ -62,10 +62,10 @@ CREATE TABLE `tbl_alumno` (
 
 CREATE TABLE `tbl_alumno_modulo` (
   `id_alumno_modulo` int(5) NOT NULL PRIMARY KEY AUTO_INCREMENT,
-  `nota_uf1` numeric NOT NULL,
-  `nota_uf2` numeric NOT NULL,
-  `nota_uf3` numeric NOT NULL,
-  `nota_final` numeric NOT NULL,
+  `nota_uf1` numeric NULL,
+  `nota_uf2` numeric NULL,
+  `nota_uf3` numeric NULL,
+  `nota_final` numeric NULL,
   `id_Alumno` int(5) NOT NULL,
   `id_Modulo` int(5) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;

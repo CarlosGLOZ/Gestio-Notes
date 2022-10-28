@@ -1,4 +1,5 @@
 <?php
+
 // Para poder pasarle la conexion como variable a la función
 require_once '../config/conexion.php';
 
@@ -9,17 +10,15 @@ validarSesion();
 require_once '../model/alumno.php';
 
 // Si no entramos aqui desde el boton nos echa para atrás
-if(!isset($_POST['registro'])){
+if(!isset($_POST['Enviar correo'])){
     echo "<script>window.location.href='../controller/index_controller.php'</script>";
     exit();
 }
 
 // Asegurar los campos que vamos a introducir en la base de datos:
-$nombre_alumno = $conexion -> real_escape_string(trim(strip_tags($_POST['nombre'])));
-$primer_apellido_alumno = $conexion -> real_escape_string(trim(strip_tags($_POST['primer_apellido'])));
-$segundo_apellido_alumno = $conexion -> real_escape_string(trim(strip_tags($_POST['segundo_apellido'])));
-$email_alumno = $conexion -> real_escape_string(trim(strip_tags($_POST['email'])));
-$dni_alumno = $conexion -> real_escape_string(trim(strip_tags($_POST['dni'])));
+foreach ($_POST as $key => $value) {
+    $$key = mysqli_real_escape_string($conexion, trim(strip_tags($value)));
+}
 
 // VALIDACIONES:
 // Comprobar que no queden campos vacios
@@ -38,8 +37,7 @@ if(Alumno::errorEmail($email_alumno) !== FALSE){
     exit();
 }
 
-// Crear usuario
-Alumno::createAlumno($nombre_alumno, $primer_apellido_alumno, $segundo_apellido_alumno, $email_alumno, $dni_alumno, $conexion);
+Alumno::createAlumno($conexion, $GLOBALS[ALUMNO['nombre']], $GLOBALS[ALUMNO['primer_apellido']], $GLOBALS[ALUMNO['segundo_apellido']], $GLOBALS[ALUMNO['email']], $GLOBALS[ALUMNO['dni']]);
 
-// Poner sweetAlert de usuario creado correctamente
-echo "<script>location.href='../controller/index_controller.php'</script>";
+echo "<script>location.href='index_controller.php'</script>";
+

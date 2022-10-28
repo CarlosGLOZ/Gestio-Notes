@@ -37,7 +37,7 @@
         <a class="enlace" href="./principal.php">
             <img src="../static/img/logo/svg/1.1.svg" alt="Logo" class="logo">
         </a>
-        <p class="bienvenida"> | ㅤBienvenido <?php echo "<b>".$_SESSION[GESTOR['nombre']]."</b>" ?></p>
+        <p class="bienvenida"> | Bienvenido <?php echo $_SESSION[GESTOR['nombre']]; ?> <!--Aqui va variable para el nombre del user--></p>
         <ul>
             <li><a href="../proc/cerrar_sesion.php">Cerrar sesión</a></li>
         </ul>
@@ -61,25 +61,25 @@
     <input type="checkbox" id="btn-modal">
     <div class="container-modal">
             <div class="formulario">
-                <form action="crear_controller.php" method="Post">
+                <form action="" method="Post">
 
                     <h2><i class="fa-solid fa-user-tag"></i> Nombre completo</h2> 
                     <!--NOMBRE COMPLETO-->
-                    <input type="text" name="<?php echo ALUMNO['nombre'];?>"  placeholder="Nombre" required>    
-                    <input type="text" name="<?php echo ALUMNO['primer_apellido'];?>" placeholder="Primer apellido" required>    
-                    <input type="text" name="<?php echo ALUMNO['segundo_apellido'];?>"  placeholder="Segundo apellido" required>
+                    <input type="text" name="nom_alu"  placeholder="Nombre" required>    
+                    <input type="text" name="primer_cognom_alu" placeholder="Primer apellido" required>    
+                    <input type="text" name="segon_cognom_alu"  placeholder="Segundo apellido" required>
 
 
                     <h2><i class="fa-solid fa-id-card"></i> Dni</h2>
                     <!--DNI-->
-                    <input type="text" name="<?php echo ALUMNO['dni'];?>" placeholder="dni" required>
+                    <input type="text" name="dni_alu" placeholder="dni" required>
 
                     <h2><i class="fa-solid fa-square-envelope"></i> e-mail</h2>
                     <!--EMAIL-->
-                    <input type="email" name="<?php echo ALUMNO['email'];?>" placeholder="e-mail" required>
+                    <input type="email" name="email_alu" placeholder="e-mail" required>
 
                     <!--BOTON ENVIAR-->
-                    <button type="submit" name="registro" class="btn btn-success btn-lg btn-outline-info" value="Enviar correo" id="btn">
+                    <button type="submit" class="btn btn-success btn-lg btn-outline-info" value="Enviar correo"  id="btn">
                         <div class="cerrado"> 
                             <i class="fa-solid fa-user-plus"></i>
                         </div> 
@@ -89,24 +89,6 @@
                         </div>  
                     </button>
 
-                    <?php
-                    // ERRORES FORMULARIO DE CREAR:
-                    if(isset($_GET['error'])){
-                        if($_GET['error']=='camposVacios'){
-                            echo "Te has olvidado de introducir algún campo!";
-                        }
-                    }
-                    if(isset($_GET['error'])){
-                        if($_GET['error']=='checkUser'){
-                            echo "El usuario ya existe en la base de datos!";
-                        }
-                    }
-                    if(isset($_GET['error'])){
-                        if($_GET['error']=='errorEmail'){
-                            echo "El formato del correo no es válido, utiliza otro correo.";
-                        }
-                    }
-                    ?>
                 </form>
             </div>
             
@@ -126,6 +108,7 @@
                  <!--ZONA SELECTOR-->               
                 <select name="grupo">
                     <option value="none">Seleccionar Clase</option>
+
                     <?php
                         $modulos = getModulos($conexion);
 
@@ -184,37 +167,89 @@
         </div>
     </div>
     <!-------------------------------------------------------FIN VENTANA MODAL---------------------------------------------------------->
+    <div class="contenedor">
+        <div class="column-perfil">
+            <br>
+            <img src="../static/img/logo/svg/2.2.svg" alt="">
+            <br>
+            <br>
+            <h1><i class="fa-solid fa-user-graduate"></i> Eduardo Rafael, Federico </h1>
+            <p><i class="fa-solid fa-address-card"></i> <b>DNI:</b> 23232323T </p>
+            <P> <i class="fa-solid fa-square-envelope"></i> <b>Correo: </b> amoungus@gmail.com </P>
+        </div>
 
+        <div class="column-notas">
+                <h1>Notas <i class="fa-solid fa-clipboard-user"></i></h1>
+            
+                <div class="notas">
+                <table class="table table-bordered table-hover table-striped">
+                    <tr>
+                        <td>Módulo</td>
+                        <td>UF1</td>
+                        <td>UF2</td>
+                        <td>UF3</td>
+                        <td>Media</td>
+                    </tr>
 
-    <!----------------------------------------------------------INICIO TABLA DE DATOS ---------------------------------------------------------->
-       <div class="crud">
-        <?php
-        // MOSTRAR DATOS EN FORMA DE TABLA:
-        echo '<table class="tablacrud table table-striped ">';
-            echo '<tr class="bloqueado">';
-                echo '<th id="primero">ID</th>';
-                echo '<th id="titulo">NOMBRE</th>';
-                echo '<th id="titulo">APELLIDOS</th>';
-                echo '<th id="titulo">EMAIL</th>';
-                echo '<th id="titulo">DNI</th>';
-                echo '<th id="titulo">MODIFICAR</th>';
-                echo '<th id="ultimo">ELIMINAR</th>';
-            echo '</tr>';
-            foreach ($listado_alumnos as $alumno) {
-                echo '<tr>';
-                    echo "<td>{$alumno['id_alumno']}</td>";
-                    echo "<td>{$alumno['nombre_alumno']}</td>";
-                    echo "<td>{$alumno['primer_apellido_alumno']} {$alumno['segundo_apellido_alumno']}</td>";
-                    echo "<td>{$alumno['email_alumno']}</td>";
-                    echo "<td>{$alumno['dni_alumno']}</td>";
-                    echo "<td><a href='../controller/form_mod_controller.php?id_alumno={$alumno['id_alumno']}'><button type='button' class='btncrudmodificar btn btn-primary'>Modificar</button></a></td>";
-                    echo "<td><a href='../controller/eliminar_controller.php?id_alumno={$alumno['id_alumno']}'><button type='button' class='btncrudenviar btn btn-danger'>Eliminar</button></a></td>";           
-                echo "</tr>";
-            }
-        echo '</table>';
-        ?>
+                    <tr>
+                        <td>Bases de Datos <i class="fa-solid fa-database"></i></td>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>1</td>
+                    </tr>
+
+                    <tr>
+                        <td>Prog. Basica <i class="fa-brands fa-php"></i></td>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>1</td>
+                    </tr>
+
+                    <tr>
+                        <td>M7-123 Des. Web Cliente <i class="fa-brands fa-html5"></i></td>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>1</td>
+                    </tr>
+
+                    <tr>
+                        <td>M7-4 Des Web Servidor  <i class="fa-brands fa-php"></i></td>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>1</td>
+                    </tr>
+
+                    <tr>
+                        <td>Despliegue Apps Web <i class="fa-brands fa-square-js"></i></td>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>1</td>
+                    </tr>
+
+                    <tr>
+                        <td>Diseño Inter. Web <i class="fa-solid fa-palette"></i></td>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>1</td>
+                    </tr>
+
+                    <tr>
+                        <td>Sintesis <i class="fa-solid fa-people-group"></i></td>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>1</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
     </div>
-    <!----------------------------------------------------------FIN TABLA DE DATOS ---------------------------------------------------------->
 
 </body>
 
