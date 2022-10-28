@@ -2,7 +2,7 @@
 
 // Constantes base de datos
 const BD = [
-    'servidor' => '172.24.17.191',
+    'servidor' => 'localhost',
     'usuario' => 'testeo',
     'password' => '1234',
     'bd' => 'bd_gestion_notas',
