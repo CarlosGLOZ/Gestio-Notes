@@ -157,3 +157,47 @@ function eliminarVariablesGetVacias($exclude=['filtro-buscar'])
 
     return $nueva_url;
 }
+
+// genera una nueva url cambiando los valores get especificados por un valor dado
+function cambiarVariableGet($url, $var, $value)
+{
+    $exploded_url = explode('?', $url);
+
+    if (count($exploded_url) == 1) { // si no hay variables get establecidas
+        return $url.'?'.$var.'='.$value;
+    }
+
+    if ($exploded_url[1] == '') {
+        return $url.$var.'='.$value;
+    }
+
+    $gets = explode('&', $exploded_url[1]);
+    
+    // if (count($gets) == 1) { // si no hay variables get establecidas
+    //     $exploded_get = explode('=', $gets[0]);
+    //     if ($exploded_get[0] == $var)
+    //     {
+    //         $gets = "$var=$value";
+    //     } else {
+    //         $gets = $gets."&$var=$value";
+    //     }
+    // } else {
+        $match = false;
+        for ($i=0; $i < count($gets); $i++) {
+            $exploded_get = explode('=', $gets[$i]);
+            if ($exploded_get[0] == $var)
+            {
+                $gets[$i] = "$var=$value";
+                $match = true;
+            }
+        }
+        if (!$match) {
+            array_push($gets,"$var=$value");
+        }
+        $gets = implode('&', $gets);
+    // }
+    
+    $imploded_url = $exploded_url[0].'?'.$gets;
+
+    return $imploded_url;
+}

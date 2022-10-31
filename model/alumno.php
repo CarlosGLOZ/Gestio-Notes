@@ -78,7 +78,11 @@ class Alumno{
     }
 
 
-    public static function getAlumnos($conexion, $filtro_nombre='', $filtro_apellidos='', $filtro_email='', $filtro_dni='') {
+    public static function getAlumnos($conexion, $filtro_nombre='', $filtro_apellidos='', $filtro_email='', $filtro_dni='', $filtro_limite=5, $pagina=1) {
+
+        // primer registro a mostrar en la pagina
+        $primer_registro = ($pagina-1) * $filtro_limite;
+        $ultimo_registro = $primer_registro + $filtro_limite-1;
 
         // sentencia inclusiva de los filtros
         $sentencia = 
@@ -89,16 +93,35 @@ class Alumno{
         AND ".ALUMNO['email']." LIKE '%".$filtro_email."%'
         AND ".ALUMNO['dni']." LIKE '%".$filtro_dni."%'
         ;";
-
-        // echo $sentencia;
-        // die();
         
         $listado_alumnos = mysqli_query($conexion, $sentencia);
+        $listado_alumnos_limitada = [];
+
+        $cont = 0;
+        foreach ($listado_alumnos as $key => $value) {
+            if ($cont >= $primer_registro && $cont <= $ultimo_registro) {
+                $listado_alumnos_limitada[$key] = $value;
+            }
+            $cont++;
+        }
 
         // Devolvemos el listado de alumnos, para imprimirlo en el index_controller.
-        return $listado_alumnos;
+        return $listado_alumnos_limitada;
 
         // Cerrar statement
+    }
+
+    public static function getCantidadAlumnosVisibles($conexion, $listado_alumnos)
+    {
+        return mysqli_num_rows($listado_alumnos);
+    }
+
+    public static function getTotalAlumnos($conexion)
+    {
+        $sentencia =
+        "SELECT COUNT(1) as total FROM ".ALUMNO['tabla'].";";
+        
+        return mysqli_fetch_assoc(mysqli_query($conexion, $sentencia))['total'];
     }
 
     public static function checkUser($conexion, $email_alumno) {

@@ -15,14 +15,16 @@ $filtro_nombre = '';
 $filtro_apellidos = '';
 $filtro_email = '';
 $filtro_dni = '';
+$filtro_limite = 5;
+$pagina = 1;
 
 if (isGetSet()) {
-
     if (hayGetsVacios()) {
         // Generamos una URL sin las variables GET vacías para hacerlo más limpio
         $nueva_url = eliminarVariablesGetVacias();
         // echo $nueva_url;
         echo "<script>window.location.href = '$nueva_url';</script>";
+        exit();
     }
 
     // Recuperar filtros de GET
@@ -33,15 +35,25 @@ if (isGetSet()) {
             // filtro-nombre, filtro-apellidos, filtro-email, filtro-dni
             $nombre_campo_junto = implode('_', $nombre_campo_separado);
             $$nombre_campo_junto = $value;
+        } else {
+            $$key = $value;
         }
     }
 }
 
 
-// Imprimimos todos los registros con el método creado anteriormente en la clase Alumno.
+// Recogemos todos los registros con el método creado anteriormente en la clase Alumno.
+$listado_alumnos = Alumno::getAlumnos($conexion, $filtro_nombre, $filtro_apellidos, $filtro_email, $filtro_dni, $filtro_limite, $pagina);
 
-$listado_alumnos = Alumno::getAlumnos($conexion, $filtro_nombre, $filtro_apellidos, $filtro_email, $filtro_dni);
+// recoger numero de alumnos que estamos mostrando
+// $cantidad_alumnos_visibles = Alumno::getCantidadAlumnosVisibles($conexion, $listado_alumnos);
+$cantidad_alumnos_visibles = $filtro_limite;
 
+// recoger la cantidad todal de alumnos para la paginación
+$total_alumnos = Alumno::getTotalAlumnos($conexion);
+
+// recogemos la url actual para los links de la paginación
+$url_actual = getURL();
 
 // Controllar que no nos entren a los views y vengan directos a los controllers, donde ya se les valida la sesión, en el caso de no tenerla
 $entrada_valida = true;

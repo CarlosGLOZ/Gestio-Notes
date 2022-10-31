@@ -54,7 +54,11 @@
         <label for="btn2-modal"><i class="fa-solid fa-envelope-open "></i></label>
         <label for="btn3-modal"><i class="fa-solid fa-magnifying-glass"></i></label> <!--buscador-->
         <button onclick="darkMode()" class="dark"><label for=""><i class="fa-sharp fa-solid fa-circle-half-stroke"></i></label></button> <!--modo oscuro-->
+    
     </div>
+
+
+    
     <!----------------------------------------------------------FIN BOTONES---------------------------------------------------------->
     
     <!----------------------------------------------------------1 VENTANA MODAL---------------------------------------------------------->
@@ -65,21 +69,25 @@
 
                     <h2><i class="fa-solid fa-user-tag"></i> Nombre completo</h2> 
                     <!--NOMBRE COMPLETO-->
-                    <input type="text" name="<?php echo ALUMNO['nombre'];?>"  placeholder="Nombre" required>    
-                    <input type="text" name="<?php echo ALUMNO['primer_apellido'];?>" placeholder="Primer apellido" required>    
-                    <input type="text" name="<?php echo ALUMNO['segundo_apellido'];?>"  placeholder="Segundo apellido" required>
-
+                    <input type="text" name="<?php echo ALUMNO['nombre'];?>" id="nombre"  placeholder="Nombre" required> 
+                    <small id="error_nombre" style="color: coral; display: none;"><b>Error en el campo nombre <i class="fa-solid fa-circle-exclamation"></i></b></small>   
+                    <input type="text" name="<?php echo ALUMNO['primer_apellido'];?>" id="primer_apellido" placeholder="Primer apellido" required>  
+                    <small id="error_primer_apellido" style="color: coral; display: none;"><b>Error en el campo primer apellido <i class="fa-solid fa-circle-exclamation"></i></b></small>   
+                    <input type="text" name="<?php echo ALUMNO['segundo_apellido'];?>" id="segundo_apellido"  placeholder="Segundo apellido" required>
+                    <small id="error_segundo_apellido" style="color: coral; display: none;"><b>Error en el campo segundo apellido <i class="fa-solid fa-circle-exclamation"></i></b></small>   
 
                     <h2><i class="fa-solid fa-id-card"></i> Dni</h2>
                     <!--DNI-->
-                    <input type="text" name="<?php echo ALUMNO['dni'];?>" placeholder="dni" required>
+                    <input type="text" name="<?php echo ALUMNO['dni'];?>" id="dni" placeholder="dni" required>
+                    <small id="error_dni" style="color: coral; display: none;"><b>Error en el campo DNI <i class="fa-solid fa-circle-exclamation"></i></b></small>   
+
 
                     <h2><i class="fa-solid fa-square-envelope"></i> e-mail</h2>
                     <!--EMAIL-->
                     <input type="email" name="<?php echo ALUMNO['email'];?>" placeholder="e-mail" required>
 
                     <!--BOTON ENVIAR-->
-                    <button type="submit" name="registro" class="btn btn-success btn-lg btn-outline-info" value="Crear-alumno" id="btn">
+                    <button type="submit" name="registro" class="btn btn-success btn-lg btn-outline-info" onclick="validarcrearalumno()" value="Enviar correo" id="btn">
                         <div class="cerrado"> 
                             <i class="fa-solid fa-user-plus"></i>
                         </div> 
@@ -179,6 +187,7 @@
                 <input type="text" name="filtro-apellidos" placeholder="Apellidos">
                 <input type="text" name="filtro-email" placeholder="E-mail">
                 <input type="text" name="filtro-dni" placeholder="Dni">
+                <input class="num_page" id="por_pagina" type="number" name="filtro-limite" placeholder="Limite" min=0 max=50> 
                 <button type="submit" name="filtro-buscar" value="Buscar" class="btnbuscar"><label for=""><i class="fa-solid fa-magnifying-glass"></i></label></button> 
             </form> 
         </div>
@@ -187,31 +196,80 @@
 
 
     <!----------------------------------------------------------INICIO TABLA DE DATOS ---------------------------------------------------------->
-       <div class="crud">
+    
+    
+    <div class="crud">
         <?php
-        // MOSTRAR DATOS EN FORMA DE TABLA:
-        echo '<table class="tablacrud table table-striped ">';
-            echo '<tr class="bloqueado">';
-                echo '<th id="primero">ID</th>';
-                echo '<th id="titulo">NOMBRE</th>';
-                echo '<th id="titulo">APELLIDOS</th>';
-                echo '<th id="titulo">EMAIL</th>';
-                echo '<th id="titulo">DNI</th>';
-                echo '<th id="titulo">MODIFICAR</th>';
-                echo '<th id="ultimo">ELIMINAR</th>';
-            echo '</tr>';
-            foreach ($listado_alumnos as $alumno) {
-                echo '<tr>';
-                    echo "<td>{$alumno['id_alumno']}</td>";
-                    echo "<td>{$alumno['nombre_alumno']}</td>";
-                    echo "<td>{$alumno['primer_apellido_alumno']} {$alumno['segundo_apellido_alumno']}</td>";
-                    echo "<td>{$alumno['email_alumno']}</td>";
-                    echo "<td>{$alumno['dni_alumno']}</td>";
-                    echo "<td><a href='../controller/form_mod_controller.php?id_alumno={$alumno['id_alumno']}'><button type='button' class='btncrudmodificar btn btn-primary'>Modificar</button></a></td>";
-                    echo "<td><a href='../controller/eliminar_controller.php?id_alumno={$alumno['id_alumno']}'><button type='button' class='btncrudenviar btn btn-danger'>Eliminar</button></a></td>";           
-                echo "</tr>";
+            // $query= "SELECT * FROM ".ALUMNO['tabla']." 
+            // WHERE ".ALUMNO['nombre']." LIKE '%".$filtro_nombre."%' 
+            // AND (".ALUMNO['primer_apellido']." LIKE '%".$filtro_apellidos."%'
+            // OR ".ALUMNO['segundo_apellido']." LIKE '%".$filtro_apellidos."%')
+            // AND ".ALUMNO['email']." LIKE '%".$filtro_email."%'
+            // AND ".ALUMNO['dni']." LIKE '%".$filtro_dni."%'
+            // ;";
+            // $resultado=mysqli_query($conexion,$query);
+
+
+            // $total_registros=mysqli_num_rows($resultado);
+
+            echo "<p style='text-align: center;'>Mostrando $cantidad_alumnos_visibles alumnos por página</p>";
+
+            // MOSTRAR DATOS EN FORMA DE TABLA:
+            echo '<table class="tablacrud table table-striped ">';
+                echo '<tr class="bloqueado">';
+                    echo '<th id="primero">ID</th>';
+                    echo '<th id="titulo">NOMBRE</th>';
+                    echo '<th id="titulo">APELLIDOS</th>';
+                    echo '<th id="titulo">EMAIL</th>';
+                    echo '<th id="titulo">DNI</th>';
+                    echo '<th id="titulo">MODIFICAR</th>';
+                    echo '<th id="ultimo">ELIMINAR</th>';
+                echo '</tr>';
+                foreach ($listado_alumnos as $alumno) {
+                    echo '<tr>';
+                        echo "<td>{$alumno['id_alumno']}</td>";
+                        echo "<td>{$alumno['nombre_alumno']}</td>";
+                        echo "<td>{$alumno['primer_apellido_alumno']} {$alumno['segundo_apellido_alumno']}</td>";
+                        echo "<td>{$alumno['email_alumno']}</td>";
+                        echo "<td>{$alumno['dni_alumno']}</td>";
+                        echo "<td><a href='../controller/form_mod_controller.php?id_alumno={$alumno['id_alumno']}'><button type='button' class='btncrudmodificar btn btn-primary'>Modificar</button></a></td>";
+                        echo "<td><a href='../controller/eliminar_controller.php?id_alumno={$alumno['id_alumno']}'><button type='button' class='btncrudenviar btn btn-danger'>Eliminar</button></a></td>";           
+                    echo "</tr>";
+                }
+            echo '</table>';
+
+            // <!--paginacion-->
+
+            $total_paginas=ceil($total_alumnos/$filtro_limite);
+
+            $pagina_menos=$pagina-1;
+
+            $pagina_mas=$pagina+1;
+
+            echo "<center>";
+
+            if ($pagina!=1) {
+                echo"<a class='casilla' href='".cambiarVariableGet($url_actual, 'pagina', 1)."'>"  .' Primera página <i class="fa-solid fa-book"></i>'. "</a> ";
+                echo"<a class='casilla' href='".cambiarVariableGet($url_actual, 'pagina', $pagina-1)."'>"  .'<i class="fa-solid fa-arrow-left"></i>'. "</a> ";  
             }
-        echo '</table>';
+
+            for($i=1; $i<=$total_paginas; $i++)
+            {
+                if ($i==$pagina) {
+                    echo"<a style=' background: #7D7199;' class='casilla' href='".cambiarVariableGet($url_actual, 'pagina', $i)."'> ".$i." </a> ";
+                }
+                else if ( $i==$pagina+1 || $i==$pagina+2 || $i==$pagina-1 || $i==$pagina-2) {
+                    echo"<a class='casilla' href='".cambiarVariableGet($url_actual, 'pagina', $i)."'> ".$i." </a> ";
+                    
+                }
+            }
+
+            if ($pagina!=$total_paginas) {
+                echo"<a class='casilla' href='".cambiarVariableGet($url_actual, 'pagina', $pagina_mas)."'><i class='fa-solid fa-arrow-right'></i></a>";
+                echo"<a class='casilla' href='".cambiarVariableGet($url_actual, 'pagina', $total_paginas)."'> Última página <i class='fa-solid fa-book'></i></a>";
+            }
+
+            echo "</center>";
         ?>
     </div>
     <!----------------------------------------------------------FIN TABLA DE DATOS ---------------------------------------------------------->
@@ -219,4 +277,3 @@
 </body>
 
 </html>
-
