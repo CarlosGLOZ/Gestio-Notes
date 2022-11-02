@@ -198,58 +198,58 @@
 
                         <tr>
                             <td><i class="fa-solid fa-database"></i> Bases de Datos </td>
-                            <td>1</td>
-                            <td>1</td>
-                            <td>1</td>
-                            <td>1</td>
+                            <td><input type="text" class="inputs"></td>
+                            <td><input type="text" class="inputs"></td>
+                            <td><input type="text" class="inputs"></td>
+                            <td><input type="text" class="inputs"></td>
                         </tr>
 
                         <tr>
                             <td><i class="fa-brands fa-php"></i> Prog. Basica </td>
-                            <td>1</td>
-                            <td>1</td>
-                            <td>1</td>
-                            <td>1</td>
+                            <td><input type="text" class="inputs"></td>
+                            <td><input type="text" class="inputs"></td>
+                            <td><input type="text" class="inputs"></td>
+                            <td><input type="text" class="inputs"></td>
                         </tr>
 
                         <tr>
                             <td><i class="fa-brands fa-html5"></i> M7-123 Des. Web Cliente </td>
-                            <td>1</td>
-                            <td>1</td>
-                            <td>1</td>
-                            <td>1</td>
+                            <td><input type="text" class="inputs"></td>
+                            <td><input type="text" class="inputs"></td>
+                            <td><input type="text" class="inputs"></td>
+                            <td><input type="text" class="inputs"></td>
                         </tr>
 
                         <tr>
                             <td><i class="fa-brands fa-php"></i> M7-4 Des Web Servidor  </td>
-                            <td>1</td>
-                            <td>1</td>
-                            <td>1</td>
-                            <td>1</td>
+                            <td><input type="text" class="inputs"></td>
+                            <td><input type="text" class="inputs"></td>
+                            <td><input type="text" class="inputs"></td>
+                            <td><input type="text" class="inputs"></td>
                         </tr>
 
                         <tr>
                             <td><i class="fa-brands fa-square-js"></i> Despliegue Apps Web </td>
-                            <td>1</td>
-                            <td>1</td>
-                            <td>1</td>
-                            <td>1</td>
+                            <td><input type="text" class="inputs"></td>
+                            <td><input type="text" class="inputs"></td>
+                            <td><input type="text" class="inputs"></td>
+                            <td><input type="text" class="inputs"></td>
                         </tr>
 
                         <tr>
                             <td><i class="fa-solid fa-palette"></i> Diseño Inter. Web</td>
-                            <td>1</td>
-                            <td>1</td>
-                            <td>1</td>
-                            <td>1</td>
+                            <td><input type="text" class="inputs"></td>
+                            <td><input type="text" class="inputs"></td>
+                            <td><input type="text" class="inputs"></td>
+                            <td><input type="text" class="inputs"></td>
                         </tr>
 
                         <tr>
                             <td><i class="fa-solid fa-people-group"></i> Sintesis</td>
-                            <td>1</td>
-                            <td>1</td>
-                            <td>1</td>
-                            <td>1</td>
+                            <td><input type="text" class="inputs"></td>
+                            <td><input type="text" class="inputs"></td>
+                            <td><input type="text" class="inputs"></td>
+                            <td><input type="text" class="inputs"></td>
                         </tr>
                     </table>
                 </div>

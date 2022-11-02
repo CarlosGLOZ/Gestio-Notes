@@ -1,0 +1,124 @@
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@300&display=swap');
+* {
+    font-family: 'Barlow Condensed', sans-serif;
+    padding: 0;
+    margin: 0;
+    text-decoration: none;
+    list-style: none;
+    box-sizing: border-box;
+}
+
+
+/* 
+notas / */
+
+.slidein {
+    animation-duration: 3s;
+    animation-name: slidein;
+    animation-iteration-count: 1;
+    animation-direction: alternate;
+}
+
+@keyframes slidein {
+    from {
+        margin-left: 100%;
+        width: 300%
+    }
+    to {
+        margin-left: 0%;
+        width: 100%;
+    }
+}
+
+.centrar {
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background: #818181;
+    margin-top: 100px;
+    margin-left: 50px;
+    margin-right: 50px;
+    border-radius: 50px;
+}
+
+.column-perfil {
+    width: 35%;
+    float: left;
+    transition: all 1s cubic-bezier(1, 0.59, 0.36, 1.09);
+    font-size: 20px;
+}
+
+.column-notas {
+    width: 65%;
+    float: left;
+    border-left: 3px black solid;
+    transition: all 1s cubic-bezier(1, 0.59, 0.36, 1.09);
+}
+
+.flex {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.img_pefil {
+    width: 150px;
+    height: 150px;
+    background-size: cover;
+    border-radius: 50%;
+    margin: 0 auto;
+}
+
+.row-c:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.fondo {
+    background: linear-gradient(150deg, #b9b9bb, #616565, #b9b9bb, #616565, #b9b9bb, #616565);
+    background-size: 400% 300%;
+    animation: BgGradient 10s ease infinite;
+}
+
+@keyframes BgGradient {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+.titulo {
+    margin: 15px 15px 15px 15px;
+    background: white;
+    border-radius: 30px;
+}
+
+.notas {
+    margin: 15px 15px 15px 15px;
+    background: white;
+}
+
+@media only screen and (max-width: 900px) {
+    .centrar {
+        border-radius: 15px;
+    }
+    .column-perfil {
+        width: 100%;
+    }
+    .column-notas {
+        width: 100%;
+        border-right: 0px;
+        border-top: 3px black solid;
+        border-left: 0px;
+    }
+}
+
+
+/* / fin de notas */
