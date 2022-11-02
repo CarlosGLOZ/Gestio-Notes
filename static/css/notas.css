@@ -9,153 +9,169 @@
 }
 
 
-/* 
-notas / */
+/*----------------------------------------------------------------*/
 
-.slidein {
-    animation-duration: 3s;
-    animation-name: slidein;
-    animation-iteration-count: 1;
-    animation-direction: alternate;
+
+/*--------------------------------NOTAS---------------------------*/
+
+
+/*----------------------------------------------------------------*/
+
+.general {
+    background-color: #F6F7FC;
 }
 
-@keyframes slidein {
-    from {
-        margin-left: 100%;
-        width: 300%
-    }
-    to {
-        margin-left: 0%;
-        width: 100%;
-    }
+.titulonotas {
+    background-color: #F6F7FC;
+    padding: 50px 0 0 20px;
 }
 
-.centrar {
-    align-content: center;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    background: #818181;
-    margin-top: 100px;
-    margin-left: 50px;
-    margin-right: 50px;
-    border-radius: 50px;
+.titulonotas h1 {
+    font-size: 35px;
+    text-align: left;
+    ;
 }
 
-.column-perfil {
-    width: 35%;
-    float: left;
-    transition: all 1s cubic-bezier(1, 0.59, 0.36, 1.09);
-    font-size: 20px;
+.notas-column {
+    background-color: #443E53;
+    border-radius: 10px;
+    margin: 10px;
+    padding: 5px;
 }
 
-.column-notas {
-    width: 65%;
-    float: left;
-    border-left: 3px black solid;
-    transition: all 1s cubic-bezier(1, 0.59, 0.36, 1.09);
+.notasestadisticas {
+    background-color: #F6F7FC;
+    margin: 10px;
 }
 
-.flex {
+.notasestadisticas table {
+    width: 100%;
+    --bs-table-bg: #353041;
+    --bs-table-striped-bg: #443E53;
+    --bs-table-striped-color: rgb(255, 255, 255);
+    --bs-table-active-bg: #bad726;
+    --bs-table-active-color: rgb(250, 246, 251);
+    --bs-table-hover-color: rgb(255, 255, 255);
+    color: #F6F7FC;
+    border-color: #373b3e;
+}
+
+
+/*----------------------------------------------------------------*/
+
+
+/*---------------------------PAGINACIÓN---------------------------*/
+
+
+/*----------------------------------------------------------------*/
+
+.alerts {
+    color: #d23838;
+    display: none;
+    padding: 2px;
+    font-size: 12px;
+}
+
+.pag {
     display: flex;
-    align-items: center;
-    justify-content: center;
+    padding: 0 0 0 20px;
+    margin: 0px;
+    font-size: 15px;
 }
-
-.img_pefil {
-    width: 150px;
-    height: 150px;
-    background-size: cover;
-    border-radius: 50%;
-    margin: 0 auto;
-}
-
-.row-c:after {
-    content: "";
-    display: table;
-    clear: both;
-}
-
-.fondo {
-    background: linear-gradient(150deg, #b9b9bb, #616565, #b9b9bb, #616565, #b9b9bb, #616565);
-    background-size: 400% 300%;
-    animation: BgGradient 10s ease infinite;
-}
-
-@keyframes BgGradient {
-    0% {
-        background-position: 0% 50%;
-    }
-    50% {
-        background-position: 100% 50%;
-    }
-    100% {
-        background-position: 0% 50%;
-    }
-}
-
-.titulo {
-    margin: 15px 15px 15px 15px;
-    background: white;
-    border-radius: 30px;
-}
-
-.notas {
-    margin: 15px 15px 15px 15px;
-    background: white;
-}
-
-@media only screen and (max-width: 900px) {
-    .centrar {
-        border-radius: 15px;
-    }
-    .column-perfil {
-        width: 100%;
-    }
-    .column-notas {
-        width: 100%;
-        border-right: 0px;
-        border-top: 3px black solid;
-        border-left: 0px;
-    }
-}
-
-
-/* / fin de notas */
 
 .num_page {
-    width: 5%;
-    text-align: center;
-    align-items: center;
+    width: 40%;
+    height: 70%;
+    font-size: 13px;
 }
 
 .casilla {
-    padding: 15px;
+    width: 40px;
+    height: 40px;
+    padding: 10px 10px;
+    font-size: 12px;
     color: white;
     text-decoration: none;
     border: 1px solid #443E53;
     background: #443E53;
     display: inline-block;
     box-sizing: border-box;
+    border-radius: 5px;
 }
 
 .casilla:hover {
     opacity: 1;
+    color: #7D7199;
 }
 
-.contenedor {
+.paginacion {
+    padding: 0 10px 5px 10px;
+}
+
+
+/*----------------------------------------------------------------*/
+
+
+/*--------------------------NOTAS ALUMNOS-------------------------*/
+
+
+/*----------------------------------------------------------------*/
+
+.inputs {
     width: 100%;
+    height: 10%;
+    font-size: 15px;
+    margin: 0px;
+    background-color: #3b3648;
+    border: none;
+    border-radius: 5px;
+}
+
+.inputs:focus-visible {
+    outline: none;
+    color: #F6F7FC;
+}
+
+.pagnotascontenedor {
+    width: 100%;
+    padding: 20px;
+    background-color: none;
+}
+
+.pagnotas {
+    width: 100%;
+    padding: 20px;
     background-color: #443E53;
     border-radius: 10px;
-    margin: 20px;
     display: flex;
     align-items: center;
     color: #F6F7FC;
+}
+
+.pagnotascontenedor img {
+    width: 100px;
+}
+
+.cabecera {
+    background-color: #2B2A2D;
+}
+
+.pagnotascontenedor table {
+    color: #F6F7FC;
+    border-width: 0px;
+    --bs-table-bg: transparent;
+    --bs-table-accent-bg: transparent;
+    --bs-table-hover-color: #7D7199;
+    --bs-table-hover-bg: rgba(0, 0, 0, 0.075);
     overflow: auto;
 }
 
-.contenedor img {
-    width: 100px;
+.notas>tbody>tr:nth-of-type(odd)>* {
+    color: #F6F7FC;
+}
+
+.bordes>:not(caption)>*>* {
+    border-width: 0px;
 }
 
 .column-perfil h1 {
@@ -180,6 +196,15 @@ notas / */
     background-color: #443E53;
 }
 
+
+/*----------------------------------------------------------------*/
+
+
+/*----------------------------SCROLL------------------------------*/
+
+
+/*----------------------------------------------------------------*/
+
 ::-webkit-scrollbar {
     width: var(--scroll-size, 5px);
     height: var(--scroll-size, 5px);
@@ -195,6 +220,15 @@ notas / */
     background-image: var(--scroll-thumb, none);
     border-radius: var(--scroll-thumb-radius, var(--scroll-radius));
 }
+
+
+/*----------------------------------------------------------------*/
+
+
+/*----------------------------------------------------------------*/
+
+
+/*----------------------------------------------------------------*/
 
 nav {
     position: sticky;
@@ -460,6 +494,8 @@ textarea {
     padding: 5px;
     box-sizing: border-box;
     font-size: 17px;
+    outline: none;
+    ;
 }
 
 
@@ -544,6 +580,10 @@ textarea {
 
 /*----------------------------------------------------------------*/
 
+.atras {
+    text-decoration: none;
+}
+
 
 /*:::::::::::::::::Boton-Modal:::::::::::::::::*/
 
@@ -558,6 +598,7 @@ textarea {
     border: none;
     display: flex;
     position: relative;
+    ;
 }
 
 .boton-modal label {
@@ -909,6 +950,22 @@ select {
 }
 
 
+/* ----------------------links de nombre del alumno-------------- */
+
+.alu-name-link {
+    text-decoration: none;
+    color: inherit;
+}
+
+.alu-name-link:hover {
+    text-decoration: underline;
+    color: auto;
+}
+
+
+/* -------------------------------------------------------------- */
+
+
 /*----------------------------------------------------------------*/
 
 
@@ -951,7 +1008,7 @@ select {
         position: fixed;
         width: 100%;
         height: calc(100vh - 80px);
-        background: #443E53;
+        background: #443e53f0;
         top: 80px;
         right: -100%;
         text-align: center;
@@ -1019,6 +1076,18 @@ select {
         height: 100%;
         font-size: 100%;
     }
+    .column-perfil h1 {
+        font-size: 10px;
+    }
+    .column-perfil p {
+        font-size: 10px;
+    }
+    .column-notas {
+        font-size: 10px;
+    }
+    .pagnotascontenedor img {
+        width: 80px;
+    }
 }
 
 
@@ -1076,6 +1145,35 @@ select {
         height: 100%;
         font-size: 100%;
     }
+    .pag {
+        font-size: 12px;
+        padding: 0 0 0 20px;
+        width: 100%;
+        height: 30px;
+        margin: 0 0 10px 0;
+    }
+    .num_page {
+        width: 20%;
+        height: 80%;
+        font-size: 13px;
+    }
+    .casilla {
+        width: 7%;
+        height: 7%;
+        font-size: 10px;
+        padding: 7px 7px;
+        color: white;
+        text-decoration: none;
+        border: 1px solid #443E53;
+        background: #443E53;
+        display: inline-block;
+        box-sizing: border-box;
+        border-radius: 5px;
+    }
+    .casilla:hover {
+        opacity: 1;
+        color: #7D7199;
+    }
 }
 
 
@@ -1095,6 +1193,25 @@ select {
     }
     .container3-modal input {
         width: 18%;
+    }
+    .column-perfil {
+        width: 50%;
+        padding: 12px;
+    }
+    .column-perfil h1 {
+        font-size: 10px;
+    }
+    .column-perfil p {
+        font-size: 10px;
+    }
+    .column-notas {
+        font-size: 10px;
+    }
+    .pagnotascontenedor img {
+        width: 50px;
+    }
+    .column-notas h1 {
+        font-size: 20px;
     }
 }
 
@@ -1124,7 +1241,7 @@ select {
         position: fixed;
         width: 100%;
         height: calc(100vh - 80px);
-        background: #443E53;
+        background: #443e53f0;
         top: 80px;
         right: -100%;
         text-align: center;
