@@ -264,10 +264,47 @@ class Alumno{
      */
     public static function updateAlumno($id_alumno, $nombre_alumno, $primer_apellido_alumno, $segundo_apellido_alumno, $email_alumno, $dni_alumno, $conexion) {
 
-        $sql = "UPDATE ".ALUMNO['tabla']." SET ".ALUMNO['nombre']." = '$nombre_alumno', ".ALUMNO['primer_apellido']." = '$primer_apellido_alumno', ".ALUMNO['segundo_apellido']." = '$segundo_apellido_alumno', ".ALUMNO['email']." = '$email_alumno', ".ALUMNO['dni']." = '$dni_alumno' WHERE id_alumno = $id_alumno";
+        $sql = 
+        "UPDATE ".ALUMNO['tabla']." 
+        SET ".ALUMNO['nombre']." = '$nombre_alumno', 
+        ".ALUMNO['primer_apellido']." = '$primer_apellido_alumno', 
+        ".ALUMNO['segundo_apellido']." = '$segundo_apellido_alumno', 
+        ".ALUMNO['email']." = '$email_alumno', 
+        ".ALUMNO['dni']." = '$dni_alumno' 
+        WHERE ".ALUMNO['id']." = $id_alumno
+        ";
 
         // Ejecutamos consulta para actualizar el usuario
         return mysqli_query($conexion, $sql);
     }
 
+    
+    /**
+     * 
+     */
+    public static function getMejoresAlumnosModulo($conexion, $id_modulo, $limite=3)
+    {
+        $sql = 
+        "SELECT ".ALUMNO['tabla'].".*, ".ALUMNO_MODULO['tabla'].".*
+        FROM ".ALUMNO['tabla']." INNER JOIN ".ALUMNO_MODULO['tabla']." 
+        ON ".ALUMNO['tabla'].".".ALUMNO['id']." = ".ALUMNO_MODULO['tabla'].".".ALUMNO_MODULO['id_alumno']."
+        WHERE ".ALUMNO_MODULO['tabla'].".".ALUMNO_MODULO['id_modulo']." = $id_modulo
+        ORDER BY ".ALUMNO_MODULO['nota_final']." DESC
+        LIMIT $limite;";
+
+        return mysqli_query($conexion, $sql);
+    }
+
+    /**
+     * 
+     */
+    public static function getNotaMediaModulo($conexion, $id_modulo)
+    {
+        $sql = 
+        "SELECT AVG(".ALUMNO_MODULO['nota_final'].") AS media 
+        FROM ".ALUMNO_MODULO['tabla']."
+        WHERE ".ALUMNO_MODULO['id_modulo']." = $id_modulo;";
+
+        return mysqli_fetch_assoc(mysqli_query($conexion, $sql))['media'];
+    }
 }

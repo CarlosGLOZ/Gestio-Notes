@@ -1,9 +1,7 @@
 <?php
 // Recogemos el fichero del modelo
 require_once '../config/conexion.php';
-require_once "../model/alumno.php";
-// Para poder pasarle la conexion como variable a la función
-require_once '../config/conexion.php';
+require_once '../model/alumno.php';
 
 
 // Comprobamos que la sesion esta iniciada.
