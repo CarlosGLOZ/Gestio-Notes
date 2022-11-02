@@ -238,40 +238,44 @@
                 }
             echo '</table>';
 
-            // <!--paginacion-->
-
-            $total_paginas=ceil($total_alumnos/$filtro_limite);
-
-            $pagina_mas=$pagina+1;
-
-            echo "<center>";
-
-            if ($pagina!=1) {
-                echo"<a class='casilla' href='".cambiarVariableGet($url_actual, 'pagina', 1)."'>"  .' Primera página <i class="fa-solid fa-book"></i>'. "</a> ";
-                echo"<a class='casilla' href='".cambiarVariableGet($url_actual, 'pagina', $pagina-1)."'>"  .'<i class="fa-solid fa-arrow-left"></i>'. "</a> ";  
-            }
-
-            echo "<script>console.log($total_paginas)</script>";
-            for($i=1; $i<=$total_paginas; $i++)
-            {
-                if ($i==$pagina) {
-                    echo"<a style=' background: #7D7199;' class='casilla' href='".cambiarVariableGet($url_actual, 'pagina', $i)."'> ".$i." </a> ";
-                }
-                else if ( $i==$pagina+1 || $i==$pagina+2 || $i==$pagina-1 || $i==$pagina-2) {
-                    echo"<a class='casilla' href='".cambiarVariableGet($url_actual, 'pagina', $i)."'> ".$i." </a> ";
-                    
-                }
-            }
-
-            if ($pagina!=$total_paginas) {
-                echo"<a class='casilla' href='".cambiarVariableGet($url_actual, 'pagina', $pagina_mas)."'><i class='fa-solid fa-arrow-right'></i></a>";
-                echo"<a class='casilla' href='".cambiarVariableGet($url_actual, 'pagina', $total_paginas)."'> Última página <i class='fa-solid fa-book'></i></a>";
-            }
-
-            echo "</center>";
         ?>
     </div>
     <!----------------------------------------------------------FIN TABLA DE DATOS ---------------------------------------------------------->
+    <!----------------------------------------------------------INICIO PAGINACIÓN ---------------------------------------------------------->
+    <?php
+        // <!--paginacion-->
+
+        $total_paginas=ceil($total_alumnos/$filtro_limite);
+
+        $pagina_mas=$pagina+1;
+
+        echo "<center>";
+
+        if ($pagina!=1) {
+            echo"<a class='casilla' href='".cambiarVariableGet($url_actual, 'pagina', 1)."'>"  .' Primera página <i class="fa-solid fa-book"></i>'. "</a> ";
+            echo"<a class='casilla' href='".cambiarVariableGet($url_actual, 'pagina', $pagina-1)."'>"  .'<i class="fa-solid fa-arrow-left"></i>'. "</a> ";  
+        }
+
+        echo "<script>console.log($total_paginas)</script>";
+        for($i=1; $i<=$total_paginas; $i++)
+        {
+            if ($i==$pagina) {
+                echo"<a style=' background: #7D7199;' class='casilla' href='".cambiarVariableGet($url_actual, 'pagina', $i)."'> ".$i." </a> ";
+            }
+            else if ( $i==$pagina+1 || $i==$pagina+2 || $i==$pagina-1 || $i==$pagina-2) {
+                echo"<a class='casilla' href='".cambiarVariableGet($url_actual, 'pagina', $i)."'> ".$i." </a> ";
+                
+            }
+        }
+
+        if ($pagina!=$total_paginas) {
+            echo"<a class='casilla' href='".cambiarVariableGet($url_actual, 'pagina', $pagina_mas)."'><i class='fa-solid fa-arrow-right'></i></a>";
+            echo"<a class='casilla' href='".cambiarVariableGet($url_actual, 'pagina', $total_paginas)."'> Última página <i class='fa-solid fa-book'></i></a>";
+        }
+
+        echo "</center>";
+    ?>
+    <!----------------------------------------------------------FIN PAGINACIÓN ---------------------------------------------------------->
 
 </body>
 
