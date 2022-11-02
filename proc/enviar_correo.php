@@ -52,7 +52,9 @@ function sendMail($asunto, $cuerpo, $correo/*, $adjunto=null*/) {
             $email->AddAddress($correo_alumno);
         }
     } else {
-        $email->AddAddress($correo);
+        foreach (explode(',',$correo) as $value) {
+            $email->AddAddress($value);
+        }
     }
 
     // COMPROBAR SI HAY ARCHIVOS ADJUNTOS Y ENVIARLOS

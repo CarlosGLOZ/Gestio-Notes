@@ -145,7 +145,7 @@
                 </select>
 
                 <!--ZONA E-MAIL-->
-                <input  placeholder="e-mail" type="email" id="email" name="correo" required>
+                <input  placeholder="e-mail (múltiples separados por ',')" type="text" id="email" name="correo" required>
 
                 <!--ZONA ASUNTO-->
                 <input placeholder="Asunto" type="text" id="asunto" name="asunto" required>
@@ -256,7 +256,6 @@
             echo"<a class='casilla' href='".cambiarVariableGet($url_actual, 'pagina', $pagina-1)."'>"  .'<i class="fa-solid fa-arrow-left"></i>'. "</a> ";  
         }
 
-        echo "<script>console.log($total_paginas)</script>";
         for($i=1; $i<=$total_paginas; $i++)
         {
             if ($i==$pagina) {

@@ -66,14 +66,17 @@ function validarcorreoyloading() {
     var cuerpo = document.getElementById("mensaje");
     valorcuerpo = cuerpo.value;
 
-    if (valorEmail == null || valorEmail.length == 0 || /^\s+$/.test(valorEmail)) {
-        alert('Debes de introducir el campo del email');
-        validacion = false;
+    valorEmail.split(',').forEach(element => {
 
-    } else if (!(/\S+@\S+.\S+/.test(valorEmail))) {
-        alert('Formato de email incorrecto, un formato correcto seria email@email.com');
-        validacion = false;
-    }
+        if (element == null || element.length == 0 || /^\s+$/.test(element)) {
+            alert('Debes de introducir el campo del email');
+            validacion = false;
+
+        } else if (!(/\S+@\S+.\S+/.test(element))) {
+            alert('Formato de email incorrecto, un formato correcto seria email@email.com');
+            validacion = false;
+        }
+    });
 
     if (!validacion) {
         return false;
