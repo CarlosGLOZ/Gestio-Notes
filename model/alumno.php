@@ -107,13 +107,24 @@ class Alumno{
 
         // Devolvemos el listado de alumnos, para imprimirlo en el index_controller.
         return $listado_alumnos_limitada;
-
-        // Cerrar statement
     }
 
-    public static function getCantidadAlumnosVisibles($conexion, $listado_alumnos)
+    public static function getCantidadAlumnosVisibles($conexion, $filtro_nombre='', $filtro_apellidos='', $filtro_email='', $filtro_dni='')
     {
-        return mysqli_num_rows($listado_alumnos);
+        // sentencia inclusiva de los filtros
+        $sentencia = 
+        "SELECT COUNT(1) AS total FROM ".ALUMNO['tabla']." 
+        WHERE ".ALUMNO['nombre']." LIKE '%".$filtro_nombre."%' 
+        AND (".ALUMNO['primer_apellido']." LIKE '%".$filtro_apellidos."%'
+        OR ".ALUMNO['segundo_apellido']." LIKE '%".$filtro_apellidos."%')
+        AND ".ALUMNO['email']." LIKE '%".$filtro_email."%'
+        AND ".ALUMNO['dni']." LIKE '%".$filtro_dni."%'
+        ;";
+        
+        $listado_alumnos = mysqli_fetch_assoc(mysqli_query($conexion, $sentencia))['total'];
+
+        // Devolvemos el listado de alumnos, para imprimirlo en el index_controller.
+        return $listado_alumnos;
     }
 
     public static function getTotalAlumnos($conexion)
@@ -224,7 +235,7 @@ class Alumno{
      */
     public static function deleteAlumno($id_alumno, $conexion) {
 
-        // TRANSACCIÓN PARA CREAD ALUMNO Y SUS NOTAS
+        // TRANSACCIÓN PARA BORRAR ALUMNO Y SUS NOTAS
         mysqli_autocommit($conexion, false);
         try {
             mysqli_begin_transaction($conexion);

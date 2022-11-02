@@ -50,14 +50,12 @@ $listado_alumnos = Alumno::getAlumnos($conexion, $filtro_nombre, $filtro_apellid
 $cantidad_alumnos_visibles = $filtro_limite;
 
 // recoger la cantidad todal de alumnos para la paginación
-$total_alumnos = Alumno::getTotalAlumnos($conexion);
+$total_alumnos = Alumno::getCantidadAlumnosVisibles($conexion, $filtro_nombre, $filtro_apellidos, $filtro_email, $filtro_dni);
 
 // recogemos la url actual para los links de la paginación
 $url_actual = getURL();
 
 // Controllar que no nos entren a los views y vengan directos a los controllers, donde ya se les valida la sesión, en el caso de no tenerla
 $entrada_valida = true;
-
-
 
 require_once '../view/principal.php';

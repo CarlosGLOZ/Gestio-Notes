@@ -242,8 +242,6 @@
 
             $total_paginas=ceil($total_alumnos/$filtro_limite);
 
-            $pagina_menos=$pagina-1;
-
             $pagina_mas=$pagina+1;
 
             echo "<center>";
@@ -253,6 +251,7 @@
                 echo"<a class='casilla' href='".cambiarVariableGet($url_actual, 'pagina', $pagina-1)."'>"  .'<i class="fa-solid fa-arrow-left"></i>'. "</a> ";  
             }
 
+            echo "<script>console.log($total_paginas)</script>";
             for($i=1; $i<=$total_paginas; $i++)
             {
                 if ($i==$pagina) {
