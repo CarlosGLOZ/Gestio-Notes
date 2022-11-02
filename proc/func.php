@@ -50,36 +50,6 @@ function validarSesion() {
     }
 }
 
-function getModulos($conexion)
-{
-    $stmt = "SELECT * FROM ".MODULO['tabla'].";";
-
-
-    // $modulos = mysqli_fetch_assoc(mysqli_query($conexion, $stmt));
-    $modulos = mysqli_query($conexion, $stmt);
-
-    return $modulos;
-}
-
-function getEmailAlumnosDeModulo($modulo, $conexion)
-{
-    $lista_alumnos = [];
-
-    $stmt = "SELECT ".ALUMNO['email']." FROM ".ALUMNO['tabla']." INNER JOIN ".ALUMNO_MODULO['tabla']." ON ".ALUMNO['tabla'].".".ALUMNO['id']." = ".ALUMNO_MODULO['tabla'].".".ALUMNO_MODULO['id_alumno']." WHERE ".ALUMNO_MODULO['tabla'].".".ALUMNO_MODULO['id_modulo']." = $modulo;";
-
-    $alumnos = mysqli_query($conexion, $stmt);
-
-    foreach ($alumnos as $key => $array) {
-        # code...
-        foreach ($array as $key => $value) {
-            // echo "[".$key."] -> [".$value."]<br>";
-            array_push($lista_alumnos, $value);
-        }
-    }
-
-    return $lista_alumnos;
-}
-
 function getURL()
 {
     if(isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on')

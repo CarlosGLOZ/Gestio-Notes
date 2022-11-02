@@ -11,7 +11,7 @@ validarSesion();
 // Recoger un array de todos los modulos
 $modulos = [];
 
-foreach (getModulos($conexion) as $value) {
+foreach (Alumno::getModulos($conexion) as $value) {
     $value['mejores_alumnos'] = Alumno::getMejoresAlumnosModulo($conexion, $value['id_modulo'], 3);
     $value['nota_media'] = Alumno::getNotaMediaModulo($conexion, $value['id_modulo']);
     

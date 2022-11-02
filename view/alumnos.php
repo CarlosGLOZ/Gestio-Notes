@@ -110,7 +110,7 @@
                     <option value="none">Seleccionar Clase</option>
 
                     <?php
-                        $modulos = getModulos($conexion);
+                        $modulos = Alumno::getModulos($conexion);
 
                         foreach ($modulos as $modulo) {
                                 // echo "[{$modulo['numero_modulo']}] -> [{$modulo['nombre_modulo']}]<br>";
