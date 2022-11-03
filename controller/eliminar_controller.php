@@ -11,6 +11,6 @@ validarSesion();
 
 $id_alumno = $_GET['id_alumno'];
 
-Alumno::deleteAlumno($id_alumno, $conexion);
+echo Alumno::deleteAlumno($id_alumno, $conexion);
 
 echo "<script>location.href='../controller/index_controller.php'</script>";

@@ -170,7 +170,7 @@ function validarcorreoyloading() {
         if (cont == 1) {
             cerrar2.style.top = "-205px"
         } else if (cont == 2) {
-            cerrar2.style.top = "-210px"
+            cerrar2.style.top = "-180px"
         }
     }
 
@@ -372,8 +372,3 @@ function validarcrearalumno() {
 
     }
 }
-
-
-
-
-

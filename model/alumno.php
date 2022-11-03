@@ -192,7 +192,7 @@ class Alumno{
         
             $alumno_id = mysqli_insert_id($conexion);
         
-            foreach (getModulos($conexion) as $modulo) {
+            foreach (self::getModulos($conexion) as $modulo) {
                 $sql2 = "INSERT INTO ".ALUMNO_MODULO['tabla']."(".ALUMNO_MODULO['id'].", ".ALUMNO_MODULO['nota_uf1'].", ".ALUMNO_MODULO['nota_uf2'].", ".ALUMNO_MODULO['nota_uf3'].", ".ALUMNO_MODULO['nota_final'].", ".ALUMNO_MODULO['id_alumno'].", ".ALUMNO_MODULO['id_modulo'].") VALUES(null, null, null, null, null, $alumno_id, {$modulo['id_modulo']});";
                 mysqli_query($conexion, $sql2);
             }
@@ -216,7 +216,7 @@ class Alumno{
         try {
             mysqli_begin_transaction($conexion);
         
-            foreach (getModulos($conexion) as $modulo) {
+            foreach (self::getModulos($conexion) as $modulo) {
                 $sql2 = "INSERT INTO tbl_alumno_modulo(id_alumno_modulo, nota_uf1, nota_uf2, nota_uf3, nota_final, id_Alumno, id_Modulo) VALUES(null, null, null, null, null, $alumno_id, {$modulo['id_modulo']});";
                 mysqli_query($conexion, $sql2);
             }
@@ -240,7 +240,7 @@ class Alumno{
         try {
             mysqli_begin_transaction($conexion);
             
-            foreach (getModulos($conexion) as $modulo) {
+            foreach (self::getModulos($conexion) as $modulo) {
                 $sql2 = "DELETE FROM ".ALUMNO_MODULO['tabla']." WHERE ".ALUMNO_MODULO['id_alumno']." = $id_alumno;";
                 mysqli_query($conexion, $sql2);
             }
@@ -306,5 +306,40 @@ class Alumno{
         WHERE ".ALUMNO_MODULO['id_modulo']." = $id_modulo;";
 
         return mysqli_fetch_assoc(mysqli_query($conexion, $sql))['media'];
+    }
+
+    /**
+     * 
+     */
+    public static function getModulos($conexion)
+    {
+        $stmt = "SELECT * FROM ".MODULO['tabla'].";";
+
+        // $modulos = mysqli_fetch_assoc(mysqli_query($conexion, $stmt));
+        $modulos = mysqli_query($conexion, $stmt);
+
+        return $modulos;
+    }
+
+    /**
+     * 
+     */
+    public static function getEmailAlumnosDeModulo($modulo, $conexion)
+    {
+        $lista_alumnos = [];
+
+        $stmt = "SELECT ".ALUMNO['email']." FROM ".ALUMNO['tabla']." INNER JOIN ".ALUMNO_MODULO['tabla']." ON ".ALUMNO['tabla'].".".ALUMNO['id']." = ".ALUMNO_MODULO['tabla'].".".ALUMNO_MODULO['id_alumno']." WHERE ".ALUMNO_MODULO['tabla'].".".ALUMNO_MODULO['id_modulo']." = $modulo;";
+
+        $alumnos = mysqli_query($conexion, $stmt);
+
+        foreach ($alumnos as $key => $array) {
+            # code...
+            foreach ($array as $key => $value) {
+                // echo "[".$key."] -> [".$value."]<br>";
+                array_push($lista_alumnos, $value);
+            }
+        }
+
+        return $lista_alumnos;
     }
 }

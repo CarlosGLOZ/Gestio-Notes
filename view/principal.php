@@ -38,7 +38,7 @@
         <a class="enlace" href="./principal.php">
             <img src="../static/img/logo/svg/1.1.svg" alt="Logo" class="logo">
         </a>
-        <p class="bienvenida"> | ㅤBienvenido <?php echo "<b>".$_SESSION[GESTOR['nombre']]."</b>" ?></p>
+        <p class="bienvenida"> | Bienvenido <?php echo "<b>".$_SESSION[GESTOR['nombre']]."</b>" ?></p>
         <ul>
             <li><a href="../proc/cerrar_sesion.php">Cerrar sesión</a></li>
         </ul>
@@ -55,7 +55,11 @@
         <label for="btn2-modal"><i class="fa-solid fa-envelope-open "></i></label>
         <label for="btn3-modal"><i class="fa-solid fa-magnifying-glass"></i></label> <!--buscador-->
         <button onclick="darkMode()" class="dark"><label for=""><i class="fa-sharp fa-solid fa-circle-half-stroke"></i></label></button> <!--modo oscuro-->
+    
     </div>
+
+
+    
     <!----------------------------------------------------------FIN BOTONES---------------------------------------------------------->
     
     <!----------------------------------------------------------1 VENTANA MODAL---------------------------------------------------------->
@@ -139,7 +143,7 @@
                  <select id="grupoEmail" name="grupo" onchange="selectedGroup();">
                     <option value="none">Seleccionar Clase</option>
                     <?php
-                        $modulos = getModulos($conexion);
+                        $modulos = Alumno::getModulos($conexion);
 
                         foreach ($modulos as $modulo) {
                                 // echo "[{$modulo['numero_modulo']}] -> [{$modulo['nombre_modulo']}]<br>";
@@ -149,7 +153,7 @@
                 </select>
                 <!--ZONA E-MAIL-->
                 <small id="error_correo"  class="alerts"><b><i class="fa-solid fa-circle-exclamation"></i> Error en el campo email </b></small>   
-                <input  placeholder="e-mail" type="email" id="email" name="correo" required>
+                <input  placeholder="e-mail (múltiples separados por ',')" type="email" id="email" name="correo" required>
 
                 <!--ZONA ASUNTO-->
                 <small id="error_asunto"  class="alerts"><b><i class="fa-solid fa-circle-exclamation"></i> Error en el campo asunto </b></small>   
@@ -193,6 +197,7 @@
                 <input type="text" name="filtro-apellidos" placeholder="Apellidos">
                 <input type="text" name="filtro-email" placeholder="E-mail">
                 <input type="text" name="filtro-dni" placeholder="Dni">
+                <input class="num_page" id="por_pagina" type="number" name="filtro-limite" placeholder="Limite" min=1 max=50> 
                 <button type="submit" name="filtro-buscar" value="Buscar" class="btnbuscar"><label for=""><i class="fa-solid fa-magnifying-glass"></i></label></button> 
             </form> 
         </div>
@@ -200,165 +205,91 @@
     <!-------------------------------------------------------FIN VENTANA MODAL---------------------------------------------------------->
 
 
-    <!--------------------------------------------INICIO TABLA DE DATOS Y PAGINACIÓN---------------------------------------------------->
-    <div class="pag">
-        <form action="index_controller.php" method="get">
-            <label for="por_pagina">Alumnos por página:</label>
-            <input class="num_page" id="por_pagina" type="number" name="por_pagina"> 
-            <!-- <input type="submit"  class="num_page" value="Cambiar"> -->
-        </form> 
-    </div>
+    <!----------------------------------------------------------INICIO TABLA DE DATOS ---------------------------------------------------------->
+    
+    
+    <div class="crud">
+        <?php
+            // $query= "SELECT * FROM ".ALUMNO['tabla']." 
+            // WHERE ".ALUMNO['nombre']." LIKE '%".$filtro_nombre."%' 
+            // AND (".ALUMNO['primer_apellido']." LIKE '%".$filtro_apellidos."%'
+            // OR ".ALUMNO['segundo_apellido']." LIKE '%".$filtro_apellidos."%')
+            // AND ".ALUMNO['email']." LIKE '%".$filtro_email."%'
+            // AND ".ALUMNO['dni']." LIKE '%".$filtro_dni."%'
+            // ;";
+            // $resultado=mysqli_query($conexion,$query);
 
+
+            // $total_registros=mysqli_num_rows($resultado);
+
+            echo "<p style='text-align: center;'>Mostrando $cantidad_alumnos_visibles alumnos por página</p>";
+
+            // MOSTRAR DATOS EN FORMA DE TABLA:
+            echo '<table class="tablacrud table table-striped ">';
+                echo '<tr class="bloqueado">';
+                    echo '<th id="primero">ID</th>';
+                    echo '<th id="titulo">NOMBRE</th>';
+                    echo '<th id="titulo">APELLIDOS</th>';
+                    echo '<th id="titulo">EMAIL</th>';
+                    echo '<th id="titulo">DNI</th>';
+                    echo '<th id="titulo">MODIFICAR</th>';
+                    echo '<th id="ultimo">ELIMINAR</th>';
+                echo '</tr>';
+                foreach ($listado_alumnos as $alumno) {
+                    echo '<tr>';
+                        echo "<td>{$alumno['id_alumno']}</td>";
+                        echo "<td>{$alumno['nombre_alumno']}</td>";
+                        echo "<td>{$alumno['primer_apellido_alumno']} {$alumno['segundo_apellido_alumno']}</td>";
+                        echo "<td>{$alumno['email_alumno']}</td>";
+                        echo "<td>{$alumno['dni_alumno']}</td>";
+                        echo "<td><a href='../controller/form_mod_controller.php?id_alumno={$alumno['id_alumno']}'><button type='button' class='btncrudmodificar btn btn-primary'>Modificar</button></a></td>";
+                        echo "<td><a href='../controller/eliminar_controller.php?id_alumno={$alumno['id_alumno']}'><button type='button' class='btncrudenviar btn btn-danger'>Eliminar</button></a></td>";           
+                    echo "</tr>";
+                }
+            echo '</table>';
+
+        ?>
+    </div>
+    <!----------------------------------------------------------INICIO PAGINACIÓN ---------------------------------------------------------->
+    <div class="paginacion">
 
     <?php
-    if (isset($_GET['por_pagina']) && $_GET['por_pagina']>0 ) {
-        $por_pagina=$_GET['por_pagina'];
-    } else {
-        $por_pagina=5;
-    }
-
-
-    if (isset($_GET['pagina'])) {
-        $pagina=$_GET['pagina']; 
-    
-    } else {
-        $pagina=1;
-    }
-
-    $empieza=($pagina-1)*$por_pagina;
+        // <!--paginacion-->
         
-    $empieza=($pagina-1) * $por_pagina;
-
-    $sentencia = 
-            "SELECT * FROM ".ALUMNO['tabla']." 
-            WHERE ".ALUMNO['nombre']." LIKE '%".$filtro_nombre."%' 
-            AND (".ALUMNO['primer_apellido']." LIKE '%".$filtro_apellidos."%'
-            OR ".ALUMNO['segundo_apellido']." LIKE '%".$filtro_apellidos."%')
-            AND ".ALUMNO['email']." LIKE '%".$filtro_email."%'
-            AND ".ALUMNO['dni']." LIKE '%".$filtro_dni."%'
-            LIMIT $empieza,$por_pagina;";
-
-
-            $listado_alumnos = mysqli_query($conexion, $sentencia);
-
-
-        $query= "SELECT * FROM ".ALUMNO['tabla']." 
-        WHERE ".ALUMNO['nombre']." LIKE '%".$filtro_nombre."%' 
-        AND (".ALUMNO['primer_apellido']." LIKE '%".$filtro_apellidos."%'
-        OR ".ALUMNO['segundo_apellido']." LIKE '%".$filtro_apellidos."%')
-        AND ".ALUMNO['email']." LIKE '%".$filtro_email."%'
-        AND ".ALUMNO['dni']." LIKE '%".$filtro_dni."%'
-        ;";
-        $resultado=mysqli_query($conexion,$query);
-
-
-        $total_registros=mysqli_num_rows($resultado);
-
-        if ($por_pagina> $total_registros) {
-
-            echo "<p style='text-align: center;'>Mostrando $total_registros alumnos por página</p>";
-        } else {
-            echo "<p style='text-align: center;font-size: 12px;'>Mostrando $por_pagina alumnos por página</p>";
-        }
-        ?>
-
-    <div class="crud">
-        
-        <?php
-        // MOSTRAR DATOS EN FORMA DE TABLA:
-        echo '<table class="tablacrud table table-striped ">';
-            echo '<tr class="bloqueado">';
-                echo '<th id="primero">ID</th>';
-                echo '<th id="titulo">NOMBRE</th>';
-                echo '<th id="titulo">APELLIDOS</th>';
-                echo '<th id="titulo">EMAIL</th>';
-                echo '<th id="titulo">DNI</th>';
-                echo '<th id="titulo">MODIFICAR</th>';
-                echo '<th id="ultimo">ELIMINAR</th>';
-            echo '</tr>';
-            foreach ($listado_alumnos as $alumno) {
-                echo '<tr>';
-                    echo "<td>{$alumno['id_alumno']}</td>";
-                    echo "<td>{$alumno['nombre_alumno']}</td>";
-                    echo "<td>{$alumno['primer_apellido_alumno']} {$alumno['segundo_apellido_alumno']}</td>";
-                    echo "<td>{$alumno['email_alumno']}</td>";
-                    echo "<td>{$alumno['dni_alumno']}</td>";
-                    echo "<td><a href='../controller/form_mod_controller.php?id_alumno={$alumno['id_alumno']}'><button type='button' class='btncrudmodificar btn btn-primary'>Modificar</button></a></td>";
-                    echo "<td><a href='../controller/eliminar_controller.php?id_alumno={$alumno['id_alumno']}'><button type='button' class='btncrudenviar btn btn-danger'>Eliminar</button></a></td>";           
-                echo "</tr>";
-            }
-        echo '</table>';
-
-        $total_paginas=ceil($total_registros/$por_pagina);
-
-        $pagina_menos=$pagina-1;
+        $total_paginas=ceil($total_alumnos/$filtro_limite);
 
         $pagina_mas=$pagina+1;
 
-        ?>
-
-    </div>
-    <!--------------------------------------------INICIO VISUALIZACIÓN DE PAGINACIÓN---------------------------------------------------->
-    <div class="paginacion">
-        <?php
         echo "<center>";
 
-        if ($pagina==1) {
-            // echo"<a class='casilla' href='index_controller.php?pagina=1'>"  .'Anterior'. "</a>";
-        } else {
-            if ($por_pagina==5) {
-                echo"<a class='casilla' href='index_controller.php?pagina=1'>"  .'<i class="fa-solid fa-book"></i>'. "</a> ";
-                echo"<a class='casilla' href='index_controller.php?pagina=$pagina_menos'>"  .'<i class="fa-solid fa-arrow-left"></i>'. "</a> ";
-            } else {
-                echo"<a class='casilla' href='index_controller.php?pagina=1&&por_pagina=$por_pagina'>"  .'<i class="fa-solid fa-book"></i>'. "</a> ";
-                echo"<a class='casilla' href='index_controller.php?pagina=$pagina_menos&&por_pagina=$por_pagina'>"  .'<i class="fa-solid fa-arrow-left"></i>'. "</a> ";
-            }
-
+        if ($pagina!=1) {
+            echo"<a class='casilla' href='".cambiarVariableGet($url_actual, 'pagina', 1)."'>".'<i class="fa-solid fa-book"></i>'. "</a> ";
+            echo"<a class='casilla' href='".cambiarVariableGet($url_actual, 'pagina', $pagina-1)."'>"  .'<i class="fa-solid fa-arrow-left"></i>'. "</a> ";  
         }
 
-        for($i=1;  $i<=$total_paginas;   $i++)
-
+        for($i=1; $i<=$total_paginas; $i++)
         {
-
-        if ($i==$pagina) {
-            if ($por_pagina==5) {
-                echo"<a style=' background: #7D7199;' class='casilla' href='index_controller.php?pagina=".$i."'> ".$i." </a> ";
-            } else {
-                echo"<a style=' background: #7D7199;' class='casilla' href='index_controller.php?pagina=".$i."&&por_pagina=$por_pagina'> ".$i." </a> ";
+            if ($i==$pagina) {
+                echo"<a style=' background: #7D7199;' class='casilla' href='".cambiarVariableGet($url_actual, 'pagina', $i)."'> ".$i." </a> ";
             }
-
-        }
-        else if ( $i==$pagina+1 || $i==$pagina+2 || $i==$pagina-1 || $i==$pagina-2) {
-            if ($por_pagina==5) {
-                echo"<a class='casilla' href='index_controller.php?pagina=".$i."'> ".$i." </a> ";
-            } else {
-                echo"<a class='casilla' href='index_controller.php?pagina=".$i."&&por_pagina=$por_pagina'> ".$i." </a> ";
-            }
-            
-        }
-
-        }
-
-        if ($pagina==$total_paginas) {
-
-        } else {
-
-            if ($por_pagina==5) {
-                echo"<a class='casilla' href='index_controller.php?pagina=$pagina_mas'>"  .'<i class="fa-solid fa-arrow-right"></i>'. "</a> ";
-                echo"<a class='casilla' href='index_controller.php?pagina=$total_paginas'>"  .'<i class="fa-solid fa-book"></i>'. "</a> ";
-            } else {
-                echo"<a class='casilla' href='index_controller.php?pagina=$pagina_mas&&por_pagina=$por_pagina'>"  .'<i class="fa-solid fa-arrow-right"></i>'. "</a> ";
-                echo"<a class='casilla' href='index_controller.php?pagina=$total_paginas&&por_pagina=$por_pagina'>"  .'<i class="fa-solid fa-book"></i>'. "</a> ";
+            else if ( $i==$pagina+1 || $i==$pagina+2 || $i==$pagina-1 || $i==$pagina-2) {
+                echo"<a class='casilla' href='".cambiarVariableGet($url_actual, 'pagina', $i)."'> ".$i." </a> ";
+                
             }
         }
-        echo "</center>"; ?>
-    </div>
-    
-    <!----------------------------------------------------------FIN TABLA DE DATOS ---------------------------------------------------------->
+
+        if ($pagina!=$total_paginas) {
+            echo"<a class='casilla' href='".cambiarVariableGet($url_actual, 'pagina', $pagina_mas)."'><i class='fa-solid fa-arrow-right'></i></a>";
+            echo"<a class='casilla' href='".cambiarVariableGet($url_actual, 'pagina', $total_paginas)."'> <i class='fa-solid fa-book'></i></a>";
+        }
+
+        echo "</center>";
+        ?>
+        </div>
+
+    <!----------------------------------------------------------FIN PAGINACIÓN ---------------------------------------------------------->
 
 </body>
-
-</html>
 
 
     <!----------------------------------------------------------VERIFICACIÓN MAIL---------------------------------------------------------->
