@@ -11,18 +11,18 @@
 </head>
 <body>
     <form action="../controller/modificar_controller.php" method="post">
-        <input type="hidden" name="id" id="id" value="<?php echo $alumno_e[ALUMNO['id']];?>">
+        <input type="hidden" name="id_alumno" id="id" value="<?php echo $alumno_e[ALUMNO['id']];?>">
         <label for="nombre">Nombre:</label><br>
-        <input type="text" name="nombre" value="<?php echo $alumno_e[ALUMNO['nombre']]; ?>"><br>
+        <input type="text" name="nombre_alumno" value="<?php echo $alumno_e[ALUMNO['nombre']]; ?>"><br>
         <label for="edad">Primer apellido:</label><br>
-        <input type="text" name="primer_apellido" value="<?php echo $alumno_e[ALUMNO['primer_apellido']]; ?>"><br><br>
+        <input type="text" name="primer_apellido_alumno" value="<?php echo $alumno_e[ALUMNO['primer_apellido']]; ?>"><br><br>
         <label for="segundo_apellido">Segundo apellido:</label><br>
-        <input type="text" name="segundo_apellido" value="<?php echo $alumno_e[ALUMNO['segundo_apellido']]; ?>"><br><br>
+        <input type="text" name="segundo_apellido_alumno" value="<?php echo $alumno_e[ALUMNO['segundo_apellido']]; ?>"><br><br>
         <label for="email">Email:</label><br>
-        <input type="email" name="email" value="<?php echo $alumno_e[ALUMNO['email']]; ?>"><br>
+        <input type="email" name="email_alumno" value="<?php echo $alumno_e[ALUMNO['email']]; ?>"><br>
         <label for="dni">DNI:</label><br>
-        <input type="text" name="dni" value="<?php echo $alumno_e[ALUMNO['dni']]; ?>"><br>
-        <input type="submit" value="Crear" class="btn btn-success"></input>    
+        <input type="text" name="dni_alumno" value="<?php echo $alumno_e[ALUMNO['dni']]; ?>"><br>
+        <input type="submit" name="modificar" value="Modificar" class="btn btn-success"></input>    
     </form>
 </body>
 </html>

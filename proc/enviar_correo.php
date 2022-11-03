@@ -1,5 +1,7 @@
 <?php
 
+require_once '../model/alumno.php';
+
 use \PHPMailer\PHPMailer\Exception;
 use \PHPMailer\PHPMailer\PHPMailer;
 require '../static/resources/PHPMailer/src/PHPMailer.php';
@@ -39,20 +41,22 @@ function sendMail($asunto, $cuerpo, $correo/*, $adjunto=null*/) {
     // comprovar que se haya seleccionado un alumno o una clase
 
     // hacer array de las ids de los modulos
-    $modulos = getModulos($conexion);
+    $modulos = Alumno::getModulos($conexion);
     $arrayModulosIds = [];
     foreach ($modulos as $value) {
         array_push($arrayModulosIds, $value['id_modulo']);
     }
 
     if (in_array($correo, $arrayModulosIds)) {
-        $lista_alumnos = getEmailAlumnosDeModulo($correo, $conexion);
+        $lista_alumnos = Alumno::getEmailAlumnosDeModulo($correo, $conexion);
         
         foreach ($lista_alumnos as $correo_alumno) {
             $email->AddAddress($correo_alumno);
         }
     } else {
-        $email->AddAddress($correo);
+        foreach (explode(',',$correo) as $value) {
+            $email->AddAddress($value);
+        }
     }
 
     // COMPROBAR SI HAY ARCHIVOS ADJUNTOS Y ENVIARLOS
@@ -69,4 +73,4 @@ function sendMail($asunto, $cuerpo, $correo/*, $adjunto=null*/) {
 }
 
 sendMail($asunto, $cuerpo, $correo);
-echo "<script>window.location.href='../view/principal.php'</script>";
+echo "<script>window.location.href='../controller/index_controller.php?correo_eniviado=correo_eniviado'</script>";

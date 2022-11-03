@@ -10,8 +10,8 @@ validarSesion();
 require_once '../model/alumno.php';
 
 // Si no entramos aqui desde el boton nos echa para atrás
-if(!isset($_POST['Enviar correo'])){
-    echo "<script>window.location.href='../controller/index_controller.php'</script>";
+if(!isset($_POST['registro'])){
+    echo "<script>window.location.href='../controller/index_controller.php?error=entradaInvalida'</script>";
     exit();
 }
 

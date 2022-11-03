@@ -950,6 +950,22 @@ select {
 }
 
 
+/* ----------------------links de nombre del alumno-------------- */
+
+.alu-name-link {
+    text-decoration: none;
+    color: inherit;
+}
+
+.alu-name-link:hover {
+    text-decoration: underline;
+    color: inherit;
+}
+
+
+/* -------------------------------------------------------------- */
+
+
 /*----------------------------------------------------------------*/
 
 

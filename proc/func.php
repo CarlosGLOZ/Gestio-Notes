@@ -50,36 +50,6 @@ function validarSesion() {
     }
 }
 
-function getModulos($conexion)
-{
-    $stmt = "SELECT * FROM ".MODULO['tabla'].";";
-
-
-    // $modulos = mysqli_fetch_assoc(mysqli_query($conexion, $stmt));
-    $modulos = mysqli_query($conexion, $stmt);
-
-    return $modulos;
-}
-
-function getEmailAlumnosDeModulo($modulo, $conexion)
-{
-    $lista_alumnos = [];
-
-    $stmt = "SELECT ".ALUMNO['email']." FROM ".ALUMNO['tabla']." INNER JOIN ".ALUMNO_MODULO['tabla']." ON ".ALUMNO['tabla'].".".ALUMNO['id']." = ".ALUMNO_MODULO['tabla'].".".ALUMNO_MODULO['id_alumno']." WHERE ".ALUMNO_MODULO['tabla'].".".ALUMNO_MODULO['id_modulo']." = $modulo;";
-
-    $alumnos = mysqli_query($conexion, $stmt);
-
-    foreach ($alumnos as $key => $array) {
-        # code...
-        foreach ($array as $key => $value) {
-            // echo "[".$key."] -> [".$value."]<br>";
-            array_push($lista_alumnos, $value);
-        }
-    }
-
-    return $lista_alumnos;
-}
-
 function getURL()
 {
     if(isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on')
@@ -156,4 +126,48 @@ function eliminarVariablesGetVacias($exclude=['filtro-buscar'])
     $nueva_url = $url_partida[0].'?'.implode('&', $nuevo_array_variables_get);
 
     return $nueva_url;
+}
+
+// genera una nueva url cambiando los valores get especificados por un valor dado
+function cambiarVariableGet($url, $var, $value)
+{
+    $exploded_url = explode('?', $url);
+
+    if (count($exploded_url) == 1) { // si no hay variables get establecidas
+        return $url.'?'.$var.'='.$value;
+    }
+
+    if ($exploded_url[1] == '') {
+        return $url.$var.'='.$value;
+    }
+
+    $gets = explode('&', $exploded_url[1]);
+    
+    // if (count($gets) == 1) { // si no hay variables get establecidas
+    //     $exploded_get = explode('=', $gets[0]);
+    //     if ($exploded_get[0] == $var)
+    //     {
+    //         $gets = "$var=$value";
+    //     } else {
+    //         $gets = $gets."&$var=$value";
+    //     }
+    // } else {
+        $match = false;
+        for ($i=0; $i < count($gets); $i++) {
+            $exploded_get = explode('=', $gets[$i]);
+            if ($exploded_get[0] == $var)
+            {
+                $gets[$i] = "$var=$value";
+                $match = true;
+            }
+        }
+        if (!$match) {
+            array_push($gets,"$var=$value");
+        }
+        $gets = implode('&', $gets);
+    // }
+    
+    $imploded_url = $exploded_url[0].'?'.$gets;
+
+    return $imploded_url;
 }
