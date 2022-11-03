@@ -959,7 +959,7 @@ select {
 
 .alu-name-link:hover {
     text-decoration: underline;
-    color: auto;
+    color: inherit;
 }
 
 

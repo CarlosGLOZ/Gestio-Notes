@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="../static/css/principal.css">
     <!-- LINK JS -->
     <script type="text/javascript" src="../static/js/script.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <!-- LINK FONT AWESOME -->
     <script src="https://kit.fontawesome.com/2b5286e1aa.js" crossorigin="anonymous"></script>
     <link rel="icon" href="../static/img/logo/svg/2.svg">
@@ -69,22 +70,28 @@
 
                     <h2><i class="fa-solid fa-user-tag"></i> Nombre completo</h2> 
                     <!--NOMBRE COMPLETO-->
+                    <small id="error_nombre" class="alerts"><b><i class="fa-solid fa-circle-exclamation"></i> Error en el campo nombre </b></small>   
                     <input type="text" name="<?php echo ALUMNO['nombre'];?>" id="nombre"  placeholder="Nombre" required> 
-                    <small id="error_nombre" style="color: coral; display: none;"><b>Error en el campo nombre <i class="fa-solid fa-circle-exclamation"></i></b></small>   
+
+                    <small id="error_primer_apellido" class="alerts"><b><i class="fa-solid fa-circle-exclamation"></i> Error en el campo primer apellido </b></small> 
                     <input type="text" name="<?php echo ALUMNO['primer_apellido'];?>" id="primer_apellido" placeholder="Primer apellido" required>  
-                    <small id="error_primer_apellido" style="color: coral; display: none;"><b>Error en el campo primer apellido <i class="fa-solid fa-circle-exclamation"></i></b></small>   
+  
+                    <small id="error_segundo_apellido" class="alerts"><b><i class="fa-solid fa-circle-exclamation"></i> Error en el campo segundo apellido </b></small>   
                     <input type="text" name="<?php echo ALUMNO['segundo_apellido'];?>" id="segundo_apellido"  placeholder="Segundo apellido" required>
-                    <small id="error_segundo_apellido" style="color: coral; display: none;"><b>Error en el campo segundo apellido <i class="fa-solid fa-circle-exclamation"></i></b></small>   
+                  
 
                     <h2><i class="fa-solid fa-id-card"></i> Dni</h2>
                     <!--DNI-->
-                    <input type="text" name="<?php echo ALUMNO['dni'];?>" id="dni" placeholder="dni" required>
-                    <small id="error_dni" style="color: coral; display: none;"><b>Error en el campo DNI <i class="fa-solid fa-circle-exclamation"></i></b></small>   
+                    <small id="error_dni" class="alerts"><b><i class="fa-solid fa-circle-exclamation"></i> Error en el campo DNI </b></small>   
+                    <input type="text" name="<?php echo ALUMNO['dni'];?>" id="dni_alu" placeholder="dni" required>
+                 
 
 
                     <h2><i class="fa-solid fa-square-envelope"></i> e-mail</h2>
                     <!--EMAIL-->
-                    <input type="email" name="<?php echo ALUMNO['email'];?>" placeholder="e-mail" required>
+                    <small id="error_email" class="alerts"><b><i class="fa-solid fa-circle-exclamation"></i> Error en el campo Email </b></small>   
+                    <input type="email" name="<?php echo ALUMNO['email'];?>" id="e_mail" placeholder="e-mail" required>
+                 
 
                     <!--BOTON ENVIAR-->
                     <button type="submit" name="registro" class="btn btn-success btn-lg btn-outline-info" onclick="validarcrearalumno()" value="Enviar correo" id="btn">
@@ -118,7 +125,7 @@
                 </form>
             </div>
             
-            <label for="btn-modal" class="close"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M256 512c141.4 0 256-114.6 256-256S397.4 0 256 0S0 114.6 0 256S114.6 512 256 512zM175 175c9.4-9.4 24.6-9.4 33.9 0l47 47 47-47c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9l-47 47 47 47c9.4 9.4 9.4 24.6 0 33.9s-24.6 9.4-33.9 0l-47-47-47 47c-9.4 9.4-24.6 9.4-33.9 0s-9.4-24.6 0-33.9l47-47-47-47c-9.4-9.4-9.4-24.6 0-33.9z"/></svg></label>
+            <label for="btn-modal" class="close" id="cerrar"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M256 512c141.4 0 256-114.6 256-256S397.4 0 256 0S0 114.6 0 256S114.6 512 256 512zM175 175c9.4-9.4 24.6-9.4 33.9 0l47 47 47-47c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9l-47 47 47 47c9.4 9.4 9.4 24.6 0 33.9s-24.6 9.4-33.9 0l-47-47-47 47c-9.4 9.4-24.6 9.4-33.9 0s-9.4-24.6 0-33.9l47-47-47-47c-9.4-9.4-9.4-24.6 0-33.9z"/></svg></label>
     </div>
     <!-------------------------------------------------------FIN VENTANA MODAL---------------------------------------------------------->
 
@@ -132,7 +139,8 @@
                 <h2><i class="fa-solid fa-envelopes-bulk"></i> Enviar e-mail</h2>
 
                  <!--ZONA SELECTOR-->               
-                <select name="grupo">
+              
+                 <select id="grupoEmail" name="grupo" onchange="selectedGroup();">
                     <option value="none">Seleccionar Clase</option>
                     <?php
                         $modulos = Alumno::getModulos($conexion);
@@ -143,15 +151,17 @@
                         }
                     ?>
                 </select>
-
                 <!--ZONA E-MAIL-->
-                <input  placeholder="e-mail (múltiples separados por ',')" type="text" id="email" name="correo" required>
+                <small id="error_correo"  class="alerts"><b><i class="fa-solid fa-circle-exclamation"></i> Error en el campo email </b></small>   
+                <input  placeholder="e-mail (múltiples separados por ',')" type="email" id="email" name="correo" required>
 
                 <!--ZONA ASUNTO-->
+                <small id="error_asunto"  class="alerts"><b><i class="fa-solid fa-circle-exclamation"></i> Error en el campo asunto </b></small>   
                 <input placeholder="Asunto" type="text" id="asunto" name="asunto" required>
 
-                <!--ZONA MENSAJE-->                
-                <textarea  placeholder="Escribe tu mensaje" name="cuerpo" id="mensaje" cols="30" rows="10"></textarea>
+                <!--ZONA MENSAJE-->     
+                <small id="error_mensaje"  class="alerts"><b><i class="fa-solid fa-circle-exclamation"></i> Error en el campo mensaje </b></small>              
+                <textarea  placeholder="Escribe tu mensaje" name="cuerpo" id="mensaje" cols="30" rows="10" require></textarea>
 
                 <!--BOTON ENVIAR-->
                 <button type="submit" class="btn btn-success btn-lg btn-outline-info" value="Enviar correo"  onclick="validarcorreoyloading()" id="btn2"> Enviar e-mail
@@ -167,7 +177,7 @@
             </form>
         </div>
             
-            <label for="btn2-modal" class="close2"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M256 512c141.4 0 256-114.6 256-256S397.4 0 256 0S0 114.6 0 256S114.6 512 256 512zM175 175c9.4-9.4 24.6-9.4 33.9 0l47 47 47-47c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9l-47 47 47 47c9.4 9.4 9.4 24.6 0 33.9s-24.6 9.4-33.9 0l-47-47-47 47c-9.4 9.4-24.6 9.4-33.9 0s-9.4-24.6 0-33.9l47-47-47-47c-9.4-9.4-9.4-24.6 0-33.9z"/></svg></label>
+            <label for="btn2-modal" class="close2" id="cerrar2"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M256 512c141.4 0 256-114.6 256-256S397.4 0 256 0S0 114.6 0 256S114.6 512 256 512zM175 175c9.4-9.4 24.6-9.4 33.9 0l47 47 47-47c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9l-47 47 47 47c9.4 9.4 9.4 24.6 0 33.9s-24.6 9.4-33.9 0l-47-47-47 47c-9.4 9.4-24.6 9.4-33.9 0s-9.4-24.6 0-33.9l47-47-47-47c-9.4-9.4-9.4-24.6 0-33.9z"/></svg></label>
     <!-------------------------------------------------------CARGA E-MAIL---------------------------------------------------------->
         <div class="spinner" id="loading">
             <div class="double-bounce1"></div>
@@ -187,7 +197,7 @@
                 <input type="text" name="filtro-apellidos" placeholder="Apellidos">
                 <input type="text" name="filtro-email" placeholder="E-mail">
                 <input type="text" name="filtro-dni" placeholder="Dni">
-                <input class="num_page" id="por_pagina" type="number" name="filtro-limite" placeholder="Limite" min=0 max=50> 
+                <input class="num_page" id="por_pagina" type="number" name="filtro-limite" placeholder="Limite" min=1 max=50> 
                 <button type="submit" name="filtro-buscar" value="Buscar" class="btnbuscar"><label for=""><i class="fa-solid fa-magnifying-glass"></i></label></button> 
             </form> 
         </div>
@@ -240,7 +250,6 @@
 
         ?>
     </div>
-    <!----------------------------------------------------------FIN TABLA DE DATOS ---------------------------------------------------------->
     <!----------------------------------------------------------INICIO PAGINACIÓN ---------------------------------------------------------->
     <?php
         // <!--paginacion-->
@@ -252,7 +261,7 @@
         echo "<center>";
 
         if ($pagina!=1) {
-            echo"<a class='casilla' href='".cambiarVariableGet($url_actual, 'pagina', 1)."'>"  .' Primera página <i class="fa-solid fa-book"></i>'. "</a> ";
+            echo"<a class='casilla' href='".cambiarVariableGet($url_actual, 'pagina', 1)."'>".'<i class="fa-solid fa-book"></i>'. "</a> ";
             echo"<a class='casilla' href='".cambiarVariableGet($url_actual, 'pagina', $pagina-1)."'>"  .'<i class="fa-solid fa-arrow-left"></i>'. "</a> ";  
         }
 
@@ -269,7 +278,7 @@
 
         if ($pagina!=$total_paginas) {
             echo"<a class='casilla' href='".cambiarVariableGet($url_actual, 'pagina', $pagina_mas)."'><i class='fa-solid fa-arrow-right'></i></a>";
-            echo"<a class='casilla' href='".cambiarVariableGet($url_actual, 'pagina', $total_paginas)."'> Última página <i class='fa-solid fa-book'></i></a>";
+            echo"<a class='casilla' href='".cambiarVariableGet($url_actual, 'pagina', $total_paginas)."'> <i class='fa-solid fa-book'></i></a>";
         }
 
         echo "</center>";
@@ -278,4 +287,24 @@
 
 </body>
 
-</html>
+
+    <!----------------------------------------------------------VERIFICACIÓN MAIL---------------------------------------------------------->
+
+<?php
+    if (isset($_GET['correo_eniviado'])) {
+        ?>
+        <script>
+    Swal.fire({
+        background:'#443E53',
+        color:'white',
+    icon: 'success',
+    iconColor:'#719972',
+    title: 'Correo enviado correctamente!'
+
+    })
+
+        </script>
+
+
+        <?php
+    }

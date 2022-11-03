@@ -31,10 +31,10 @@
         <label for="check" class="checkbtn">
             <i class="fas fa-bars"></i>
         </label>
-        <a class="enlace" href="./principal.php">
+        <a class="enlace" href="../controller/index_controller.php">
             <img src="../static/img/logo/svg/2.2.svg" alt="Logo" class="logo-peq">
         </a>
-        <a class="enlace" href="./principal.php">
+        <a class="enlace" href="../controller/index_controller.php">
             <img src="../static/img/logo/svg/1.1.svg" alt="Logo" class="logo">
         </a>
         <p class="bienvenida"> | Bienvenido <?php echo $_SESSION[GESTOR['nombre']]; ?> <!--Aqui va variable para el nombre del user--></p>
@@ -54,6 +54,7 @@
         <label for="btn2-modal"><i class="fa-solid fa-envelope-open "></i></label>
         <label for="btn3-modal"><i class="fa-solid fa-magnifying-glass"></i></label> <!--buscador-->
         <button onclick="darkMode()" class="dark"><label for=""><i class="fa-sharp fa-solid fa-circle-half-stroke"></i></label></button> <!--modo oscuro-->
+        <a href="../controller/index_controller.php" class="atras"><button class="dark"><label><i class="fa-solid fa-arrow-left"></i></label></button></a> <!--atras-->
     </div>
     <!----------------------------------------------------------FIN BOTONES---------------------------------------------------------->
     
@@ -167,86 +168,91 @@
         </div>
     </div>
     <!-------------------------------------------------------FIN VENTANA MODAL---------------------------------------------------------->
-    <div class="contenedor">
-        <div class="column-perfil">
-            <br>
-            <img src="../static/img/logo/svg/2.2.svg" alt="">
-            <br>
-            <br>
-            <h1><i class="fa-solid fa-user-graduate"></i> Eduardo Rafael, Federico </h1>
-            <p><i class="fa-solid fa-address-card"></i> <b>DNI:</b> 23232323T </p>
-            <P> <i class="fa-solid fa-square-envelope"></i> <b>Correo: </b> amoungus@gmail.com </P>
-        </div>
+    <div class="pagnotascontenedor">
+        <div class="pagnotas">
+      
+            <div class="column-perfil">
+                <br>
+                <img src="../static/img/logo/svg/2.2.svg" alt="">
+                <br>
+                <br>
+                <h1><i class="fa-solid fa-user-graduate"></i> Eduardo Rafael, Federico </h1>
+                <p><i class="fa-solid fa-address-card"></i> <b>DNI:</b> 23232323T </p>
+                <P> <i class="fa-solid fa-square-envelope"></i> <b>Correo: </b> amoungus@gmail.com </P>
+            </div>
 
-        <div class="column-notas">
-                <h1>Notas <i class="fa-solid fa-clipboard-user"></i></h1>
-            
-                <div class="notas">
-                <table class="table table-bordered table-hover table-striped">
-                    <tr>
-                        <td>Módulo</td>
-                        <td>UF1</td>
-                        <td>UF2</td>
-                        <td>UF3</td>
-                        <td>Media</td>
-                    </tr>
+            <div class="column-notas">
+                    <h1><i class="fa-solid fa-clipboard-user"></i> Notas </h1>
+                
+                    <div class="notas">
 
-                    <tr>
-                        <td>Bases de Datos <i class="fa-solid fa-database"></i></td>
-                        <td>1</td>
-                        <td>1</td>
-                        <td>1</td>
-                        <td>1</td>
-                    </tr>
+                    <table class="table table-bordered table-hover table-striped notas bordes">
+                        
+                        <tr class="cabecera">
+                            <td>Módulo</td>
+                            <td>UF1</td>
+                            <td>UF2</td>
+                            <td>UF3</td>
+                            <td>Media</td>
+                        </tr>
 
-                    <tr>
-                        <td>Prog. Basica <i class="fa-brands fa-php"></i></td>
-                        <td>1</td>
-                        <td>1</td>
-                        <td>1</td>
-                        <td>1</td>
-                    </tr>
+                        <tr>
+                            <td><i class="fa-solid fa-database"></i> Bases de Datos </td>
+                            <td><input type="text" class="inputs"></td>
+                            <td><input type="text" class="inputs"></td>
+                            <td><input type="text" class="inputs"></td>
+                            <td><input type="text" class="inputs"></td>
+                        </tr>
 
-                    <tr>
-                        <td>M7-123 Des. Web Cliente <i class="fa-brands fa-html5"></i></td>
-                        <td>1</td>
-                        <td>1</td>
-                        <td>1</td>
-                        <td>1</td>
-                    </tr>
+                        <tr>
+                            <td><i class="fa-brands fa-php"></i> Prog. Basica </td>
+                            <td><input type="text" class="inputs"></td>
+                            <td><input type="text" class="inputs"></td>
+                            <td><input type="text" class="inputs"></td>
+                            <td><input type="text" class="inputs"></td>
+                        </tr>
 
-                    <tr>
-                        <td>M7-4 Des Web Servidor  <i class="fa-brands fa-php"></i></td>
-                        <td>1</td>
-                        <td>1</td>
-                        <td>1</td>
-                        <td>1</td>
-                    </tr>
+                        <tr>
+                            <td><i class="fa-brands fa-html5"></i> M7-123 Des. Web Cliente </td>
+                            <td><input type="text" class="inputs"></td>
+                            <td><input type="text" class="inputs"></td>
+                            <td><input type="text" class="inputs"></td>
+                            <td><input type="text" class="inputs"></td>
+                        </tr>
 
-                    <tr>
-                        <td>Despliegue Apps Web <i class="fa-brands fa-square-js"></i></td>
-                        <td>1</td>
-                        <td>1</td>
-                        <td>1</td>
-                        <td>1</td>
-                    </tr>
+                        <tr>
+                            <td><i class="fa-brands fa-php"></i> M7-4 Des Web Servidor  </td>
+                            <td><input type="text" class="inputs"></td>
+                            <td><input type="text" class="inputs"></td>
+                            <td><input type="text" class="inputs"></td>
+                            <td><input type="text" class="inputs"></td>
+                        </tr>
 
-                    <tr>
-                        <td>Diseño Inter. Web <i class="fa-solid fa-palette"></i></td>
-                        <td>1</td>
-                        <td>1</td>
-                        <td>1</td>
-                        <td>1</td>
-                    </tr>
+                        <tr>
+                            <td><i class="fa-brands fa-square-js"></i> Despliegue Apps Web </td>
+                            <td><input type="text" class="inputs"></td>
+                            <td><input type="text" class="inputs"></td>
+                            <td><input type="text" class="inputs"></td>
+                            <td><input type="text" class="inputs"></td>
+                        </tr>
 
-                    <tr>
-                        <td>Sintesis <i class="fa-solid fa-people-group"></i></td>
-                        <td>1</td>
-                        <td>1</td>
-                        <td>1</td>
-                        <td>1</td>
-                    </tr>
-                </table>
+                        <tr>
+                            <td><i class="fa-solid fa-palette"></i> Diseño Inter. Web</td>
+                            <td><input type="text" class="inputs"></td>
+                            <td><input type="text" class="inputs"></td>
+                            <td><input type="text" class="inputs"></td>
+                            <td><input type="text" class="inputs"></td>
+                        </tr>
+
+                        <tr>
+                            <td><i class="fa-solid fa-people-group"></i> Sintesis</td>
+                            <td><input type="text" class="inputs"></td>
+                            <td><input type="text" class="inputs"></td>
+                            <td><input type="text" class="inputs"></td>
+                            <td><input type="text" class="inputs"></td>
+                        </tr>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
