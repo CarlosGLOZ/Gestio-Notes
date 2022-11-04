@@ -150,15 +150,29 @@ class Alumno{
         return $error;
     }
     
-    public static function getAlumnosEmail() {
+    public static function checkDNI($conexion, $dni_alumno) {
+        $sql = "SELECT * FROM ".ALUMNO['tabla']." WHERE ".ALUMNO['dni']." = '$dni_alumno';";
 
-        $sentencia = "SELECT ".ALUMNO['email']." FROM ".ALUMNO['tabla'].";";
-        $listado_alumnos = mysqli_query($conexion, $sentencia);
+        $id_usuarioExiste = mysqli_fetch_assoc(mysqli_query($conexion, $sql));
+        $usuarioExiste = mysqli_query($conexion, $sql);
+        // var_dump($usuarioExiste -> num_rows);
 
-        return $correos_alumnos;
+        if($row = $usuarioExiste -> num_rows){
+            $error = true;
+        }else{
+            $error = false;
+        }
+        return $error;
     }
 
-    function errorEmail($email_alumno){
+    // public static function getAlumnosEmail() {
+
+    //     $sentencia = "SELECT ".ALUMNO['email']." FROM ".ALUMNO['tabla'].";";
+    //     $listado_alumnos = mysqli_query($conexion, $sentencia);
+    //     return $correos_alumnos;
+    // }
+
+    public static function errorEmail($email_alumno){
         if(!filter_var($email_alumno, FILTER_VALIDATE_EMAIL)){
             $error = true;
         }else{
@@ -182,7 +196,7 @@ class Alumno{
 
         $alumno = new Alumno (null,$nombre_alumno, $primer_apellido_alumno, $segundo_apellido_alumno, $email_alumno, $dni_alumno);
 
-        // TRANSACCIÓN PARA CREAD ALUMNO Y SUS NOTAS
+        // TRANSACCIÓN PARA CREAR ALUMNO Y SUS NOTAS
         mysqli_autocommit($conexion, false);
         try {
             mysqli_begin_transaction($conexion);
@@ -198,16 +212,13 @@ class Alumno{
             }
         
             mysqli_commit($conexion);
-        } catch (\Thorwable $e) {
+        } catch (\Throwable $e) {
             mysqli_rollback($conexion);
         }
     }
 
-    /**
-     * 
-     */
+    // Funciones para recoger información específica del alumno, tanto datos como notas
     public static function getAlumnoId($id_alumno, $conexion) {
-
         $sql = "SELECT * FROM ".ALUMNO['tabla']." WHERE ".ALUMNO['id']. " = '$id_alumno';";
         return mysqli_fetch_assoc(mysqli_query($conexion, $sql));
 
@@ -228,6 +239,10 @@ class Alumno{
         } catch (\Thorwable $e) {
             mysqli_rollback($conexion);
         }
+    }
+    public static function getNotasAlumno($id_alumno, $conexion) {
+        $sql = "SELECT * FROM ".ALUMNO_MODULO['tabla']." WHERE ".ALUMNO_MODULO['id_alumno']. " = '$id_alumno';";
+        return mysqli_fetch_all(mysqli_query($conexion, $sql));
     }
 
     /**
@@ -251,7 +266,7 @@ class Alumno{
             $alumno_id = mysqli_insert_id($conexion);
         
             return mysqli_commit($conexion);
-        } catch (\Thorwable $e) {
+        } catch (\Throwable $e) {
             mysqli_rollback($conexion);
 
             return false;
@@ -342,4 +357,13 @@ class Alumno{
 
         return $lista_alumnos;
     }
+    public static function updateNotas($notasGlobal, $id_alumno, $conexion) {
+        // var_dump($notasGlobal['m1']);
+        for ($i=1; $i <= count($notasGlobal); $i++) { 
+            $sql = "UPDATE ".ALUMNO_MODULO['tabla']." SET ".ALUMNO_MODULO['nota_uf1']." = ".$notasGlobal["m$i"]['uf1'].", ".ALUMNO_MODULO['nota_uf2']." = ".$notasGlobal["m$i"]['uf2'].", ".ALUMNO_MODULO['nota_uf3']." = ".$notasGlobal["m$i"]['uf3'].", ".ALUMNO_MODULO['nota_final']." = ".$notasGlobal["m$i"]['media']." WHERE ".ALUMNO_MODULO['id_alumno']." = ".$id_alumno." AND ".ALUMNO_MODULO['id_modulo']." = ".$i.";";
+            // Ejecutamos consulta para actualizar el usuario
+            mysqli_query($conexion, $sql);
+        }
+    }
+
 }

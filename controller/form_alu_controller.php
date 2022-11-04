@@ -11,7 +11,10 @@ validarSesion();
 
 $id_alumno = $_GET['id_alumno'];
 
-$alumno_e = Alumno::getAlumnoId($id_alumno, $conexion);
+// Función para recoger la información de ese usuario en concreto
+$alumno_info = Alumno::getAlumnoId($id_alumno, $conexion);
+// Función para recoger las notas de ese usuario en concreto, que recogemos al darle al modificar del crud de alumnos
+$alumno_notas = Alumno::getNotasAlumno($id_alumno, $conexion);
 
 // Controllar que no nos entren a los views y vengan directos a los controllers, donde ya se les valida la sesión, en el caso de no tenerla
 $entrada_valida = true;

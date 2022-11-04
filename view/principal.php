@@ -139,8 +139,7 @@
                 <h2><i class="fa-solid fa-envelopes-bulk"></i> Enviar e-mail</h2>
 
                  <!--ZONA SELECTOR-->               
-              
-                 <select id="grupoEmail" name="grupo" onchange="selectedGroup();">
+                    <select id="grupoEmail" name="grupo" onchange="selectedGroup();">
                     <option value="none">Seleccionar Clase</option>
                     <?php
                         $modulos = Alumno::getModulos($conexion);
@@ -210,44 +209,31 @@
     
     <div class="crud">
         <?php
-            // $query= "SELECT * FROM ".ALUMNO['tabla']." 
-            // WHERE ".ALUMNO['nombre']." LIKE '%".$filtro_nombre."%' 
-            // AND (".ALUMNO['primer_apellido']." LIKE '%".$filtro_apellidos."%'
-            // OR ".ALUMNO['segundo_apellido']." LIKE '%".$filtro_apellidos."%')
-            // AND ".ALUMNO['email']." LIKE '%".$filtro_email."%'
-            // AND ".ALUMNO['dni']." LIKE '%".$filtro_dni."%'
-            // ;";
-            // $resultado=mysqli_query($conexion,$query);
-
-
-            // $total_registros=mysqli_num_rows($resultado);
-
-            echo "<p style='text-align: center;'>Mostrando $cantidad_alumnos_visibles alumnos por página</p>";
-
-            // MOSTRAR DATOS EN FORMA DE TABLA:
-            echo '<table class="tablacrud table table-striped ">';
-                echo '<tr class="bloqueado">';
-                    echo '<th id="primero">ID</th>';
-                    echo '<th id="titulo">NOMBRE</th>';
-                    echo '<th id="titulo">APELLIDOS</th>';
-                    echo '<th id="titulo">EMAIL</th>';
-                    echo '<th id="titulo">DNI</th>';
-                    echo '<th id="titulo">MODIFICAR</th>';
-                    echo '<th id="ultimo">ELIMINAR</th>';
-                echo '</tr>';
-                foreach ($listado_alumnos as $alumno) {
-                    echo '<tr>';
-                        echo "<td>{$alumno['id_alumno']}</td>";
-                        echo "<td>{$alumno['nombre_alumno']}</td>";
-                        echo "<td>{$alumno['primer_apellido_alumno']} {$alumno['segundo_apellido_alumno']}</td>";
-                        echo "<td>{$alumno['email_alumno']}</td>";
-                        echo "<td>{$alumno['dni_alumno']}</td>";
-                        echo "<td><a href='../controller/form_mod_controller.php?id_alumno={$alumno['id_alumno']}'><button type='button' class='btncrudmodificar btn btn-primary'>Modificar</button></a></td>";
-                        echo "<td><a href='../controller/eliminar_controller.php?id_alumno={$alumno['id_alumno']}'><button type='button' class='btncrudenviar btn btn-danger'>Eliminar</button></a></td>";           
+        // MOSTRAR DATOS EN FORMA DE TABLA:
+        echo '<table class="tablacrud table table-striped ">';
+            echo '<tr class="bloqueado">';
+                echo '<th id="primero">ID</th>';
+                echo '<th id="titulo">NOMBRE</th>';
+                echo '<th id="titulo">APELLIDOS</th>';
+                echo '<th id="titulo">EMAIL</th>';
+                echo '<th id="titulo">DNI</th>';
+                echo '<th id="titulo">MODIFICAR</th>';
+                echo '<th id="ultimo">ELIMINAR</th>';
+            echo '</tr>';
+            foreach ($listado_alumnos as $alumno) {
+                echo '<tr>';
+                    echo "<td>{$alumno['id_alumno']}</td>";
+                    echo "<td>{$alumno['nombre_alumno']}</td>";
+                    echo "<td>{$alumno['primer_apellido_alumno']} {$alumno['segundo_apellido_alumno']}</td>";
+                    echo "<td>{$alumno['email_alumno']}</td>";
+                    echo "<td>{$alumno['dni_alumno']}</td>";
+                    echo "<td><a href='../controller/form_alu_controller.php?id_alumno={$alumno['id_alumno']}'><button type='button' class='btncrudmodificar btn btn-primary'>Modificar</button></a></td>";
+                    ?>
+                    <td><button class='btncrudenviar btn btn-danger btn btn-primary' onClick="aviso('../controller/eliminar_controller.php?id_alumno=<?php echo $alumno['id_alumno'];?>')" >Eliminar</button></td>        
+                    <?php
                     echo "</tr>";
-                }
-            echo '</table>';
-
+            }
+        echo '</table>';
         ?>
     </div>
     <!----------------------------------------------------------INICIO PAGINACIÓN ---------------------------------------------------------->
@@ -279,7 +265,7 @@
         }
 
         if ($pagina!=$total_paginas) {
-            echo"<a class='casilla' href='".cambiarVariableGet($url_actual, 'pagina', $pagina_mas)."'><i class='fa-solid fa-arrow-right'></i></a>";
+            echo"<a class='casilla' href='".cambiarVariableGet($url_actual, 'pagina', $pagina_mas)."'><i class='fa-solid fa-arrow-right'></i></a> ";
             echo"<a class='casilla' href='".cambiarVariableGet($url_actual, 'pagina', $total_paginas)."'> <i class='fa-solid fa-book'></i></a>";
         }
 
@@ -289,6 +275,116 @@
 
     <!----------------------------------------------------------FIN PAGINACIÓN ---------------------------------------------------------->
 
+    <!-- SWEET ALERT -->
+         <!-- BOTON ELIMINAR -->
+  <script>
+    function aviso(url) {
+        Swal.fire({
+            title: '¿Estás seguro?',
+            icon: 'warning',
+            background:'#443E53',
+            color:'white',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Si',
+            CancelButtonText: 'Cancelar',
+            }).then((result) => {
+            if (result.isConfirmed) {
+                window.location.href = url;
+            }
+            })
+    }
+</script>
+
+
+ <!-- USUARIO YA EXISTENTE EN LA BASE DE DATOS -->
+<?php
+if (isset($_GET['error'])) {
+if ($_GET['error']=='checkUser') {
+    ?>
+    <script>
+Swal.fire({
+    background:'#443E53',
+    color:'white',
+icon: 'error',
+title: 'Usuario no creado',
+text: 'El usuario ya existe'
+
+})
+
+    </script>
+    <?php
+}
+}
+?>
+
+<?php
+if (isset($_GET['error'])) {
+if ($_GET['error']=='checkUserDNI') {
+    ?>
+    <script>
+    Swal.fire({
+    background:'#443E53',
+    color:'white',
+    icon: 'error',
+    title: 'Usuario no creado',
+    text: 'El usuario ya existe'
+
+})
+
+    </script>
+    <?php
+}
+}
+?>
+
+
+<!-- CREACIÓN DE UN NUEVO ALUMNO -->
+<?php
+if (isset($_GET['create'])) {
+if ($_GET['create']=='true') {
+    ?>
+    <script>
+Swal.fire({
+    background:'#443E53',
+    color:'white',
+    icon: 'success',
+    iconColor:'#719972',
+title: 'Usuario creado!'
+
+
+})
+
+    </script>
+    <?php
+}
+}
+?>
+
+</body>
+
+
+    <!----------------------------------------------------------VERIFICACIÓN MAIL---------------------------------------------------------->
+<!-- CORREO ENVIADO -->
+<?php
+    if (isset($_GET['correo_eniviado'])) {
+        ?>
+        <script>
+    Swal.fire({
+        background:'#443E53',
+        color:'white',
+    icon: 'success',
+    iconColor:'#719972',
+    title: 'Correo enviado correctamente!'
+
+    })
+
+        </script>
+
+        <?php
+    }
+?>
 </body>
 
 

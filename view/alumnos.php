@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="../static/css/principal.css">
     <!-- LINK JS -->
     <script type="text/javascript" src="../static/js/script.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <!-- LINK FONT AWESOME -->
     <script src="https://kit.fontawesome.com/2b5286e1aa.js" crossorigin="anonymous"></script>
     <link rel="icon" href="../static/img/logo/svg/2.svg">
@@ -107,9 +108,8 @@
                 <h2><i class="fa-solid fa-envelopes-bulk"></i> Enviar e-mail</h2>
 
                  <!--ZONA SELECTOR-->               
-                <select name="grupo">
+                <select id="grupoEmail" name="grupo" onchange="selectedGroup();">
                     <option value="none">Seleccionar Clase</option>
-
                     <?php
                         $modulos = Alumno::getModulos($conexion);
 
@@ -170,104 +170,211 @@
     <!-------------------------------------------------------FIN VENTANA MODAL---------------------------------------------------------->
     <div class="pagnotascontenedor">
         <div class="pagnotas">
-      
             <div class="column-perfil">
                 <br>
                 <img src="../static/img/logo/svg/2.2.svg" alt="">
                 <br>
                 <br>
-                <div class="icon">
-                    <i class="fa-solid fa-user-graduate"></i>
-                    <input type="text" class="inputsname">
-                </div>
-
-                <div class="icon">
-                    <i class="fa-solid fa-address-card"></i>
-                    <input type="text" class="inputsname">
-                </div>
-
-                <div class="icon">
-                    <i class="fa-solid fa-square-envelope"></i>
-                    <input type="text" class="inputsname">
-                </div>
+                <form action="./alumnos_controller.php" method="post">
+                    <div class="icon">
+                        <?php echo "<input type='hidden' name='id_alumno' value='".$id_alumno."'>"?>
+                        <p><i class="fa-solid fa-user-graduate"></i> <b>Nombre:</b><?php echo "<input type='text' class='inputsname' name='nombre_alumno' value='".$alumno_info['nombre_alumno']."'></input>"?></p>                        
+                        <?php echo "<input type='text'name='primer_apellido_alumno' class='inputsname' value='".$alumno_info['primer_apellido_alumno']."'></input>"?>
+                        <?php echo "<input type='text'name='segundo_apellido_alumno' class='inputsname' value='".$alumno_info['segundo_apellido_alumno']."'></input>"?>
+                    </div>
+                    <div class="icon">                  
+                        <p><i class="fa-solid fa-address-card"></i> <b>DNI:</b><?php echo "<input type='text' class='inputsname' name='dni_alumno' value='".$alumno_info['dni_alumno']."'></input>"?></p>
+                    </div>
+                    <div class="icon">
+                        <p> <i class="fa-solid fa-square-envelope"></i> <b>Correo: </b><?php echo "<input type='text' class='inputsname' name='email_alumno' value='".$alumno_info['email_alumno']."'></input>"?></p>
+                    </div>
+                    <button type='submit' name='info' id="info" class='btn btn-warning'><i class='fa-solid fa-upload'></i> Modificar</button>
+                </form>
             </div>
 
             <div class="column-notas">
-                    <h1><i class="fa-solid fa-clipboard-user"></i> Notas </h1>
+                    <h1>Notas <i class="fa-solid fa-clipboard-user"></i></h1>
                 
                     <div class="notas">
-
                     <table class="table table-bordered table-hover table-striped notas bordes">
-                        
                         <tr class="cabecera">
-                            <td>Módulo</td>
-                            <td>UF1</td>
-                            <td>UF2</td>
-                            <td>UF3</td>
-                            <td>Media</td>
+                            <td><b>Módulo</b></td>
+                            <td><b>UF1</b></td>
+                            <td><b>UF2</b></td>
+                            <td><b>UF3</b></td>
+                            <td><b>Media</b></td>
                         </tr>
 
                         <tr>
-                            <td><i class="fa-solid fa-database"></i> Bases de Datos </td>
-                            <td><input type="text" class="inputs"></td>
-                            <td><input type="text" class="inputs"></td>
-                            <td><input type="text" class="inputs"></td>
-                            <td><input type="text" class="inputs"></td>
+                            <td>M2 Bases de Datos <i class="fa-solid fa-database"></i></td>
+                            <?php
+                            for ($i=0; $i < count($alumno_notas); $i++) { 
+                                if ($alumno_notas[$i][6] == 1) {
+                                    echo "<form action='./alumnos_controller.php' method='post'>";
+                                    echo "<td><input type='number' name='m1-1' class='inputs' value='".$alumno_notas[$i][1]."'></td>";
+                                    echo "<td><input type='number' name='m1-2' class='inputs' value='".$alumno_notas[$i][2]."'></td>";
+                                    echo "<td><input type='number' name='m1-3' class='inputs' value='".$alumno_notas[$i][3]."'></td>";
+                                    $media = round(($alumno_notas[$i][1] + $alumno_notas[$i][2] + $alumno_notas[$i][3])/3, 2);
+                                    echo "<td>$media</td>";
+                                    echo "<input type='hidden' name='m1-media' value='".$media."'>";  
+                                }
+                            }
+                            ?>
                         </tr>
 
                         <tr>
-                            <td><i class="fa-brands fa-php"></i> Prog. Basica </td>
-                            <td><input type="text" class="inputs"></td>
-                            <td><input type="text" class="inputs"></td>
-                            <td><input type="text" class="inputs"></td>
-                            <td><input type="text" class="inputs"></td>
+                            <td>M3 Programación Básica <i class="fa-brands fa-php"></i></td>
+                            <?php
+                            for ($i=0; $i < count($alumno_notas); $i++) { 
+                                if ($alumno_notas[$i][6] == 2) {
+                                    echo "<td><input type='number' name='m2-1' class='inputs' value='".$alumno_notas[$i][1]."'></td>";
+                                    echo "<td><input type='number' name='m2-2' class='inputs' value='".$alumno_notas[$i][2]."'></td>";
+                                    echo "<td><input type='number' name='m2-3' class='inputs' value='".$alumno_notas[$i][3]."'></td>";
+                                    $media = round(($alumno_notas[$i][1] + $alumno_notas[$i][2] + $alumno_notas[$i][3])/3, 2);
+                                    echo "<td>$media</td>";
+                                    echo "<input type='hidden' name='m2-media' value='".$media."'>";  
+                                }
+                            }
+                            ?>
                         </tr>
 
                         <tr>
-                            <td><i class="fa-brands fa-html5"></i> M7-123 Des. Web Cliente </td>
-                            <td><input type="text" class="inputs"></td>
-                            <td><input type="text" class="inputs"></td>
-                            <td><input type="text" class="inputs"></td>
-                            <td><input type="text" class="inputs"></td>
+                            <td>M6 Desarrollo Web Cliente <i class="fa-brands fa-php"></i></td>
+                            <?php
+                            for ($i=0; $i < count($alumno_notas); $i++) { 
+                                if ($alumno_notas[$i][6] == 3) {
+                                    echo "<td><input type='number' name='m3-1' class='inputs' value='".$alumno_notas[$i][1]."'></td>";
+                                    echo "<td><input type='number' name='m3-2' class='inputs' value='".$alumno_notas[$i][2]."'></td>";
+                                    echo "<td><input type='number' name='m3-3' class='inputs' value='".$alumno_notas[$i][3]."'></td>";
+                                    $media = round(($alumno_notas[$i][1] + $alumno_notas[$i][2] + $alumno_notas[$i][3])/3, 2);
+                                    echo "<td>$media</td>";
+                                    echo "<input type='hidden' name='m3-media' value='".$media."'>";  
+                                }
+                            }
+                            ?>
                         </tr>
 
                         <tr>
-                            <td><i class="fa-brands fa-php"></i> M7-4 Des Web Servidor  </td>
-                            <td><input type="text" class="inputs"></td>
-                            <td><input type="text" class="inputs"></td>
-                            <td><input type="text" class="inputs"></td>
-                            <td><input type="text" class="inputs"></td>
+                            <td>M7-123 Desarrollo Web Cliente <i class="fa-brands fa-html5"></i></td>
+                            <?php
+                            for ($i=0; $i < count($alumno_notas); $i++) { 
+                                if ($alumno_notas[$i][6] == 4) {
+                                    echo "<td><input type='number' name='m4-1' class='inputs' value='".$alumno_notas[$i][1]."'></td>";
+                                    echo "<td><input type='number' name='m4-2' class='inputs' value='".$alumno_notas[$i][2]."'></td>";
+                                    echo "<td><input type='number' name='m4-3' class='inputs' value='".$alumno_notas[$i][3]."'></td>";
+                                    $media = round(($alumno_notas[$i][1] + $alumno_notas[$i][2] + $alumno_notas[$i][3])/3, 2);
+                                    echo "<td>$media</td>";
+                                    echo "<input type='hidden' name='m4-media' value='".$media."'>";     
+                                }
+                            }
+                            ?>
                         </tr>
 
                         <tr>
-                            <td><i class="fa-brands fa-square-js"></i> Despliegue Apps Web </td>
-                            <td><input type="text" class="inputs"></td>
-                            <td><input type="text" class="inputs"></td>
-                            <td><input type="text" class="inputs"></td>
-                            <td><input type="text" class="inputs"></td>
+                            <td>M7-4 Desarrollo Web Servidor  <i class="fa-brands fa-php"></i></td>
+                            <?php
+                            for ($i=0; $i < count($alumno_notas); $i++) { 
+                                if ($alumno_notas[$i][6] == 5) {
+                                    echo "<td><input type='number' name='m5-1' class='inputs' value='".$alumno_notas[$i][1]."'></td>";
+                                    echo "<td><input type='number' name='m5-2' class='inputs' value='".$alumno_notas[$i][2]."'></td>";
+                                    echo "<td><input type='number' name='m5-3' class='inputs' value='".$alumno_notas[$i][3]."'></td>";
+                                    $media = round(($alumno_notas[$i][1] + $alumno_notas[$i][2] + $alumno_notas[$i][3])/3, 2);
+                                    echo "<td>$media</td>";
+                                    echo "<input type='hidden' name='m5-media' value='".$media."'>";                    
+                                }
+                            }
+                            ?>
                         </tr>
 
                         <tr>
-                            <td><i class="fa-solid fa-palette"></i> Diseño Inter. Web</td>
-                            <td><input type="text" class="inputs"></td>
-                            <td><input type="text" class="inputs"></td>
-                            <td><input type="text" class="inputs"></td>
-                            <td><input type="text" class="inputs"></td>
+                            <td>M8 Despliegue Apps Web <i class="fa-brands fa-square-js"></i></td>
+                            <?php
+                            for ($i=0; $i < count($alumno_notas); $i++) { 
+                                if ($alumno_notas[$i][6] == 6) {
+                                    echo "<td><input type='number' name='m6-1' class='inputs' value='".$alumno_notas[$i][1]."'></td>";
+                                    echo "<td><input type='number' name='m6-2' class='inputs' value='".$alumno_notas[$i][2]."'></td>";
+                                    echo "<td><input type='number' name='m6-3' class='inputs' value='".$alumno_notas[$i][3]."'></td>";
+                                    $media = round(($alumno_notas[$i][1] + $alumno_notas[$i][2] + $alumno_notas[$i][3])/3, 2);
+                                    echo "<td>$media</td>";
+                                    echo "<input type='hidden' name='m6-media' value='".$media."'>";
+                                }
+                            }
+                            ?>
                         </tr>
 
                         <tr>
-                            <td><i class="fa-solid fa-people-group"></i> Sintesis</td>
-                            <td><input type="text" class="inputs"></td>
-                            <td><input type="text" class="inputs"></td>
-                            <td><input type="text" class="inputs"></td>
-                            <td><input type="text" class="inputs"></td>
+                            <td>M9 Diseño de Interfícies Web <i class="fa-solid fa-palette"></i></td>
+                            <?php
+                            for ($i=0; $i < count($alumno_notas); $i++) { 
+                                if ($alumno_notas[$i][6] == 7) {
+                                    echo "<td><input type='number' name='m7-1' class='inputs' value='".$alumno_notas[$i][1]."'></td>";
+                                    echo "<td><input type='number' name='m7-2' class='inputs' value='".$alumno_notas[$i][2]."'></td>";
+                                    echo "<td><input type='number' name='m7-3' class='inputs' value='".$alumno_notas[$i][3]."'></td>";
+                                    $media = round(($alumno_notas[$i][1] + $alumno_notas[$i][2] + $alumno_notas[$i][3])/3, 2);
+                                    echo "<td>$media</td>";
+                                    echo "<input type='hidden' name='m7-media' value='".$media."'>";
+                                }
+                            }
+                            ?>
+                        </tr>
+
+                        <tr>
+                            <td>M12 Sintesis <i class="fa-solid fa-people-group"></i></td>
+                            <?php
+                            for ($i=0; $i < count($alumno_notas); $i++) { 
+                                if ($alumno_notas[$i][6] == 8) {
+                                    echo "<td><input type='number' name='m8-1' class='inputs' value='".$alumno_notas[$i][1]."'></td>";
+                                    echo "<td><input type='number' name='m8-2' class='inputs' value='".$alumno_notas[$i][2]."'></td>";
+                                    echo "<td><input type='number' name='m8-3' class='inputs' value='".$alumno_notas[$i][3]."'></td>";
+                                    $media = round(($alumno_notas[$i][1] + $alumno_notas[$i][2] + $alumno_notas[$i][3])/3, 2);
+                                    echo "<td>$media</td>";
+                                    echo "<input type='hidden' name='m8-media' value='".$media."'>";                            }
+                            }
+                            ?>
                         </tr>
                     </table>
                 </div>
+                <?php
+                // Botón para restuara valores de las notas, actualizando la página
+                echo "<input type='hidden' name='id_alumno' value='".$id_alumno."'>"; 
+                echo "<button type='submit' id='notas' name='notas' class='btn btn-warning'><i class='fa-solid fa-upload'></i> Actualizar notas</button>";
+                echo "</form>";
+                // Actualizar
+                echo "<a href='form_alu_controller.php?id_alumno={$alumno_info['id_alumno']}'><button class='btn btn-danger'><i class='fa-solid fa-rotate-right'></i> Restaurar valores</button></a>";
+                ?>
             </div>
         </div>
     </div>
-
+    <?php
+    if (isset($_GET['notasMod'])) {
+        ?>
+        <script>
+        Swal.fire({
+        background:'#443E53',
+        color:'white',
+        icon: 'success',
+        iconColor:'#719972',
+        title: 'NOTAS ACTULIZADAS!'
+    })
+          </script>
+    <?php
+    }
+    ?>
+    <?php
+    if (isset($_GET['userMod'])) {
+    ?>
+        <script>
+    Swal.fire({
+        background:'#443E53',
+        color:'white',
+        icon: 'success',
+        iconColor:'#719972',
+        title: 'USUARIO ACTUALIZADO!'
+    })
+        </script>
+        <?php
+    }
+    ?>
 </body>
 
 </html>

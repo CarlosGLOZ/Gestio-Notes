@@ -76,4 +76,4 @@ function sendMail($asunto, $cuerpo, $correo/*, $adjunto=null*/) {
 }
 
 sendMail($asunto, $cuerpo, $correo);
-echo "<script>window.location.href='../controller/index_controller.php?correo_eniviado=correo_eniviado'</script>";
+echo "<script>window.location.href='../controller/index_controller.php?correo_enviado=correo_enviado'</script>";
