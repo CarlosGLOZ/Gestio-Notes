@@ -81,8 +81,7 @@
 
 .num_page {
     width: 40%;
-    height: 70%;
-    font-size: 13px;
+    height: 34px;
 }
 
 .casilla {
@@ -97,6 +96,7 @@
     display: inline-block;
     box-sizing: border-box;
     border-radius: 5px;
+    margin: 2px;
 }
 
 .casilla:hover {
@@ -125,6 +125,20 @@
     background-color: #3b3648;
     border: none;
     border-radius: 5px;
+}
+
+.inputsname {
+    width: 90%;
+    height: 10%;
+    font-size: 15px;
+    margin: 2%;
+    background-color: #3b3648;
+    border: none;
+    border-radius: 5px;
+}
+
+.icon {
+    padding: 10px;
 }
 
 .inputs:focus-visible {
@@ -184,7 +198,7 @@
 
 .column-perfil {
     width: 30%;
-    padding: 20px;
+    padding: 10px;
 }
 
 .column-notas {
@@ -1138,8 +1152,7 @@ select {
     }
     .num_page {
         width: 20%;
-        height: 80%;
-        font-size: 13px;
+        height: 34px;
     }
     .casilla {
         width: 7%;
@@ -1258,5 +1271,10 @@ select {
     }
     .formulario {
         width: 300px;
+    }
+    .container3-modal {
+        width: 100%;
+        display: none;
+        margin: 0 0 10px;
     }
 }

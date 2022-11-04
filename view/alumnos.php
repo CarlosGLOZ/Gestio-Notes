@@ -22,7 +22,7 @@
 
     <?php
         if (!isset($entrada_valida)) {
-            echo "<script>window.location.href='../controller/index_controller.php'</script>";
+            echo "<script>window.location.href='../controller/form_alu_controller.php'</script>";
         }
     ?>
 
@@ -176,9 +176,20 @@
                 <img src="../static/img/logo/svg/2.2.svg" alt="">
                 <br>
                 <br>
-                <h1><i class="fa-solid fa-user-graduate"></i> Eduardo Rafael, Federico </h1>
-                <p><i class="fa-solid fa-address-card"></i> <b>DNI:</b> 23232323T </p>
-                <P> <i class="fa-solid fa-square-envelope"></i> <b>Correo: </b> amoungus@gmail.com </P>
+                <div class="icon">
+                    <i class="fa-solid fa-user-graduate"></i>
+                    <input type="text" class="inputsname">
+                </div>
+
+                <div class="icon">
+                    <i class="fa-solid fa-address-card"></i>
+                    <input type="text" class="inputsname">
+                </div>
+
+                <div class="icon">
+                    <i class="fa-solid fa-square-envelope"></i>
+                    <input type="text" class="inputsname">
+                </div>
             </div>
 
             <div class="column-notas">

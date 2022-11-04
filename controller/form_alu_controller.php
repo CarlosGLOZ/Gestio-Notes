@@ -13,4 +13,7 @@ $id_alumno = $_GET['id_alumno'];
 
 $alumno_e = Alumno::getAlumnoId($id_alumno, $conexion);
 
-require_once '../view/modificar.php';
+// Controllar que no nos entren a los views y vengan directos a los controllers, donde ya se les valida la sesión, en el caso de no tenerla
+$entrada_valida = true;
+
+require_once '../view/alumnos.php';
