@@ -25,13 +25,16 @@ function sendMail($asunto, $cuerpo, $correo/*, $adjunto=null*/) {
     $email->Port = 587;
     $email->SMTPSecure = 'tls';
     $email->SMTPAuth = true;
-    $email->Username = 'cahm.secretaria@gmail.com';
+    // $email->Username = 'cahm.secretaria@gmail.com';
+    $email->Username = 'hectorjimenezrafael18@gmail.com';
     // $email->Password = 'Contra12';
-    $email->Password = 'zfeuhvsceawfryuf';
+    // $email->Password = 'xqzhntrjanixgywh';
+    $email->Password = 'udpbevfoqtehwsoj';
     
     $email->isHTML(true);
     $email->CharSet = 'UTF-8';
-    $email->SetFrom('cahm.secretaria@gmail.com');
+    // $email->SetFrom('cahm.secretaria@gmail.com');
+    $email->SetFrom('hectorjimenezrafael18@gmail.com');
     $email->Subject=$asunto;
     $email->Body=$cuerpo;
     
