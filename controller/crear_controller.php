@@ -31,6 +31,10 @@ if(Alumno::checkUser($conexion, $email_alumno) !== FALSE){
     echo "<script>window.location.href='../controller/index_controller.php?error=checkUser'</script>";
     exit();
 }
+if(Alumno::checkDNI($conexion, $dni_alumno) !== FALSE){
+    echo "<script>window.location.href='../controller/index_controller.php?error=checkUserDNI'</script>";
+    exit();
+}
 // Error email, formato invalido
 if(Alumno::errorEmail($email_alumno) !== FALSE){
     echo "<script>window.location.href='../controller/index_controller.php?error=errorEmail'</script>";
@@ -39,5 +43,5 @@ if(Alumno::errorEmail($email_alumno) !== FALSE){
 
 Alumno::createAlumno($conexion, $GLOBALS[ALUMNO['nombre']], $GLOBALS[ALUMNO['primer_apellido']], $GLOBALS[ALUMNO['segundo_apellido']], $GLOBALS[ALUMNO['email']], $GLOBALS[ALUMNO['dni']]);
 
-echo "<script>location.href='index_controller.php'</script>";
+echo "<script>location.href='index_controller.php?create=true'</script>";
 

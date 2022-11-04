@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="../static/css/principal.css">
     <!-- LINK JS -->
     <script type="text/javascript" src="../static/js/script.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <!-- LINK FONT AWESOME -->
     <script src="https://kit.fontawesome.com/2b5286e1aa.js" crossorigin="anonymous"></script>
     <link rel="icon" href="../static/img/logo/svg/2.svg">
@@ -124,7 +125,7 @@
                 <h2><i class="fa-solid fa-envelopes-bulk"></i> Enviar e-mail</h2>
 
                  <!--ZONA SELECTOR-->               
-                <select name="grupo">
+                <select id="grupoEmail" name="grupo" onchange="selectedGroup();">
                     <option value="none">Seleccionar Clase</option>
                     <?php
                         $modulos = getModulos($conexion);
@@ -207,15 +208,127 @@
                     echo "<td>{$alumno['primer_apellido_alumno']} {$alumno['segundo_apellido_alumno']}</td>";
                     echo "<td>{$alumno['email_alumno']}</td>";
                     echo "<td>{$alumno['dni_alumno']}</td>";
-                    echo "<td><a href='../controller/form_mod_controller.php?id_alumno={$alumno['id_alumno']}'><button type='button' class='btncrudmodificar btn btn-primary'>Modificar</button></a></td>";
-                    echo "<td><a href='../controller/eliminar_controller.php?id_alumno={$alumno['id_alumno']}'><button type='button' class='btncrudenviar btn btn-danger'>Eliminar</button></a></td>";           
-                echo "</tr>";
+                    echo "<td><a href='../controller/form_alu_controller.php?id_alumno={$alumno['id_alumno']}'><button type='button' class='btncrudmodificar btn btn-primary'>Modificar</button></a></td>";
+                    ?>
+                    <td><button class='btncrudenviar btn btn-danger btn btn-primary' onClick="aviso('../controller/eliminar_controller.php?id_alumno=<?php echo $alumno['id_alumno'];?>')" >Eliminar</button></td>        
+                    <?php
+                    echo "</tr>";
             }
         echo '</table>';
         ?>
     </div>
     <!----------------------------------------------------------FIN TABLA DE DATOS ---------------------------------------------------------->
 
+    <!-- SWEET ALERT -->
+         <!-- BOTON ELIMINAR -->
+  <script>
+    function aviso(url) {
+        Swal.fire({
+            title: '¿Estás seguro?',
+            icon: 'warning',
+            background:'#443E53',
+            color:'white',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Si',
+            CancelButtonText: 'Cancelar',
+            }).then((result) => {
+            if (result.isConfirmed) {
+                window.location.href = url;
+            }
+            })
+    }
+</script>
+
+
+ <!-- USUARIO YA EXISTENTE EN LA BASE DE DATOS -->
+<?php
+if (isset($_GET['error'])) {
+if ($_GET['error']=='checkUser') {
+    ?>
+    <script>
+Swal.fire({
+    background:'#443E53',
+    color:'white',
+icon: 'error',
+title: 'Usuario no creado',
+text: 'El usuario ya existe'
+
+})
+
+    </script>
+    <?php
+}
+}
+?>
+
+<?php
+if (isset($_GET['error'])) {
+if ($_GET['error']=='checkUserDNI') {
+    ?>
+    <script>
+    Swal.fire({
+    background:'#443E53',
+    color:'white',
+    icon: 'error',
+    title: 'Usuario no creado',
+    text: 'El usuario ya existe'
+
+})
+
+    </script>
+    <?php
+}
+}
+?>
+
+
+<!-- CREACIÓN DE UN NUEVO ALUMNO -->
+<?php
+if (isset($_GET['create'])) {
+if ($_GET['create']=='true') {
+    ?>
+    <script>
+Swal.fire({
+    background:'#443E53',
+    color:'white',
+    icon: 'success',
+    iconColor:'#719972',
+title: 'Usuario creado!'
+
+
+})
+
+    </script>
+    <?php
+}
+}
+?>
+
+</body>
+
+
+    <!----------------------------------------------------------VERIFICACIÓN MAIL---------------------------------------------------------->
+<!-- CORREO ENVIADO -->
+<?php
+    if (isset($_GET['correo_eniviado'])) {
+        ?>
+        <script>
+    Swal.fire({
+        background:'#443E53',
+        color:'white',
+    icon: 'success',
+    iconColor:'#719972',
+    title: 'Correo enviado correctamente!'
+
+    })
+
+        </script>
+
+        <?php
+    }
+?>
 </body>
 
 </html>

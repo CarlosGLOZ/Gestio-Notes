@@ -53,8 +53,18 @@ function loading() {
 //------------------------------------------------------------------
 //-------------MODAL ENVIAR MAIL Y PANTALLA DE CARGA----------------
 //------------------------------------------------------------------
-function validarcorreoyloading() {
 
+// OCULTAR EL INPUT EMAIL SI HAY ALGÚN GRUPO SELECIONADO
+function selectedGroup() {
+    var valorInputs = document.getElementById("grupoEmail").value;
+    if (valorInputs != "none") {
+        document.getElementById("email").style.display = "none";
+    } else {
+        document.getElementById("email").style.display = "block";
+    }
+}
+
+function validarcorreoyloading() {
     //VALIDACIÓN CORREO
     var validacion = true;
     var email = document.getElementById("email");
@@ -78,6 +88,7 @@ function validarcorreoyloading() {
     if (!validacion) {
         return false;
     }
+
     // PANTALLA DE CARGA
     var form = document.getElementById("form");
     var loading = document.getElementById("loading");
