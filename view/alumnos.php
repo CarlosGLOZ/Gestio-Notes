@@ -51,11 +51,11 @@
 
     <!----------------------------------------------------------BOTONES MODAL---------------------------------------------------------->
     <div class="boton-modal">
-        <label for="btn-modal"><i class="fa-solid fa-plus"></i></label>
+        <!-- <label for="btn-modal"><i class="fa-solid fa-plus"></i></label> -->
         <label for="btn2-modal"><i class="fa-solid fa-envelope-open "></i></label>
-        <label for="btn3-modal"><i class="fa-solid fa-magnifying-glass"></i></label> <!--buscador-->
+        <!-- <label for="btn3-modal"><i class="fa-solid fa-magnifying-glass"></i></label> buscador -->
         <button onclick="darkMode()" class="dark"><label for=""><i class="fa-sharp fa-solid fa-circle-half-stroke"></i></label></button> <!--modo oscuro-->
-        <a href="../controller/index_controller.php" class="atras"><button class="dark"><label><i class="fa-solid fa-arrow-left"></i></label></button></a> <!--atras-->
+        <a href="../controller/index_controller.php?" class="atras"><button class="dark"><label><i class="fa-solid fa-arrow-left"></i></label></button></a> <!--atras-->
     </div>
     <!----------------------------------------------------------FIN BOTONES---------------------------------------------------------->
     
@@ -168,8 +168,8 @@
         </div>
     </div>
     <!-------------------------------------------------------FIN VENTANA MODAL---------------------------------------------------------->
-    <div class="pagnotascontenedor">
-        <div class="pagnotas">
+    <div class="pagnotascontenedor ">
+        <div class="pagnotas row-c">
             <div class="column-perfil">
                 <br>
                 <img src="../static/img/logo/svg/2.2.svg" alt="">
@@ -177,25 +177,36 @@
                 <br>
                 <form action="./alumnos_controller.php" method="post">
                     <div class="icon">
+                   
                         <?php echo "<input type='hidden' name='id_alumno' value='".$id_alumno."'>"?>
-                        <p><i class="fa-solid fa-user-graduate"></i> <b>Nombre:</b><?php echo "<input type='text' class='inputsname' name='nombre_alumno' value='".$alumno_info['nombre_alumno']."'></input>"?></p>                        
-                        <?php echo "<input type='text'name='primer_apellido_alumno' class='inputsname' value='".$alumno_info['primer_apellido_alumno']."'></input>"?>
-                        <?php echo "<input type='text'name='segundo_apellido_alumno' class='inputsname' value='".$alumno_info['segundo_apellido_alumno']."'></input>"?>
+                        
+                        <small id="error_nombre" class="alerts"><b><i class="fa-solid fa-circle-exclamation"></i> Error en el campo nombre </b></small>   
+                        <p><i class="fa-solid fa-user-graduate"></i> <b>Nombre:</b><?php echo "<input type='text' class='inputsname' name='nombre_alumno' id='nombre' value='".$alumno_info['nombre_alumno']."'></input>"?>                       
+                        
+                        <small id="error_primer_apellido" class="alerts"><b><i class="fa-solid fa-circle-exclamation"></i> Error en el campo primer apellido </b></small> 
+                        <?php echo "<input type='text'name='primer_apellido_alumno' id='primer_apellido' class='inputsname' value='".$alumno_info['primer_apellido_alumno']."'></input>"?>
+                        
+                        <small id="error_segundo_apellido" class="alerts"><b><i class="fa-solid fa-circle-exclamation"></i> Error en el campo segundo apellido </b></small>   
+                        <?php echo "<input type='text'name='segundo_apellido_alumno' id='segundo_apellido' class='inputsname' value='".$alumno_info['segundo_apellido_alumno']."'></input>"?></p> 
                     </div>
-                    <div class="icon">                  
-                        <p><i class="fa-solid fa-address-card"></i> <b>DNI:</b><?php echo "<input type='text' class='inputsname' name='dni_alumno' value='".$alumno_info['dni_alumno']."'></input>"?></p>
+                    <div class="icon">  
+                    <small id="error_dni" class="alerts"><b><i class="fa-solid fa-circle-exclamation"></i> Error en el campo DNI </b></small>                   
+                        <p><i class="fa-solid fa-address-card"></i> <b>DNI:</b><?php echo "<input type='text' class='inputsname' id='dni_alu' name='dni_alumno' value='".$alumno_info['dni_alumno']."'></input>"?></p>
                     </div>
                     <div class="icon">
-                        <p> <i class="fa-solid fa-square-envelope"></i> <b>Correo: </b><?php echo "<input type='text' class='inputsname' name='email_alumno' value='".$alumno_info['email_alumno']."'></input>"?></p>
+                    <small id="error_email" class="alerts"><b><i class="fa-solid fa-circle-exclamation"></i> Error en el campo Email </b></small>   
+                        <p> <i class="fa-solid fa-square-envelope"></i> <b>Correo: </b><?php echo "<input type='text' id='e_mail' class='inputsname' name='email_alumno' value='".$alumno_info['email_alumno']."'></input>"?></p>
                     </div>
-                    <button type='submit' name='info' id="info" class='btn btn-warning'><i class='fa-solid fa-upload'></i> Modificar</button>
+                   
+                    <button type='submit'  onclick="modificaralumno()" name='info' id="info" class='btncrudmodificar-alu btn btn-primary'><i class='fa-solid fa-upload'></i> Modificar</button>
+                   
                 </form>
             </div>
 
-            <div class="column-notas">
-                    <h1>Notas <i class="fa-solid fa-clipboard-user"></i></h1>
+            <div  class="column-notas">
+                    <h1 style=text-align:center;>Notas <i class="fa-solid fa-clipboard-user"></i></h1>
                 
-                    <div class="notas">
+                    <div  class="notas">
                     <table class="table table-bordered table-hover table-striped notas bordes">
                         <tr class="cabecera">
                             <td><b>Módulo</b></td>
@@ -210,7 +221,7 @@
                             <?php
                             for ($i=0; $i < count($alumno_notas); $i++) { 
                                 if ($alumno_notas[$i][6] == 1) {
-                                    echo "<form action='./alumnos_controller.php' method='post'>";
+                                    echo "<form  action='./alumnos_controller.php' method='post'>";
                                     echo "<td><input type='number' name='m1-1' class='inputs' value='".$alumno_notas[$i][1]."'></td>";
                                     echo "<td><input type='number' name='m1-2' class='inputs' value='".$alumno_notas[$i][2]."'></td>";
                                     echo "<td><input type='number' name='m1-3' class='inputs' value='".$alumno_notas[$i][3]."'></td>";
@@ -337,10 +348,10 @@
                 <?php
                 // Botón para restuara valores de las notas, actualizando la página
                 echo "<input type='hidden' name='id_alumno' value='".$id_alumno."'>"; 
-                echo "<button type='submit' id='notas' name='notas' class='btn btn-warning'><i class='fa-solid fa-upload'></i> Actualizar notas</button>";
+                echo "<button  type='submit' id='notas' name='notas' class='btncrudmodificar-alu btn btn-primary'><i class='fa-solid fa-upload'></i> Actualizar notas</button>";
                 echo "</form>";
                 // Actualizar
-                echo "<a href='form_alu_controller.php?id_alumno={$alumno_info['id_alumno']}'><button class='btn btn-danger'><i class='fa-solid fa-rotate-right'></i> Restaurar valores</button></a>";
+                echo "<a href='form_alu_controller.php?id_alumno={$alumno_info['id_alumno']}'><button class='btncrudenviar btn btn-danger btn btn-primary'><i class='fa-solid fa-rotate-right'></i> Restaurar valores</button></a>";
                 ?>
             </div>
         </div>

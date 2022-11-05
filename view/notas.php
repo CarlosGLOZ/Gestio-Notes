@@ -45,9 +45,10 @@
 
 <div class="general">
     
-
+<a href="../controller/index_controller.php?" class="atras"><button class="dark"><label><i class="fa-solid fa-arrow-left"></i></label></button></a> <!--atras-->
         <div class="titulonotas">
-            <b><h1><i class="fa-solid fa-book-bookmark"></i> Estadísticas </h1></b>
+
+            <b><h1 style="text-align:center;" ><i class="fa-solid fa-book-bookmark"></i> Estadísticas </h1></b>
         </div>
 
         <div  class="notas-column"> 
