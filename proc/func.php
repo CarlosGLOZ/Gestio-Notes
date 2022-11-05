@@ -131,13 +131,44 @@ function eliminarVariablesGetVacias($exclude=['filtro-buscar'])
 // genera una nueva url cambiando los valores get especificados por un valor dado
 function cambiarVariableGet($url, $var, $value)
 {
+  
     $exploded_url = explode('?', $url);
+
+    // ELIMINAR SWEETALERTS PARA QUE NO SALTEN TODO EL RATO AL CAMBIAR DE PÁGINA
+
+    $eliminar_1="error=checkUser&";
+
+    $modificar_1=trim($exploded_url[1],$eliminar_1);
+    $exploded_url[1]= $modificar_1;
+
+
+
+    $eliminar_2="error=checkUserDNI&";
+
+    $modificar_2=trim($exploded_url[1],$eliminar_2);
+    $exploded_url[1]= $modificar_2;
+
+    $eliminar_3="error=errorEmail&";
+
+    $modificar_3=trim($exploded_url[1],$eliminar_3);
+    $exploded_url[1]= $modificar_3;
+
+    $eliminar_4="create=true&";
+    $modificar_4=trim($exploded_url[1],$eliminar_4);
+    $exploded_url[1]= $modificar_4;
+
+    $eliminar_5="correo_enviado=correo_enviado";
+    $modificar_5=trim($exploded_url[1],$eliminar_5);
+    $exploded_url[1]= $modificar_5;
+
+
 
     if (count($exploded_url) == 1) { // si no hay variables get establecidas
         return $url.'?'.$var.'='.$value;
     }
 
     if ($exploded_url[1] == '') {
+        
         return $url.$var.'='.$value;
     }
 
@@ -157,13 +188,18 @@ function cambiarVariableGet($url, $var, $value)
             $exploded_get = explode('=', $gets[$i]);
             if ($exploded_get[0] == $var)
             {
-                $gets[$i] = "$var=$value";
-                $match = true;
+                
+                    $gets[$i] = "$var=$value";
+                    $match = true;
+                
+               
             }
         }
         if (!$match) {
+          
             array_push($gets,"$var=$value");
         }
+      
         $gets = implode('&', $gets);
     // }
     
@@ -171,3 +207,7 @@ function cambiarVariableGet($url, $var, $value)
 
     return $imploded_url;
 }
+
+
+
+

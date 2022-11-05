@@ -54,6 +54,8 @@
         <label for="btn-modal"><i class="fa-solid fa-plus"></i></label>
         <label for="btn2-modal"><i class="fa-solid fa-envelope-open "></i></label>
         <label for="btn3-modal"><i class="fa-solid fa-magnifying-glass"></i></label> <!--buscador-->
+
+        <a href="../controller/notas_controller.php" class="atras"><button class="dark"><label><i class="fa-solid fa-medal"></i></label></button></a> <!--top notas-->
         <button onclick="darkMode()" class="dark"><label for=""><i class="fa-sharp fa-solid fa-circle-half-stroke"></i></label></button> <!--modo oscuro-->
     
     </div>
@@ -152,7 +154,7 @@
                 </select>
                 <!--ZONA E-MAIL-->
                 <small id="error_correo"  class="alerts"><b><i class="fa-solid fa-circle-exclamation"></i> Error en el campo email </b></small>   
-                <input  placeholder="e-mail (múltiples separados por ',')" type="email" id="email" name="correo" required>
+                <input style="display:block;"  placeholder="e-mail (múltiples separados por ',')" type="email" id="email" name="correo" required>
 
                 <!--ZONA ASUNTO-->
                 <small id="error_asunto"  class="alerts"><b><i class="fa-solid fa-circle-exclamation"></i> Error en el campo asunto </b></small>   
@@ -160,7 +162,7 @@
 
                 <!--ZONA MENSAJE-->     
                 <small id="error_mensaje"  class="alerts"><b><i class="fa-solid fa-circle-exclamation"></i> Error en el campo mensaje </b></small>              
-                <textarea  placeholder="Escribe tu mensaje" name="cuerpo" id="mensaje" cols="30" rows="10" require></textarea>
+                <textarea  placeholder="Escribe tu mensaje" name="cuerpo" id="mensaje" cols="30" rows="10" required></textarea>
 
                 <!--BOTON ENVIAR-->
                 <button type="submit" class="btn btn-success btn-lg btn-outline-info" value="Enviar correo"  onclick="validarcorreoyloading()" id="btn2"> Enviar e-mail
@@ -249,7 +251,7 @@
         echo "<center>";
 
         if ($pagina!=1) {
-            echo"<a class='casilla' href='".cambiarVariableGet($url_actual, 'pagina', 1)."'>".'<i class="fa-solid fa-book"></i>'. "</a> ";
+            echo"<a class='casilla' href='".cambiarVariableGet($url_actual, 'pagina', 1)."'>".'<i class="fa-solid fa-backward-fast"></i>'. "</a> ";
             echo"<a class='casilla' href='".cambiarVariableGet($url_actual, 'pagina', $pagina-1)."'>"  .'<i class="fa-solid fa-arrow-left"></i>'. "</a> ";  
         }
 
@@ -266,7 +268,7 @@
 
         if ($pagina!=$total_paginas) {
             echo"<a class='casilla' href='".cambiarVariableGet($url_actual, 'pagina', $pagina_mas)."'><i class='fa-solid fa-arrow-right'></i></a> ";
-            echo"<a class='casilla' href='".cambiarVariableGet($url_actual, 'pagina', $total_paginas)."'> <i class='fa-solid fa-book'></i></a>";
+            echo"<a class='casilla' href='".cambiarVariableGet($url_actual, 'pagina', $total_paginas)."'> <i class='fa-solid fa-forward-fast'></i></a>";
         }
 
         echo "</center>";
@@ -368,7 +370,7 @@ title: 'Usuario creado!'
     <!----------------------------------------------------------VERIFICACIÓN MAIL---------------------------------------------------------->
 <!-- CORREO ENVIADO -->
 <?php
-    if (isset($_GET['correo_eniviado'])) {
+    if (isset($_GET['correo_enviado'])) {
         ?>
         <script>
     Swal.fire({

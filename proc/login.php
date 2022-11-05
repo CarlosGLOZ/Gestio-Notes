@@ -35,4 +35,4 @@ if (!validar_email($GLOBALS[GESTOR['email']], $GLOBALS[GESTOR['contra']], $conex
 // a partir de aquí el email ya está validado y el usuario se puede loguear
 loguear($GLOBALS[GESTOR['email']], $conexion);
 
-echo "<script>window.location.href = '../controller/index_controller.php';</script>";
+echo "<script>window.location.href = '../controller/index_controller.php?';</script>";
