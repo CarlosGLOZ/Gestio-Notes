@@ -207,7 +207,7 @@ class Alumno{
             $alumno_id = mysqli_insert_id($conexion);
         
             foreach (self::getModulos($conexion) as $modulo) {
-                $sql2 = "INSERT INTO ".ALUMNO_MODULO['tabla']."(".ALUMNO_MODULO['id'].", ".ALUMNO_MODULO['nota_uf1'].", ".ALUMNO_MODULO['nota_uf2'].", ".ALUMNO_MODULO['nota_uf3'].", ".ALUMNO_MODULO['nota_final'].", ".ALUMNO_MODULO['id_alumno'].", ".ALUMNO_MODULO['id_modulo'].") VALUES(null, null, null, null, null, $alumno_id, {$modulo['id_modulo']});";
+                $sql2 = "INSERT INTO ".ALUMNO_MODULO['tabla']."(".ALUMNO_MODULO['id'].", ".ALUMNO_MODULO['nota_uf1'].", ".ALUMNO_MODULO['nota_uf2'].", ".ALUMNO_MODULO['nota_uf3'].", ".ALUMNO_MODULO['nota_final'].", ".ALUMNO_MODULO['id_alumno'].", ".ALUMNO_MODULO['id_modulo'].") VALUES(null, 0, 0, 0, 0, $alumno_id, {$modulo['id_modulo']});";
                 mysqli_query($conexion, $sql2);
             }
         
