@@ -175,7 +175,7 @@
                 <img src="../static/img/logo/svg/2.2.svg" alt="">
                 <br>
                 <br>
-                <form action="./alumnos_controller.php" method="post">
+                <form action="../controller/alumnos_controller.php" method="post">
                     <div class="icon">
                    
                         <?php echo "<input type='hidden' name='id_alumno' value='".$id_alumno."'>"?>
@@ -198,7 +198,7 @@
                         <p> <i class="fa-solid fa-square-envelope"></i> <b>Correo: </b><?php echo "<input type='text' id='e_mail' class='inputsname' name='email_alumno' value='".$alumno_info['email_alumno']."'></input>"?></p>
                     </div>
                    
-                    <button type='submit'  onclick="modificaralumno()" name='info' id="info" class='btncrudmodificar-alu btn btn-primary'><i class='fa-solid fa-upload'></i> Modificar</button>
+                    <button type='submit' name='info' id="info" class='btncrudmodificar-alu btn btn-primary'><i class='fa-solid fa-upload'></i> Modificar</button>
                    
                 </form>
             </div>
@@ -381,6 +381,22 @@
         icon: 'success',
         iconColor:'#719972',
         title: 'USUARIO ACTUALIZADO!'
+    })
+        </script>
+        <?php
+    }
+    ?>
+
+<?php
+    if (isset($_GET['MaluserMod'])) {
+    ?>
+        <script>
+    Swal.fire({
+        background:'#443E53',
+        color:'white',
+        icon: 'error',
+        title: 'USUARIO NO MODIFICADO!',
+        text: 'Error en el nuevo formato'
     })
         </script>
         <?php

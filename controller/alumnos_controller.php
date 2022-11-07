@@ -61,11 +61,27 @@ if (isset($_POST['notas'])) {
     foreach ($_POST as $key => $value) {
         $$key = mysqli_real_escape_string($conexion, trim(strip_tags($value)));
     }
-
+    $letter = substr($dni_alumno, -1);
+    $numbers = substr($dni_alumno, 0, -1);
+if (empty($nombre_alumno) || empty($primer_apellido_alumno) || empty($segundo_apellido_alumno) || empty($email_alumno) || empty($dni_alumno)) {
+    echo "<script>location.href='../controller/form_alu_controller.php?id_alumno=$id_alumno&&MaluserMod=true'</script>";
+} else if (!filter_var($email_alumno, FILTER_VALIDATE_EMAIL)) {
+      echo "<script>location.href='../controller/form_alu_controller.php?id_alumno=$id_alumno&&MaluserMod=true'</script>";
+} else if ($dni_alumno==true ) {
+   
+  if (substr("TRWAGMYFPDXBNJZSQVHLCKE", $numbers%23, 1) == $letter && strlen($letter) == 1 && strlen ($numbers) == 8 ){
     // Actualizar los datos del alumno, información:
     Alumno::updateAlumno($id_alumno, $nombre_alumno, $primer_apellido_alumno, $segundo_apellido_alumno, $email_alumno, $dni_alumno, $conexion);
-
     echo "<script>location.href='../controller/form_alu_controller.php?id_alumno=$id_alumno&&userMod=true'</script>";
+  } else {
+    echo "<script>location.href='../controller/form_alu_controller.php?id_alumno=$id_alumno&&MaluserMod=true'</script>";
+  }
+}
+
+
+   
+
+    
 }
 
 
