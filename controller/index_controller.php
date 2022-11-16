@@ -36,6 +36,13 @@ if (isGetSet()) {
             $nombre_campo_junto = implode('_', $nombre_campo_separado);
             $$nombre_campo_junto = $value;
         } else {
+            if ($key == 'pagina') {
+                if ($value >= 1) {
+                    $$key = $value;
+                } else {
+                    echo "<script>window.location.href = 'index_controller.php?';</script>";
+                }
+            }
             $$key = $value;
         }
     }

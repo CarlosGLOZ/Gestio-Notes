@@ -134,6 +134,16 @@ function cambiarVariableGet($url, $var, $value)
   
     $exploded_url = explode('?', $url);
 
+    if (count($exploded_url) == 1) { // si no hay variables get establecidas
+        return $url.'?'.$var.'='.$value;
+    }
+
+    if ($exploded_url[1] == '') {
+        
+        return $url.$var.'='.$value;
+    }
+
+
     // ELIMINAR SWEETALERTS PARA QUE NO SALTEN TODO EL RATO AL CAMBIAR DE PÁGINA
 
     $eliminar_1="error=checkUser&";
@@ -161,16 +171,6 @@ function cambiarVariableGet($url, $var, $value)
     $modificar_5=trim($exploded_url[1],$eliminar_5);
     $exploded_url[1]= $modificar_5;
 
-
-
-    if (count($exploded_url) == 1) { // si no hay variables get establecidas
-        return $url.'?'.$var.'='.$value;
-    }
-
-    if ($exploded_url[1] == '') {
-        
-        return $url.$var.'='.$value;
-    }
 
     $gets = explode('&', $exploded_url[1]);
     
