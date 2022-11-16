@@ -37,11 +37,21 @@ if(Alumno::checkDNI($conexion, $dni_alumno) !== FALSE){
 }
 // Error email, formato invalido
 if(Alumno::errorEmail($email_alumno) !== FALSE){
-    echo "<script>window.location.href='../controller/index_controller.php?error=errorEmail'</script>";
+    echo "<script>window.location.href='../controller/index_controller.php?error=mal'</script>";
     exit();
 }
 
-Alumno::createAlumno($conexion, $GLOBALS[ALUMNO['nombre']], $GLOBALS[ALUMNO['primer_apellido']], $GLOBALS[ALUMNO['segundo_apellido']], $GLOBALS[ALUMNO['email']], $GLOBALS[ALUMNO['dni']]);
 
-echo "<script>location.href='index_controller.php?create=true'</script>";
-
+$letter = substr($dni_alumno, -1);
+$numbers = substr($dni_alumno, 0, -1);
+ if (!filter_var($email_alumno, FILTER_VALIDATE_EMAIL)) {
+    echo "<script>window.location.href='../controller/index_controller.php?error=mal'</script>";
+} else if ($dni_alumno==true ) {
+    if (substr("TRWAGMYFPDXBNJZSQVHLCKE", $numbers%23, 1) == $letter && strlen($letter) == 1 && strlen ($numbers) == 8 ){
+        // Actualizar los datos del alumno, información:
+        Alumno::createAlumno($conexion, $GLOBALS[ALUMNO['nombre']], $GLOBALS[ALUMNO['primer_apellido']], $GLOBALS[ALUMNO['segundo_apellido']], $GLOBALS[ALUMNO['email']], $GLOBALS[ALUMNO['dni']]);
+        echo "<script>location.href='index_controller.php?create=true'</script>";
+    } else {
+        echo "<script>window.location.href='../controller/index_controller.php?error=mal'</script>";
+    }
+}
