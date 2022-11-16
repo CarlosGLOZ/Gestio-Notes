@@ -371,42 +371,68 @@ title: 'Usuario creado!'
 <!-- CORREO ENVIADO -->
 <?php
     if (isset($_GET['correo_enviado'])) {
-        ?>
-        <script>
-    Swal.fire({
-        background:'#443E53',
-        color:'white',
-    icon: 'success',
-    iconColor:'#719972',
-    title: 'Correo enviado correctamente!'
+        if ($_GET['correo_enviado']=='correo_enviado') {
+            ?>
+            <script>
+        Swal.fire({
+            background:'#443E53',
+            color:'white',
+        icon: 'success',
+        iconColor:'#719972',
+        title: 'Correo enviado correctamente!'
 
-    })
+        })
 
-        </script>
+            </script>
 
-        <?php
+            <?php
+        }
+
     }
 ?>
-</body>
 
 
-    <!----------------------------------------------------------VERIFICACIÓN MAIL---------------------------------------------------------->
+<!-- Campos vacios -->
+<?php
+if (isset($_GET['error'])) {
+if ($_GET['error']=='camposVacios') {
+    ?>
+    <script>
+Swal.fire({
+    background:'#443E53',
+    color:'white',
+icon: 'error',
+title: 'Usuario no creado',
+text: 'Campos vacíos'
+
+})
+
+    </script>
+    <?php
+}
+}
+?>
+
+
+<!-- Error en el formato -->
 
 <?php
-    if (isset($_GET['correo_eniviado'])) {
-        ?>
+    if (isset($_GET['error'])) {
+        if ($_GET['error']=='mal') {
+?>
         <script>
-    Swal.fire({
-        background:'#443E53',
-        color:'white',
-    icon: 'success',
-    iconColor:'#719972',
-    title: 'Correo enviado correctamente!'
+            Swal.fire({
+                background:'#443E53',
+                color:'white',
+            icon: 'error',
+            title: 'Usuario no creado',
+            text: 'Formato incorrecto'
 
-    })
+            })
 
         </script>
-
-
-        <?php
+<?php
     }
+    }
+?>
+    <!----------------------------------------------------------FIN VERIFICACIÓN MAIL---------------------------------------------------------->

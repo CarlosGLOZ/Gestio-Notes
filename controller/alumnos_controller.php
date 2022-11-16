@@ -59,7 +59,7 @@ if (isset($_POST['notas'])) {
 
 } else if (isset($_POST['info'])) {
     foreach ($_POST as $key => $value) {
-        $$key = mysqli_real_escape_string($conexion, trim(strip_tags($value)));
+        $$key = pe_string($conexion, trim(strip_tags($value)));
     }
     $letter = substr($dni_alumno, -1);
     $numbers = substr($dni_alumno, 0, -1);
